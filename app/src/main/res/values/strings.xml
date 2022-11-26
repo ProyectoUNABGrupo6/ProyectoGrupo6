@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">ProyectoGrupo6</string>
+    <string name="fresa">Fresa</string>
+    <string name="mango">Mango</string>
+    <string name="pina">Piña</string>
+    <string name="botonProductos">Info</string>
+    <string name="imagenLogin">Login</string>
+    <string name="txtUsuario">Usuario:</string>
+    <string name="txtContrasena">Contraseña:</string>
+    <string name="insContrasena">Ingrese su contraseña</string>
+    <string name="insUsuario">Ingrese su Usuario</string>
+    <string name="botonLogin">Inicio</string>
+    <string name="cerrarSesion">Cerrar Sesion</string>
+    <string name="imagenInfo">Imagen Info</string>
+    <string name="txtPrecio">Precio Gramo: </string>
+    <string name="txtInventario">Cantidad Disponible: </string>
+    <string name="botonAtras">Atras</string>
+
 </resources>

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Informacion">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="409dp"
+        android:layout_height="601dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,41 +17,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imagenLogin"
+            android:id="@+id/imagenInfo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:contentDescription="@string/imagenLogin"
-            android:src="@drawable/tienda" />
+            android:contentDescription="@string/imagenInfo" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtUsuario"
+                android:id="@+id/txtPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"
-                android:text="@string/txtUsuario"
+                android:text="@string/txtPrecio"
                 android:textColor="#616161"
                 android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/insUsuario"
+            <TextView
+                android:id="@+id/txtValor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/insUsuario"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:textColorHint="#78909C" />
+                android:textColor="#020202"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -61,30 +51,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtContrasena"
+                android:id="@+id/txtInventario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txtContrasena"
+                android:text="@string/txtInventario"
                 android:textColor="#616161"
                 android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/insContrasena"
+            <TextView
+                android:id="@+id/txtCantidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/insContrasena"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:textColorHint="#78909C" />
+                android:textColor="#090909"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/botonLogin"
+            android:id="@+id/botonAtras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botonLogin" />
+            android:text="@string/botonAtras" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

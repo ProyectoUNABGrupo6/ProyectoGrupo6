@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usuario = (EditText) findViewById(R.id.insUsuario);
-        contrasena = (EditText) findViewById(R.id.insContrasena);
-        botonLogin = (Button) findViewById(R.id.botonLogin);
+        usuario = findViewById(R.id.insUsuario);
+        contrasena = findViewById(R.id.insContrasena);
+        botonLogin = findViewById(R.id.botonLogin);
 
         botonLogin.setOnClickListener(this::acceso);
 

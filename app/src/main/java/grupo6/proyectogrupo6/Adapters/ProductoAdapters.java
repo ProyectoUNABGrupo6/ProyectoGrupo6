@@ -64,8 +64,11 @@ public class ProductoAdapters extends BaseAdapter {
         imgProductoTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context, Informacion.class);
 
+            intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
+
+
             intent.putExtra("titulo", producto.getName());
             intent.putExtra("descripcion", producto.getDescripcion());
             intent.putExtra("imageCode", producto.getImagen());

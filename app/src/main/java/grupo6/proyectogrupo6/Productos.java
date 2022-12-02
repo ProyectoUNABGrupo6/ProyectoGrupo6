@@ -2,6 +2,7 @@ package grupo6.proyectogrupo6;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -65,11 +66,13 @@ public class Productos extends AppCompatActivity {
         arrayList.add(producto6);
 
 
-        productoAdapters = new ProductoAdapters(getApplicationContext(), arrayList);
+        productoAdapters = new ProductoAdapters(this, arrayList);
 
         listViewProductos = findViewById(R.id.listViewProductos);
         listViewProductos.setAdapter(productoAdapters);
 
 
     }
+
+
 }

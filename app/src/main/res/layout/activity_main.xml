@@ -6,85 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="601dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imagenLogin"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="@string/imagenLogin"
-            android:src="@drawable/tienda" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/imgTienda"
+                    app:srcCompat="@drawable/ferresix" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="100dp"
+                    android:contentDescription="@string/imgCarrito"
+                    app:srcCompat="@drawable/carrito" />
+            </LinearLayout>
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/txtUsuario"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"
-                android:text="@string/txtUsuario"
-                android:textColor="#616161"
-                android:textSize="24sp" />
+                android:text="@string/txtCategoria"
+                android:textColor="#656565"
+                android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/insUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/insUsuario"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:textColorHint="#00838F" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgMaterial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/imgMaterial"
+                    app:srcCompat="@mipmap/materialesdeconstruccion" />
+
+                <TextView
+                    android:id="@+id/txtMate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txtMaterial"
+                    android:textColor="#656565"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgCables"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/imgCables"
+                    app:srcCompat="@mipmap/cableselectricos" />
+
+                <TextView
+                    android:id="@+id/txtElect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtCables"
+                    android:textColor="#656565"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgHerramienta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/imgHerramienta"
+                    app:srcCompat="@mipmap/herramienta" />
+
+                <TextView
+                    android:id="@+id/txtHerram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtHerramienta"
+                    android:textColor="#656565"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txtContrasena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txtContrasena"
-                android:textColor="#616161"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/insContrasena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/insContrasena"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:textColorHint="#00838F" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/botonLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/botonLogin" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

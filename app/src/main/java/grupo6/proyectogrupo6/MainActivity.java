@@ -13,9 +13,9 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton imgMaterial;
     public ImageButton imgHerramientas;
     public ImageButton imgElectricos;
-    private TextView txtMaterial;
-    private TextView txtHerramienta;
-    private TextView txtElectrico;
+    public TextView txtMaterial;
+    public TextView txtHerramienta;
+    public TextView txtElectrico;
 
 
     @Override
@@ -30,41 +30,24 @@ public class MainActivity extends AppCompatActivity {
         txtHerramienta = findViewById(R.id.txtHerram);
         txtElectrico = findViewById(R.id.txtElect);
 
-        txtMaterial.setOnClickListener(View -> {
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
+        txtMaterial.setOnClickListener(this::pasarProducto);
 
-        });
+        txtHerramienta.setOnClickListener(this::pasarProducto);
 
-        txtHerramienta.setOnClickListener(View -> {
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
+        txtElectrico.setOnClickListener(this::pasarProducto);
 
-        });
+        imgMaterial.setOnClickListener(this::pasarProducto);
 
-        txtElectrico.setOnClickListener(View -> {
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
+        imgHerramientas.setOnClickListener(this::pasarProducto);
 
-        });
-        
-        imgMaterial.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
+        imgElectricos.setOnClickListener(this::pasarProducto);
+    }
 
-        });
-
-        imgHerramientas.setOnClickListener(View -> {
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
-
-        });
-
-        imgElectricos.setOnClickListener(View -> {
-
-            Intent intent = new Intent(getApplicationContext(), Productos.class);
-            startActivity(intent);
-        });
+    public void pasarProducto(View view) {
+        Intent intent = new Intent(getApplicationContext(), Productos.class);
+        intent.putExtra("imageTitulo", R.drawable.ferresix);
+        intent.putExtra("imageCarrito", R.drawable.carrito);
+        startActivity(intent);
     }
 
 }

@@ -1,21 +1,27 @@
 package grupo6.proyectogrupo6;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
+import grupo6.proyectogrupo6.DB.DBHelper;
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class Productos extends AppCompatActivity {
 
+    private DBHelper dbHelper;
+    private ProductosServices productosServices;
     public ImageButton botonAtras;
     public ImageView imgTitulo;
     public ImageView imgCarrito;
@@ -29,6 +35,31 @@ public class Productos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+
+
+        try {
+            dbHelper = new DBHelper(this);
+            /*
+            byte[] img = "".getBytes();
+            dbHelper.insetarDatos("Producto1", "Descripcion1", 10000, img);
+            dbHelper.insetarDatos("Producto2", "Descripcion2", 70000, img);
+            dbHelper.insetarDatos("Producto3", "Descripcion3", 20000, img);
+            dbHelper.insetarDatos("Producto4", "Descripcion4", 90000, img);
+            dbHelper.insetarDatos("Producto5", "Descripcion5", 80000, img);
+            dbHelper.insetarDatos("Producto6", "Descripcion6", 60000, img);
+            dbHelper.insetarDatos("Producto7", "Descripcion7", 40000, img);
+            dbHelper.insetarDatos("Producto8", "Descripcion8", 50000, img);
+            dbHelper.insetarDatos("Producto9", "Descripcion9", 30000, img);*/
+
+
+            productosServices = new ProductosServices();
+            Cursor cursor = dbHelper.consultarDatos();
+            arrayList = productosServices.cursorToArray(cursor);
+            Toast.makeText(this, "Insert OK", Toast.LENGTH_LONG).show();
+
+        }catch (Exception e){
+            Toast.makeText(this, "Error Lectura de DB", Toast.LENGTH_LONG).show();
+        }
 
         botonAtras = findViewById(R.id.imgAtras);
         imgTitulo = findViewById(R.id.imgTituloProductoTemplate);
@@ -46,24 +77,6 @@ public class Productos extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         });
-
-
-        arrayList = new ArrayList<>();
-
-
-        Producto producto1 = new Producto(R.drawable.mango, "Producto1", "Descripcion1", 1000);
-        Producto producto2 = new Producto(R.drawable.fresa, "Producto2", "Descripcion2", 2000);
-        Producto producto3 = new Producto(R.drawable.frutita, "Producto3", "Descripcion3", 5000);
-        Producto producto4 = new Producto(R.drawable.herramienta, "Producto4", "Descripcion4", 4000);
-        Producto producto5 = new Producto(R.drawable.cableselectricos, "Producto5", "Descripcion5", 10000);
-        Producto producto6 = new Producto(R.drawable.carrito, "Producto6", "Descripcion6", 50000);
-
-        arrayList.add(producto1);
-        arrayList.add(producto2);
-        arrayList.add(producto3);
-        arrayList.add(producto4);
-        arrayList.add(producto5);
-        arrayList.add(producto6);
 
 
         productoAdapters = new ProductoAdapters(this, arrayList);

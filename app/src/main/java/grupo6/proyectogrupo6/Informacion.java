@@ -44,7 +44,7 @@ public class Informacion extends AppCompatActivity {
             int imgPro = bundle.getInt("imageCode");
             String tituloInf = bundle.getString("titulo");
             String DescripInf = bundle.getString("descripcion");
-            String precInf = String.valueOf(bundle.getInt("precio"));
+            String precInf = "$" + String.valueOf(bundle.getInt("precio"));
             imgProd.setImageResource(imgPro);
             txtTituloInf.setText(tituloInf);
             txtDescripInf.setText(DescripInf);

@@ -7,20 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Informacion;
-import grupo6.proyectogrupo6.Productos;
 import grupo6.proyectogrupo6.R;
 
 public class ProductoAdapters extends BaseAdapter {
 
-    private Context context;
-    private ArrayList<Producto> arrayList;
+    private final Context context;
+    private final ArrayList<Producto> arrayList;
 
     public ProductoAdapters(Context context, ArrayList<Producto> arrayList) {
         this.context = context;
@@ -59,7 +57,7 @@ public class ProductoAdapters extends BaseAdapter {
         imgProductoTemplate.setImageResource(producto.getImagen());
         txtProductoTituloTemplate.setText(producto.getName());
         txtDescripcionTemplate.setText(producto.getDescripcion());
-        txtPrecioTemplate.setText(String.valueOf(producto.getPrecio()));
+        txtPrecioTemplate.setText("$" + producto.getPrecio());
 
         imgProductoTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context, Informacion.class);
@@ -76,7 +74,54 @@ public class ProductoAdapters extends BaseAdapter {
             context.startActivity(intent);
         });
 
+        txtProductoTituloTemplate.setOnClickListener(View -> {
+            Intent intent = new Intent(context, Informacion.class);
+
+            intent.putExtra("imageAtras", R.mipmap.atras);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            intent.putExtra("imageCarrito", R.drawable.carrito);
+
+
+            intent.putExtra("titulo", producto.getName());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("imageCode", producto.getImagen());
+            intent.putExtra("precio", producto.getPrecio());
+            context.startActivity(intent);
+        });
+
+        txtDescripcionTemplate.setOnClickListener(View -> {
+            Intent intent = new Intent(context, Informacion.class);
+
+            intent.putExtra("imageAtras", R.mipmap.atras);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            intent.putExtra("imageCarrito", R.drawable.carrito);
+
+
+            intent.putExtra("titulo", producto.getName());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("imageCode", producto.getImagen());
+            intent.putExtra("precio", producto.getPrecio());
+            context.startActivity(intent);
+        });
+
+        txtPrecioTemplate.setOnClickListener(View -> {
+            Intent intent = new Intent(context, Informacion.class);
+
+            intent.putExtra("imageAtras", R.mipmap.atras);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            intent.putExtra("imageCarrito", R.drawable.carrito);
+
+
+            intent.putExtra("titulo", producto.getName());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("imageCode", producto.getImagen());
+            intent.putExtra("precio", producto.getPrecio());
+            context.startActivity(intent);
+        });
+
+
         return view;
     }
+
 
 }

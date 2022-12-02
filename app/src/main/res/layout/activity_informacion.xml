@@ -7,70 +7,81 @@
     tools:context=".Informacion">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="601dp"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imagenInfo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="@string/imagenInfo" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtPrecio"
+            <ImageButton
+                android:id="@+id/imgAtrasInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txtPrecio"
-                android:textColor="#616161"
-                android:textSize="24sp" />
+                android:contentDescription="@string/imgAtras"
+                android:minWidth="32dp"
+                android:minHeight="48dp"
+                tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/txtValor"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/imgTituloInfo"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#020202"
-                android:textSize="24sp" />
+                android:layout_weight="1"
+                android:contentDescription="@string/imgTienda" />
+
+            <ImageView
+                android:id="@+id/imgCarritoInfo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="100dp"
+                android:contentDescription="@string/imgCarrito"
+                tools:ignore="ImageContrastCheck" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgProductoInfo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/imgHerramienta" />
 
             <TextView
-                android:id="@+id/txtInventario"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtTituloProInfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txtInventario"
-                android:textColor="#616161"
-                android:textSize="24sp" />
+                android:gravity="center"
+                android:textColor="#656565"
+                android:textSize="26sp" />
 
             <TextView
-                android:id="@+id/txtCantidad"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtDescripInfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#090909"
-                android:textSize="24sp" />
+                android:gravity="center"
+                android:textColor="#656565"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtPrecioInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#656565"
+                android:textSize="20sp" />
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/botonAtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/botonAtras" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

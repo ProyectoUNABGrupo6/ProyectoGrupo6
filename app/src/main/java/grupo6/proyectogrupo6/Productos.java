@@ -1,70 +1,78 @@
 package grupo6.proyectogrupo6;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
+import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
+import grupo6.proyectogrupo6.Entities.Producto;
 
 public class Productos extends AppCompatActivity {
 
-    public Button producto1;
-    public Button producto2;
-    public Button producto3;
-    public Button cerrar;
+    public ImageButton botonAtras;
+    public ImageView imgTitulo;
+    public ImageView imgCarrito;
+
+    public ListView listViewProductos;
+    public ArrayList<Producto> arrayList;
+    public ProductoAdapters productoAdapters;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
 
-        producto1 = findViewById(R.id.botonProducto1);
-        producto2 = findViewById(R.id.botonProducto2);
-        producto3 = findViewById(R.id.botonProducto3);
-        cerrar = findViewById(R.id.botonCerrar);
+        botonAtras = findViewById(R.id.imgAtras);
+        imgTitulo = findViewById(R.id.imgTituloProductoTemplate);
+        imgCarrito = findViewById(R.id.imgCarritoProductos);
 
-        producto1.setOnClickListener(view -> {
-            Intent intent = new Intent(Productos.this, Informacion.class);
-            String cantidad = "10.000";
-            String precio = "$1.000";
-            intent.putExtra("image", R.drawable.fresa);
-            intent.putExtra("pre", precio);
-            intent.putExtra("cant", cantidad);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int imgTit = bundle.getInt("imageTitulo");
+            int imgCar = bundle.getInt("imageCarrito");
+            imgTitulo.setImageResource(imgTit);
+            imgCarrito.setImageResource(imgCar  );
+        }
 
-            startActivity(intent);
-        });
-        producto2.setOnClickListener(view -> {
-            Intent intent = new Intent(Productos.this, Informacion.class);
-            String cantidad = "5.000";
-            String precio = "$2.000";
-            intent.putExtra("image", R.drawable.mango);
-            intent.putExtra("pre", precio);
-            intent.putExtra("cant", cantidad);
-
-            startActivity(intent);
-        });
-        producto3.setOnClickListener(view -> {
-            Intent intent = new Intent(Productos.this, Informacion.class);
-            String cantidad = "50.000";
-            String precio = "$500";
-            intent.putExtra("image", R.drawable.frutita);
-            intent.putExtra("pre", precio);
-            intent.putExtra("cant", cantidad);
-
+        botonAtras.setOnClickListener(View -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         });
 
-        cerrar.setOnClickListener(this::cerrarSesion);
+
+        arrayList = new ArrayList<>();
+
+
+        Producto producto1 = new Producto(R.drawable.mango, "Producto1", "Descripcion1", 1000);
+        Producto producto2 = new Producto(R.drawable.fresa, "Producto2", "Descripcion2", 2000);
+        Producto producto3 = new Producto(R.drawable.frutita, "Producto3", "Descripcion3", 5000);
+        Producto producto4 = new Producto(R.drawable.herramienta, "Producto4", "Descripcion4", 4000);
+        Producto producto5 = new Producto(R.drawable.cableselectricos, "Producto5", "Descripcion5", 10000);
+        Producto producto6 = new Producto(R.drawable.carrito, "Producto6", "Descripcion6", 50000);
+
+        arrayList.add(producto1);
+        arrayList.add(producto2);
+        arrayList.add(producto3);
+        arrayList.add(producto4);
+        arrayList.add(producto5);
+        arrayList.add(producto6);
+
+
+        productoAdapters = new ProductoAdapters(this, arrayList);
+
+        listViewProductos = findViewById(R.id.listViewProductos);
+        listViewProductos.setAdapter(productoAdapters);
 
 
     }
 
 
-    public void cerrarSesion(View view) {
-        Toast.makeText(this, "Sesion Cerrada", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-    }
 }

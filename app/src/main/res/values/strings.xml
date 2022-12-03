@@ -16,5 +16,8 @@
     // Productos
     <string name="imgAtras">Atras</string>
 
+    //Formulario
+    <string name="formulario">Formulario</string>
+
 
 </resources>

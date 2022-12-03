@@ -24,8 +24,8 @@ public class Informacion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion);
 
-        botonAtras = findViewById(R.id.imgAtrasInfo);
-        imgTitulo = findViewById(R.id.imgTituloInfo);
+        botonAtras = findViewById(R.id.imgAtrasForm);
+        imgTitulo = findViewById(R.id.imgTituloForm);
         imgCarrito = findViewById(R.id.imgCarritoInfo);
         imgProd = findViewById(R.id.imgProductoInfo);
         txtTituloInf = findViewById(R.id.txtTituloProInfo);
@@ -44,7 +44,7 @@ public class Informacion extends AppCompatActivity {
             int imgPro = bundle.getInt("imageCode");
             String tituloInf = bundle.getString("titulo");
             String DescripInf = bundle.getString("descripcion");
-            String precInf = String.valueOf(bundle.getInt("precio"));
+            String precInf = "$" + String.valueOf(bundle.getInt("precio"));
             imgProd.setImageResource(imgPro);
             txtTituloInf.setText(tituloInf);
             txtDescripInf.setText(DescripInf);

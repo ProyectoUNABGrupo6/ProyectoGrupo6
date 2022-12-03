@@ -24,8 +24,8 @@ public class Informacion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion);
 
-        botonAtras = findViewById(R.id.imgAtrasInfo);
-        imgTitulo = findViewById(R.id.imgTituloInfo);
+        botonAtras = findViewById(R.id.imgAtrasForm);
+        imgTitulo = findViewById(R.id.imgTituloForm);
         imgCarrito = findViewById(R.id.imgCarritoInfo);
         imgProd = findViewById(R.id.imgProductoInfo);
         txtTituloInf = findViewById(R.id.txtTituloProInfo);

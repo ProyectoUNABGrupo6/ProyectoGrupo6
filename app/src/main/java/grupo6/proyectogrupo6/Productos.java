@@ -3,12 +3,14 @@ package grupo6.proyectogrupo6;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -55,10 +57,9 @@ public class Productos extends AppCompatActivity {
             productosServices = new ProductosServices();
             Cursor cursor = dbHelper.consultarDatos();
             arrayList = productosServices.cursorToArray(cursor);
-            Toast.makeText(this, "Insert OK", Toast.LENGTH_LONG).show();
 
-        }catch (Exception e){
-            Toast.makeText(this, "Error Lectura de DB", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e("Database", e.toString());
         }
 
         botonAtras = findViewById(R.id.imgAtras);
@@ -70,7 +71,7 @@ public class Productos extends AppCompatActivity {
             int imgTit = bundle.getInt("imageTitulo");
             int imgCar = bundle.getInt("imageCarrito");
             imgTitulo.setImageResource(imgTit);
-            imgCarrito.setImageResource(imgCar  );
+            imgCarrito.setImageResource(imgCar);
         }
 
         botonAtras.setOnClickListener(View -> {
@@ -87,5 +88,27 @@ public class Productos extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.actionAdd:
+                Intent intent = new Intent(getApplicationContext(), AgregarProducto.class);
+                intent.putExtra("imageAtras", R.mipmap.atras);
+                intent.putExtra("imageTitulo", R.drawable.ferresix);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

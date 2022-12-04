@@ -3,7 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/menuItemSettings">
+    app:startDestination="@id/menuItemHome">
+
+    <fragment
+        android:id="@+id/menuItemHome"
+        android:name="grupo6.proyectogrupo6.menuHomeFragment"
+        android:label="@string/menuItemHome"
+        tools:layout="@layout/fragment_menu_home" />
+
     <fragment
         android:id="@+id/menuItemSettings"
         android:name="grupo6.proyectogrupo6.SettingsFragment"

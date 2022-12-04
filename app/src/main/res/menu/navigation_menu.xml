@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:title="@string/menuItem"
+        android:icon="@drawable/ic_menu_item_generic" />
+    <item
+        android:id="@+id/item2"
+        android:title="@string/menuItem"
+        android:icon="@drawable/ic_menu_item_generic" />
+    <item
+        android:id="@+id/item3"
+        android:title="@string/menuItem"
+        android:icon="@drawable/ic_menu_item_generic" />
+    <item
+        android:id="@+id/mitem4"
+        android:title="@string/menuItem"
+        android:icon="@drawable/ic_menu_item_generic" />
+    <item
+        android:id="@+id/item5"
+        android:title="@string/menuItem"
+        android:icon="@drawable/ic_menu_item_generic" />
+
+    <item android:title="@string/submenuOther">
+        <menu>
+                <item
+                    android:id="@+id/menuItemSettings"
+                    android:title="@string/menuItemSettings"
+                    android:icon="@drawable/ic_menu_item_generic" />
+                <item
+                    android:id="@+id/menuItemSupport"
+                    android:title="@string/menuItemSupport"
+                    android:icon="@drawable/ic_menu_item_generic" />
+                <item
+                    android:id="@+id/menuItemAbout"
+                    android:title="@string/menuItemAbout"
+                    android:icon="@drawable/ic_menu_item_generic" />
+        </menu>
+
+    </item>
+
+</menu>

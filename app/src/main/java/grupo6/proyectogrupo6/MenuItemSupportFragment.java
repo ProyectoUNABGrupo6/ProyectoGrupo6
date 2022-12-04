@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link menuHomeFragment#newInstance} factory method to
+ * Use the {@link MenuItemSupportFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class menuHomeFragment extends Fragment {
+public class MenuItemSupportFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class menuHomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public menuHomeFragment() {
+    public MenuItemSupportFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class menuHomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment menuHomeFragment.
+     * @return A new instance of fragment supportFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static menuHomeFragment newInstance(String param1, String param2) {
-        menuHomeFragment fragment = new menuHomeFragment();
+    public static MenuItemSupportFragment newInstance(String param1, String param2) {
+        MenuItemSupportFragment fragment = new MenuItemSupportFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class menuHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_home, container, false);
+        return inflater.inflate(R.layout.fragment_menu_item_support, container, false);
     }
 }

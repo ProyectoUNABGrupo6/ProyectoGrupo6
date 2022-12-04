@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menuHomeFragment">
+    tools:context=".MenuItemAboutFragment">
 
-    <TextView
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/menuItemHome"
+        android:text="@string/menuItemAbout"
         android:layout_gravity="center"
         android:textSize="20sp"/>
 

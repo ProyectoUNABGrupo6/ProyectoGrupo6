@@ -13,7 +13,7 @@
         android:title="@string/menuItem"
         android:icon="@drawable/ic_menu_item_generic" />
     <item
-        android:id="@+id/mitem4"
+        android:id="@+id/item4"
         android:title="@string/menuItem"
         android:icon="@drawable/ic_menu_item_generic" />
     <item

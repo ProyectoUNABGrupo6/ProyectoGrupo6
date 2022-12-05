@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,8 @@ public class MenuItemHomeFragment extends Fragment {
     //Recommended category
     private GridView gvCategorias;
     private CardItemRecommendedCategoryAdapter categoriaAdapter;
+    private RecyclerView rvCategorias;
+    private CardItemRecommendedCategoryAdapterRv categoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,13 +82,20 @@ public class MenuItemHomeFragment extends Fragment {
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 4"));
         misa.updateItem(lista);
     }
-    //Slider Image
+    //Recommended Category
     private void initRecommendedCategory(View v){
         gvCategorias = v.findViewById(R.id.menuItemHomeGvRecommendedCategory);
+
+        rvCategorias = v.findViewById(R.id.menuItemHomeRvRecommendedCategory);
+        rvCategorias.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
     }
     private void initAdapterRecommendedCategory(){
         categoriaAdapter = new CardItemRecommendedCategoryAdapter(getContext(), R.layout.layout_card_item_recommended_category, new ArrayList<>());
         gvCategorias.setAdapter(categoriaAdapter);
+
+        categoryAdapter = new CardItemRecommendedCategoryAdapterRv();
+        rvCategorias.setAdapter(categoryAdapter);
+
     }
     private void loadDataRecommendedCategory(){
         List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
@@ -94,5 +105,7 @@ public class MenuItemHomeFragment extends Fragment {
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
         categoriaAdapter.updateItem(list);
+
+        categoryAdapter.updateList(list);
     }
 }

@@ -1,45 +1,65 @@
 package grupo6.proyectogrupo6;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class CardItemRecommendedCategoryAdapter extends ArrayAdapter<CardItemRecommendedCategoryModel> {
+public class CardItemRecommendedCategoryAdapter extends RecyclerView.Adapter<CardItemRecommendedCategoryAdapter.ViewHolder>{
 
-    public CardItemRecommendedCategoryAdapter(@NonNull Context context, int resource, @NonNull List<CardItemRecommendedCategoryModel> objects) {
-        super(context, resource, objects);
+    private  List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
+
+    public CardItemRecommendedCategoryAdapter() {
+    }
+
+    public CardItemRecommendedCategoryAdapter(List<CardItemRecommendedCategoryModel> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_card_item_recommended_category, parent, false);
-        }
-        CardItemRecommendedCategoryModel c = this.getItem(position);
-        ImageView imgCategoria = convertView.findViewById(R.id.cardItemRecommendedCategoryImage);
-        TextView titleCategoria= convertView.findViewById(R.id.cardItemRecommendedCategoryName);
-
-        imgCategoria.setImageResource(c.getImagen());
-        titleCategoria.setText(c.getTitulo());
-
-        return convertView;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_category,null,false);
+        return new ViewHolder(view);
     }
 
-    public void updateItem(List<CardItemRecommendedCategoryModel> lista) {
-        clear();
-        addAll(lista);
-        this.notifyDataSetChanged();
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.updateItem(list.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public void updateList(List<CardItemRecommendedCategoryModel> list) {
+        this.list.clear();
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView imgCategory;
+        TextView titleCategory;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+           imgCategory = itemView.findViewById(R.id.cardItemRecommendedCategoryImage);
+           titleCategory= itemView.findViewById(R.id.cardItemRecommendedCategoryName);
+        }
+
+        public void updateItem(CardItemRecommendedCategoryModel cardItemRecommendedCategoryModel) {
+            imgCategory.setImageResource(cardItemRecommendedCategoryModel.getImagen());
+            titleCategory.setText(cardItemRecommendedCategoryModel.getTitulo());
+        }
     }
 }

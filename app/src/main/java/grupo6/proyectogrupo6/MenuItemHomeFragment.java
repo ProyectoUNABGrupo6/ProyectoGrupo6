@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -29,10 +28,8 @@ public class MenuItemHomeFragment extends Fragment {
     private SliderView svm;
     private MenuItemHomeSliderAdapter misa;
     //Recommended category
-    private GridView gvCategorias;
-    private CardItemRecommendedCategoryAdapter categoriaAdapter;
     private RecyclerView rvCategorias;
-    private CardItemRecommendedCategoryAdapterRv categoryAdapter;
+    private CardItemRecommendedCategoryAdapter categoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,16 +81,11 @@ public class MenuItemHomeFragment extends Fragment {
     }
     //Recommended Category
     private void initRecommendedCategory(View v){
-        gvCategorias = v.findViewById(R.id.menuItemHomeGvRecommendedCategory);
-
         rvCategorias = v.findViewById(R.id.menuItemHomeRvRecommendedCategory);
         rvCategorias.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
     }
     private void initAdapterRecommendedCategory(){
-        categoriaAdapter = new CardItemRecommendedCategoryAdapter(getContext(), R.layout.layout_card_item_recommended_category, new ArrayList<>());
-        gvCategorias.setAdapter(categoriaAdapter);
-
-        categoryAdapter = new CardItemRecommendedCategoryAdapterRv();
+        categoryAdapter = new CardItemRecommendedCategoryAdapter();
         rvCategorias.setAdapter(categoryAdapter);
 
     }
@@ -104,8 +96,6 @@ public class MenuItemHomeFragment extends Fragment {
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 3"));
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
-        categoriaAdapter.updateItem(list);
-
         categoryAdapter.updateList(list);
     }
 }

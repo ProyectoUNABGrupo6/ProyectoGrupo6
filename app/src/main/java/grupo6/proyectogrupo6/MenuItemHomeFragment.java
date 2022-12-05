@@ -61,11 +61,11 @@ public class MenuItemHomeFragment extends Fragment {
     }
     private void loadData() {
 
-        List<SliderItemImageModelView> lista = new ArrayList<>();
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 1"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 2"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 3"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 4"));
+        List<SliderItemImageModel> lista = new ArrayList<>();
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 1"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 2"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 3"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 4"));
         misa.updateItem(lista);
     }
 }

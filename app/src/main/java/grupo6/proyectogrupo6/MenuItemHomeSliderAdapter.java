@@ -17,7 +17,7 @@ import java.util.List;
 public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSliderAdapter.SliderAdapterVH> {
 
     private Context context;
-    List<SliderItemImageModelView> mSliderItems = new ArrayList<>();
+    List<SliderItemImageModel> mSliderItems = new ArrayList<>();
 
     public MenuItemHomeSliderAdapter(Context context) {
         this.context = context;
@@ -31,7 +31,7 @@ public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSli
 
     @Override
     public void onBindViewHolder(SliderAdapterVH viewHolder, int position) {
-        SliderItemImageModelView sliderItem = mSliderItems.get(position);
+        SliderItemImageModel sliderItem = mSliderItems.get(position);
 
         viewHolder.textView.setText(sliderItem.getTitulo());
         viewHolder.textView.setTextSize(16);
@@ -60,7 +60,7 @@ public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSli
         }
     }
 
-    public void updateItem(List<SliderItemImageModelView> lista) {
+    public void updateItem(List<SliderItemImageModel> lista) {
         mSliderItems.clear();
         mSliderItems.addAll(lista);
         this.notifyDataSetChanged();

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,12 @@ import java.util.List;
 
 public class MenuItemHomeFragment extends Fragment {
 
+    //Slider Image
     private SliderView svm;
     private MenuItemHomeSliderAdapter misa;
+    //Recommended category
+    private RecyclerView rvCategorias;
+    private CardItemRecommendedCategoryAdapter categoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,15 +46,20 @@ public class MenuItemHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init(view);
-        initAdapter();
-        loadData();
+        //Slider Image
+        initSliderImage(view);
+        initAdapterSliderImage();
+        loadDataSliderImage();
+        //Recommended category
+        initRecommendedCategory(view);
+        initAdapterRecommendedCategory();
+        loadDataRecommendedCategory();
     }
-
-    private void init(View v){
+    //Slider Image
+    private void initSliderImage(View v){
         svm = v.findViewById(R.id.menuItemHomeSliderImage);
     }
-    private void initAdapter() {
+    private void initAdapterSliderImage() {
         misa = new MenuItemHomeSliderAdapter(getContext());
         svm.setSliderAdapter(misa);
         svm.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
@@ -59,13 +70,32 @@ public class MenuItemHomeFragment extends Fragment {
         svm.setScrollTimeInSec(4); //set scroll delay in seconds :
         svm.startAutoCycle();
     }
-    private void loadData() {
+    private void loadDataSliderImage() {
 
-        List<SliderItemImageModelView> lista = new ArrayList<>();
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 1"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 2"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 3"));
-        lista.add(new SliderItemImageModelView(R.drawable.img_logo, "Imagen 4"));
+        List<SliderItemImageModel> lista = new ArrayList<>();
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 1"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 2"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 3"));
+        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 4"));
         misa.updateItem(lista);
+    }
+    //Recommended Category
+    private void initRecommendedCategory(View v){
+        rvCategorias = v.findViewById(R.id.menuItemHomeRvRecommendedCategory);
+        rvCategorias.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
+    }
+    private void initAdapterRecommendedCategory(){
+        categoryAdapter = new CardItemRecommendedCategoryAdapter();
+        rvCategorias.setAdapter(categoryAdapter);
+
+    }
+    private void loadDataRecommendedCategory(){
+        List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 1"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 2"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 3"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
+        categoryAdapter.updateList(list);
     }
 }

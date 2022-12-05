@@ -1,13 +1,13 @@
 package grupo6.proyectogrupo6;
 
-public class SliderItemImageModelView {
+public class SliderItemImageModel {
 
     private int imagen;
     private String titulo;
 
-    public SliderItemImageModelView() {
+    public SliderItemImageModel() {
     }
-    public SliderItemImageModelView(int imagen, String titulo) {
+    public SliderItemImageModel(int imagen, String titulo) {
         this.imagen = imagen;
         this.titulo = titulo;
     }

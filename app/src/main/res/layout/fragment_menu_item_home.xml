@@ -59,7 +59,21 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/san_francisco"
+                android:text="@string/menuItemHomeTitleProduct"
+                android:textColor="@color/black"
+                android:textSize="24dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menuItemHomeRvRecommendedProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp" />
         </LinearLayout>
 
     </ScrollView>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -22,8 +23,12 @@ import java.util.List;
 
 public class MenuItemHomeFragment extends Fragment {
 
+    //Slider Image
     private SliderView svm;
     private MenuItemHomeSliderAdapter misa;
+    //Recommended category
+    private GridView gvCategorias;
+    private CardItemRecommendedCategoryAdapter categoriaAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,15 +45,20 @@ public class MenuItemHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init(view);
-        initAdapter();
-        loadData();
+        //Slider Image
+        initSliderImage(view);
+        initAdapterSliderImage();
+        loadDataSliderImage();
+        //Recommended category
+        initRecommendedCategory(view);
+        initAdapterRecommendedCategory();
+        loadDataRecommendedCategory();
     }
-
-    private void init(View v){
+    //Slider Image
+    private void initSliderImage(View v){
         svm = v.findViewById(R.id.menuItemHomeSliderImage);
     }
-    private void initAdapter() {
+    private void initAdapterSliderImage() {
         misa = new MenuItemHomeSliderAdapter(getContext());
         svm.setSliderAdapter(misa);
         svm.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
@@ -59,7 +69,7 @@ public class MenuItemHomeFragment extends Fragment {
         svm.setScrollTimeInSec(4); //set scroll delay in seconds :
         svm.startAutoCycle();
     }
-    private void loadData() {
+    private void loadDataSliderImage() {
 
         List<SliderItemImageModel> lista = new ArrayList<>();
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 1"));
@@ -67,5 +77,22 @@ public class MenuItemHomeFragment extends Fragment {
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 3"));
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 4"));
         misa.updateItem(lista);
+    }
+    //Slider Image
+    private void initRecommendedCategory(View v){
+        gvCategorias = v.findViewById(R.id.menuItemHomeGvRecommendedCategory);
+    }
+    private void initAdapterRecommendedCategory(){
+        categoriaAdapter = new CardItemRecommendedCategoryAdapter(getContext(), R.layout.layout_card_item_recommended_category, new ArrayList<>());
+        gvCategorias.setAdapter(categoriaAdapter);
+    }
+    private void loadDataRecommendedCategory(){
+        List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 1"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 2"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 3"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
+        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
+        categoriaAdapter.updateItem(list);
     }
 }

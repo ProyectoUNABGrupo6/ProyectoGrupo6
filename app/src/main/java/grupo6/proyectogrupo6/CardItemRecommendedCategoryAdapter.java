@@ -36,4 +36,10 @@ public class CardItemRecommendedCategoryAdapter extends ArrayAdapter<CardItemRec
 
         return convertView;
     }
+
+    public void updateItem(List<CardItemRecommendedCategoryModel> lista) {
+        clear();
+        addAll(lista);
+        this.notifyDataSetChanged();
+    }
 }

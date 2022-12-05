@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item1"
-        android:title="@string/menuItem"
-        android:icon="@drawable/ic_menu_item_generic" />
+        android:id="@+id/menuItemHome"
+        android:title="@string/menuItemHome"
+        android:icon="@drawable/ic_menu_item_home" />
     <item
         android:id="@+id/item2"
         android:title="@string/menuItem"
@@ -13,7 +13,7 @@
         android:title="@string/menuItem"
         android:icon="@drawable/ic_menu_item_generic" />
     <item
-        android:id="@+id/mitem4"
+        android:id="@+id/item4"
         android:title="@string/menuItem"
         android:icon="@drawable/ic_menu_item_generic" />
     <item

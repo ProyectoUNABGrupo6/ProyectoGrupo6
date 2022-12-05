@@ -46,6 +46,7 @@
                 android:src="@drawable/rating_orange_small" />
 
             <TextView
+                android:id="@+id/cardItemRecommendedProductDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardItemRecommendedProductRating"

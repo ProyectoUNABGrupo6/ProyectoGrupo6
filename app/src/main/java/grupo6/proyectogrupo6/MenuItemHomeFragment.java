@@ -30,6 +30,9 @@ public class MenuItemHomeFragment extends Fragment {
     //Recommended category
     private RecyclerView rvCategorias;
     private CardItemRecommendedCategoryAdapter categoryAdapter;
+    //Recommended product
+    private RecyclerView rvProduct;
+    private CardItemRecommendedProductAdapter productAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,10 @@ public class MenuItemHomeFragment extends Fragment {
         initRecommendedCategory(view);
         initAdapterRecommendedCategory();
         loadDataRecommendedCategory();
+        //Recommended product
+        initRecommendedProduct(view);
+        initAdapterRecommendedProduct();
+        loadDataRecommendedProduct();
     }
     //Slider Image
     private void initSliderImage(View v){
@@ -97,5 +104,24 @@ public class MenuItemHomeFragment extends Fragment {
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
         list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
         categoryAdapter.updateList(list);
+    }
+    //Recommended Product
+    private void initRecommendedProduct(View v){
+        rvProduct = v.findViewById(R.id.menuItemHomeRvRecommendedProduct);
+        rvProduct.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
+    }
+    private void initAdapterRecommendedProduct(){
+        productAdapter = new CardItemRecommendedProductAdapter();
+        rvProduct.setAdapter(productAdapter);
+
+    }
+    private void loadDataRecommendedProduct(){
+        List<CardItemRecommendedProductModel> list = new ArrayList<>();
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 1","details 1"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 2","details 2"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 3","details 3"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 4","details 4"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 5","details 5"));
+        productAdapter.updateList(list);
     }
 }

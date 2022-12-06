@@ -19,7 +19,7 @@ public class CardItemRecommendedProductAdapter extends RecyclerView.Adapter<Card
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_product,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_product,parent,false);
         return new CardItemRecommendedProductAdapter.ViewHolder(view);
     }
 

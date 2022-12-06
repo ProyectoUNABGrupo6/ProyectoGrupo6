@@ -122,6 +122,8 @@ public class MenuItemHomeFragment extends Fragment {
         list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 3","details 3"));
         list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 4","details 4"));
         list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 5","details 5"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 6","details 6"));
+        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 7","details 7"));
         productAdapter.updateList(list);
     }
 }

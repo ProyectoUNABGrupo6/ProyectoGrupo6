@@ -26,7 +26,7 @@ public class CardItemRecommendedCategoryAdapter extends RecyclerView.Adapter<Car
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_category,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_category,parent,false);
         return new ViewHolder(view);
     }
 

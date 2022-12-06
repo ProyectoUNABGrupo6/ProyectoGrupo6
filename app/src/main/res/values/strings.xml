@@ -11,7 +11,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menuItemHome">Home</string>
     <string name="layoutCardItemCategoryText">Categoría 1</string>
-    <string name="menuItemHomeTitleCategory">Categorías</string>
+    <string name="menuItemHomeTitleCategory">Categorías Recomendadas</string>
+    <string name="layoutCardItemProductName">Seco De Cabrito</string>
+    <string name="layoutCardItemProductDetails">Platillo Recomendado</string>
+    <string name="layoutCardItemProductBotton">Ordenar</string>
+    <string name="menuItemHomeTitleProduct">Productos Recomendados</string>
 
 
 </resources>

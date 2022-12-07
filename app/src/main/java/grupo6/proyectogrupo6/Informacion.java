@@ -1,6 +1,8 @@
 package grupo6.proyectogrupo6;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,11 +43,12 @@ public class Informacion extends AppCompatActivity {
             imgCarrito.setImageResource(imgCar);
             botonAtras.setImageResource(imgatras);
 
-            int imgPro = bundle.getInt("imageCode");
+            byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
+            Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             String tituloInf = bundle.getString("titulo");
             String DescripInf = bundle.getString("descripcion");
             String precInf = "$" + String.valueOf(bundle.getInt("precio"));
-            imgProd.setImageResource(imgPro);
+            imgProd.setImageBitmap(imgPro);
             txtTituloInf.setText(tituloInf);
             txtDescripInf.setText(DescripInf);
             txtPrecioInf.setText(precInf);

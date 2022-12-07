@@ -61,7 +61,7 @@ public class AgregarProducto extends AppCompatActivity {
         try {
 
             productosServices = new ProductosServices();
-            dbFirebase = new DBFirebase();
+            dbFirebase = new DBFirebase(this);
             dbHelper = new DBHelper(this);
 
         } catch (Exception e) {
@@ -79,14 +79,15 @@ public class AgregarProducto extends AppCompatActivity {
         botonAgregarPro.setOnClickListener(View -> {
 
             if (!(productoAdd.getText().toString()).isEmpty() && !(descripcionAdd.getText().toString()).isEmpty() && !(precioAdd.getText().toString()).isEmpty()) {
-/*
+
                 dbFirebase.insertarDatos(
                         productoAdd.getText().toString(),
                         descripcionAdd.getText().toString(),
                         Integer.parseInt(precioAdd.getText().toString()),
                         productosServices.imageButtonToByte(imgAdd)
                 );
-*/
+                Toast.makeText(this, "Dato Agregado", Toast.LENGTH_LONG).show();
+
                 dbHelper.insetarDatos(
                         productoAdd.getText().toString(),
                         descripcionAdd.getText().toString(),

@@ -18,6 +18,11 @@
 
     //Formulario
     <string name="formulario">Formulario</string>
+    <string name="imgAgregar">Agregar Imagen</string>
+    <string name="insAgregarNombre">Producto</string>
+    <string name="insAgregarDescripcion">Descripcion del Producto</string>
+    <string name="insAgregarPrecio">Precio</string>
+    <string name="botonAgregar">Agregar</string>
 
 
 </resources>

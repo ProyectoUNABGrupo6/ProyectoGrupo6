@@ -1,47 +1,55 @@
 package grupo6.proyectogrupo6.Entities;
 
 public class Producto {
-    private int imagen;
-    private String name;
+    private byte[] imagen;
+    private String nombre;
     private String descripcion;
     private int precio;
 
-    public Producto(int imagen, String name, String descripcion, int precio) {
+    public Producto(byte[] imagen, String nombre, String descripcion, int precio) {
         this.imagen = imagen;
-        this.name = name;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
     }
 
-    public int getImagen() {
+    public byte[] getImagen() {
+
         return imagen;
     }
 
-    public void setImagen(int imagen) {
+    public void setImagen(byte[] imagen) {
+
         this.imagen = imagen;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
+
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
+
         this.descripcion = descripcion;
     }
 
     public int getPrecio() {
+
         return precio;
     }
 
     public void setPrecio(int precio) {
+
         this.precio = precio;
     }
 }

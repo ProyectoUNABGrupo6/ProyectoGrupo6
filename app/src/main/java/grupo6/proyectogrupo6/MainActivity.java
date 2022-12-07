@@ -2,6 +2,7 @@ package grupo6.proyectogrupo6;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("imageTitulo", R.drawable.ferresix);
         intent.putExtra("imageCarrito", R.drawable.carrito);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
     }
 
 }

@@ -22,11 +22,12 @@ import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class Productos extends AppCompatActivity {
 
-    private DBHelper dbHelper;
-    private ProductosServices productosServices;
+    public DBHelper dbHelper;
+    public ProductosServices productosServices;
     public ImageButton botonAtras;
     public ImageView imgTitulo;
     public ImageView imgCarrito;
+
 
     public ListView listViewProductos;
     public ArrayList<Producto> arrayList;
@@ -38,25 +39,16 @@ public class Productos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
 
+        arrayList = new ArrayList<>();
+
 
         try {
             dbHelper = new DBHelper(this);
-            /*
-            byte[] img = "".getBytes();
-            dbHelper.insetarDatos("Producto1", "Descripcion1", 10000, img);
-            dbHelper.insetarDatos("Producto2", "Descripcion2", 70000, img);
-            dbHelper.insetarDatos("Producto3", "Descripcion3", 20000, img);
-            dbHelper.insetarDatos("Producto4", "Descripcion4", 90000, img);
-            dbHelper.insetarDatos("Producto5", "Descripcion5", 80000, img);
-            dbHelper.insetarDatos("Producto6", "Descripcion6", 60000, img);
-            dbHelper.insetarDatos("Producto7", "Descripcion7", 40000, img);
-            dbHelper.insetarDatos("Producto8", "Descripcion8", 50000, img);
-            dbHelper.insetarDatos("Producto9", "Descripcion9", 30000, img);*/
-
 
             productosServices = new ProductosServices();
             Cursor cursor = dbHelper.consultarDatos();
             arrayList = productosServices.cursorToArray(cursor);
+
 
         } catch (Exception e) {
             Log.e("Database", e.toString());
@@ -99,16 +91,13 @@ public class Productos extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.actionAdd:
-                Intent intent = new Intent(getApplicationContext(), AgregarProducto.class);
-                intent.putExtra("imageAtras", R.mipmap.atras);
-                intent.putExtra("imageTitulo", R.drawable.ferresix);
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.actionAdd) {
+            Intent intent = new Intent(getApplicationContext(), AgregarProducto.class);
+            intent.putExtra("imageAtras", R.mipmap.atras);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            startActivity(intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

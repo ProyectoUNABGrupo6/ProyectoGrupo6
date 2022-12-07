@@ -2,6 +2,7 @@ package grupo6.proyectogrupo6;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,14 +14,17 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
 import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class AgregarProducto extends AppCompatActivity {
 
     private ProductosServices productosServices;
+    private DBFirebase dbFirebase;
     private DBHelper dbHelper;
     public Button botonAgregarPro;
     private EditText productoAdd, descripcionAdd, precioAdd;
@@ -30,6 +34,7 @@ public class AgregarProducto extends AppCompatActivity {
     public ImageButton botonAtrasForm;
     public ImageView imgTituloForm;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,7 @@ public class AgregarProducto extends AppCompatActivity {
         try {
 
             productosServices = new ProductosServices();
+            dbFirebase = new DBFirebase();
             dbHelper = new DBHelper(this);
 
         } catch (Exception e) {
@@ -73,7 +79,14 @@ public class AgregarProducto extends AppCompatActivity {
         botonAgregarPro.setOnClickListener(View -> {
 
             if (!(productoAdd.getText().toString()).isEmpty() && !(descripcionAdd.getText().toString()).isEmpty() && !(precioAdd.getText().toString()).isEmpty()) {
-
+/*
+                dbFirebase.insertarDatos(
+                        productoAdd.getText().toString(),
+                        descripcionAdd.getText().toString(),
+                        Integer.parseInt(precioAdd.getText().toString()),
+                        productosServices.imageButtonToByte(imgAdd)
+                );
+*/
                 dbHelper.insetarDatos(
                         productoAdd.getText().toString(),
                         descripcionAdd.getText().toString(),

@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Informacion;
 import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class ProductoAdapters extends BaseAdapter {
 
     private Context context;
     private ArrayList<Producto> arrayList;
+    private ProductosServices productosServices;
 
     public ProductoAdapters(Context context, ArrayList<Producto> arrayList) {
         this.context = context;
@@ -74,10 +76,8 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
+            productosServices = new ProductosServices();
+            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
             intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", producto.getNombre());
@@ -94,9 +94,12 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
 
+            productosServices = new ProductosServices();
+            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+
+            intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", producto.getNombre());
             intent.putExtra("descripcion", producto.getDescripcion());
-            intent.putExtra("imageCode", producto.getImagen());
             intent.putExtra("precio", producto.getPrecio());
             context.startActivity(intent);
         });
@@ -109,9 +112,12 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
 
+            productosServices = new ProductosServices();
+            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+
+            intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", producto.getNombre());
             intent.putExtra("descripcion", producto.getDescripcion());
-            intent.putExtra("imageCode", producto.getImagen());
             intent.putExtra("precio", producto.getPrecio());
             context.startActivity(intent);
         });
@@ -123,10 +129,12 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
+            productosServices = new ProductosServices();
+            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
+            intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", producto.getNombre());
             intent.putExtra("descripcion", producto.getDescripcion());
-            intent.putExtra("imageCode", producto.getImagen());
             intent.putExtra("precio", producto.getPrecio());
             context.startActivity(intent);
         });

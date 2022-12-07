@@ -6,7 +6,10 @@
     <string name="menuItemSupport">Support</string>
     <string name="menuItemAbout">About</string>
     <string name="submenuOther">other</string>
+    <string name="subMenuAdmin">administrator </string>
     <string name="menuHeaderVerified">Verified</string>
+    <string name="menuItemCategory">Category</string>
+    <string name="menuItemProduct">Product</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menuItemHome">Home</string>

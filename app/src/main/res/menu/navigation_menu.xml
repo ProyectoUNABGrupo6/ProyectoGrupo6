@@ -5,36 +5,28 @@
         android:title="@string/menuItemHome"
         android:icon="@drawable/ic_menu_item_home" />
     <item
-        android:id="@+id/item2"
-        android:title="@string/menuItem"
-        android:icon="@drawable/ic_menu_item_generic" />
+        android:id="@+id/menuItemSettings"
+        android:title="@string/menuItemSettings"
+        android:icon="@drawable/ic_menu_item_settings" />
     <item
-        android:id="@+id/item3"
-        android:title="@string/menuItem"
-        android:icon="@drawable/ic_menu_item_generic" />
+        android:id="@+id/menuItemSupport"
+        android:title="@string/menuItemSupport"
+        android:icon="@drawable/ic_menu_item_support" />
     <item
-        android:id="@+id/item4"
-        android:title="@string/menuItem"
-        android:icon="@drawable/ic_menu_item_generic" />
-    <item
-        android:id="@+id/item5"
-        android:title="@string/menuItem"
-        android:icon="@drawable/ic_menu_item_generic" />
+        android:id="@+id/menuItemAbout"
+        android:title="@string/menuItemAbout"
+        android:icon="@drawable/ic_menu_item_about" />
 
-    <item android:title="@string/submenuOther">
+    <item android:title="@string/subMenuAdmin">
         <menu>
                 <item
-                    android:id="@+id/menuItemSettings"
-                    android:title="@string/menuItemSettings"
-                    android:icon="@drawable/ic_menu_item_generic" />
+                    android:id="@+id/menuItemCategory"
+                    android:title="@string/menuItemCategory"
+                    android:icon="@drawable/ic_menu_item_category" />
                 <item
-                    android:id="@+id/menuItemSupport"
-                    android:title="@string/menuItemSupport"
-                    android:icon="@drawable/ic_menu_item_generic" />
-                <item
-                    android:id="@+id/menuItemAbout"
-                    android:title="@string/menuItemAbout"
-                    android:icon="@drawable/ic_menu_item_generic" />
+                    android:id="@+id/menuItemProduct"
+                    android:title="@string/menuItemProduct"
+                    android:icon="@drawable/ic_menu_item_product" />
         </menu>
 
     </item>

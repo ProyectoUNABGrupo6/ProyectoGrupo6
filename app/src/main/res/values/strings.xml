@@ -24,5 +24,14 @@
     <string name="insAgregarPrecio">Precio</string>
     <string name="botonAgregar">Agregar</string>
 
+    //menu productos
+
+    <string name="agregar">Agregar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="Actualizar">Actualizar</string>
+
+    //informacion
+    <string name="id">id</string>
+
 
 </resources>

@@ -20,6 +20,7 @@ public class ProductosServices {
         } else {
             while (cursor.moveToNext()) {
                 Producto producto = new Producto(
+                        cursor.getInt(0),
                         cursor.getBlob(4),
                         cursor.getString(1),
                         cursor.getString(2),

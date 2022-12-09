@@ -51,19 +51,34 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/imgProductoInfo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:contentDescription="@string/imgHerramienta" />
+                android:contentDescription="@string/imgHerramienta"
+                tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/txtTituloProInfo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="#656565"
-                android:textSize="26sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtID"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#656565"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:id="@+id/txtTituloProInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#656565"
+                    android:textSize="26sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtDescripInfo"
@@ -80,6 +95,35 @@
                 android:gravity="center"
                 android:textColor="#656565"
                 android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/botonActualizar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/Actualizar"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/ic_create"
+                    tools:ignore="ImageContrastCheck" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/botonEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="@string/eliminar"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/ic_delete"
+                    tools:ignore="ImageContrastCheck" />
+            </LinearLayout>
 
         </LinearLayout>
 

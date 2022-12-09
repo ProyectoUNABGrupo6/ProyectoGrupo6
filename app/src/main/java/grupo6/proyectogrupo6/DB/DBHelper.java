@@ -1,19 +1,15 @@
 package grupo6.proyectogrupo6.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-
-import java.sql.Blob;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private SQLiteDatabase FerreteriaDB;
+    private final SQLiteDatabase FerreteriaDB;
 
     public DBHelper(Context context) {
         super(context, "FerreteriaDB.db", null, 1);
@@ -57,8 +53,27 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor consultarDatos() {
-        Cursor cursor = FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS", null);
-        return cursor;
+        return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS", null);
+    }
+
+    public Cursor consultarDatosporID(int id) {
+        return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS WHERE id = " + id, null);
+    }
+
+    public void eliminarDatos(int id) {
+        FerreteriaDB.execSQL("DELETE  FROM PRODUCTOS WHERE id =" + id);
+        FerreteriaDB.execSQL("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'PRODUCTOS'");
+        //FerreteriaDB.close();
+    }
+
+    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, byte[] IMAGEN) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("NOMBRE", NOMBRE);
+        contentValues.put("DESCRIPCION", DESCRIPCION);
+        contentValues.put("PRECIO", PRECIO);
+        contentValues.put("IMAGEN", IMAGEN);
+
+        FerreteriaDB.update("PRODUCTOS", contentValues, "id = ?", new String[]{String.valueOf(id)});
     }
 
 }

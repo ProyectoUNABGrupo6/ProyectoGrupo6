@@ -2,6 +2,8 @@ package grupo6.proyectogrupo6;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -26,13 +29,17 @@ public class AgregarProducto extends AppCompatActivity {
     private ProductosServices productosServices;
     private DBFirebase dbFirebase;
     private DBHelper dbHelper;
-    public Button botonAgregarPro;
+    public Button botonAgregarPro, btnActualizar;
     private EditText productoAdd, descripcionAdd, precioAdd;
     private ImageButton imgAdd;
+    private TextView idAct;
+
     ActivityResultLauncher<String> content;
 
     public ImageButton botonAtrasForm;
     public ImageView imgTituloForm;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -45,6 +52,8 @@ public class AgregarProducto extends AppCompatActivity {
         descripcionAdd = findViewById(R.id.insDescripcion);
         precioAdd = findViewById(R.id.insPrecio);
         imgAdd = findViewById(R.id.imgAgregar);
+        btnActualizar = findViewById(R.id.btnActualizar);
+        idAct = findViewById(R.id.txtIDAct);
 
         botonAtrasForm = findViewById(R.id.imgAtrasForm);
         imgTituloForm = findViewById(R.id.imgTituloForm);
@@ -55,6 +64,23 @@ public class AgregarProducto extends AppCompatActivity {
             int imgAtras = bundle.getInt("imageAtras");
             botonAtrasForm.setImageResource(imgAtras);
             imgTituloForm.setImageResource(imgTit);
+
+            String ida = bundle.getString("id");
+            if(ida != null){
+                String id = bundle.getString("id");
+                byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
+                Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                String tituloInf = bundle.getString("titulo");
+                String DescripInf = bundle.getString("descripcion");
+                String precInf = bundle.getString("precio");
+                precInf = precInf.replaceAll("[$]","");
+                productoAdd.setText(tituloInf);
+                descripcionAdd.setText(DescripInf);
+                precioAdd.setText(precInf);
+                imgAdd.setImageBitmap(imgPro);
+                idAct.setText(id);
+            }
+
         }
 
 
@@ -78,6 +104,8 @@ public class AgregarProducto extends AppCompatActivity {
 
         botonAgregarPro.setOnClickListener(View -> {
 
+
+
             if (!(productoAdd.getText().toString()).isEmpty() && !(descripcionAdd.getText().toString()).isEmpty() && !(precioAdd.getText().toString()).isEmpty()) {
 
                 dbFirebase.insertarDatos(
@@ -86,7 +114,7 @@ public class AgregarProducto extends AppCompatActivity {
                         Integer.parseInt(precioAdd.getText().toString()),
                         productosServices.imageButtonToByte(imgAdd)
                 );
-                Toast.makeText(this, "Dato Agregado", Toast.LENGTH_LONG).show();
+
 
                 dbHelper.insetarDatos(
                         productoAdd.getText().toString(),
@@ -100,6 +128,17 @@ public class AgregarProducto extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Los campos no deben estar vacios", Toast.LENGTH_LONG).show();
             }
+        });
+
+        btnActualizar.setOnClickListener(View ->{
+            dbHelper.actualizarDatos(
+                    idAct.getText().toString(),
+                    productoAdd.getText().toString(),
+                    descripcionAdd.getText().toString(),
+                    Integer.parseInt(precioAdd.getText().toString()),
+                    productosServices.imageButtonToByte(imgAdd)
+            );
+            volverAtras(View);
         });
 
 

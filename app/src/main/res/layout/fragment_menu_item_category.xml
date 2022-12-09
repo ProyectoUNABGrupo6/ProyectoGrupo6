@@ -7,14 +7,26 @@
     android:orientation="vertical"
     tools:context=".menuItemCategoryFragment">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/menuItemCategoryRvCategory"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/layout_card_item_category">
+        android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <SearchView
+            android:id="@+id/menuItemCategorySvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/menuItemCategoryRvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/layout_card_item_category">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
 
 
 

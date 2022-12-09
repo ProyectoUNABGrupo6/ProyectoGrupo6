@@ -1,5 +1,7 @@
 package grupo6.proyectogrupo6;
 
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCategoryAdapter.ViewHolder>{
 
     private  List<CardItemCategoryModel> list = new ArrayList<>();
+    private  List<CardItemCategoryModel> listInitial = new ArrayList<>();
 
     public CardItemCategoryAdapter() {
     }
 
     public CardItemCategoryAdapter(List<CardItemCategoryModel> list) {
-        this.list = list;
+        this.listInitial = list;
+        this.list = this.listInitial;
     }
 
     @NonNull
@@ -40,10 +45,32 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
         return list.size();
     }
 
+
     public void updateList(List<CardItemCategoryModel> list) {
-        this.list.clear();
-        this.list = list;
+        this.listInitial = list;
+        this.list = this.listInitial;
         notifyDataSetChanged();
+    }
+
+    public  void filter(String search){
+        int length = search.length();
+
+        if(length == 0){
+            this.list = this.listInitial;
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                this.list = listInitial.stream().
+                        filter(item -> item.getName().toLowerCase().contains(search.toLowerCase()))
+                        .collect(Collectors.toList());
+            }else {
+                list.clear();
+                for (CardItemCategoryModel item : listInitial){
+                    if(item.getName().toLowerCase().contains(search.toLowerCase())) list.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
+
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

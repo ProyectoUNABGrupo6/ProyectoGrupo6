@@ -11,17 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class menuItemCategoryFragment extends Fragment {
+public class menuItemCategoryFragment extends Fragment implements SearchView.OnQueryTextListener{
 
     //Category
     private RecyclerView rvCategory;
     private CardItemCategoryAdapter categoryAdapter;
+    SearchView svCategory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,26 @@ public class menuItemCategoryFragment extends Fragment {
         loadData();
 
     }
+
+
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        categoryAdapter.filter(s);
+        return false;
+    }
+
     //Category
     private void init(View v){
         rvCategory = v.findViewById(R.id.menuItemCategoryRvCategory);
         rvCategory.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
+        svCategory = v.findViewById(R.id.menuItemCategorySvCategory);
+        svCategory.setOnQueryTextListener(this);
     }
     private void initAdapter(){
         categoryAdapter = new CardItemCategoryAdapter();
@@ -62,4 +80,6 @@ public class menuItemCategoryFragment extends Fragment {
         list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 5", "Description 5"));
         categoryAdapter.updateList(list);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package grupo6.proyectogrupo6;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,18 +13,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class menuItemCategoryFragment extends Fragment implements SearchView.OnQueryTextListener{
+public class menuItemCategoryFragment extends Fragment
+                                      implements SearchView.OnQueryTextListener,
+                                                 View.OnClickListener {
 
+    private SearchView svCategory;
     //Category
     private RecyclerView rvCategory;
     private CardItemCategoryAdapter categoryAdapter;
-    SearchView svCategory;
+    //add button
+    private FloatingActionButton addButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,39 +47,42 @@ public class menuItemCategoryFragment extends Fragment implements SearchView.OnQ
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Search
+        initSearch(view);
         //Category
-        init(view);
-        initAdapter();
-        loadData();
+        initRvCategory(view);
+        initAdapterRvCategory();
+        loadDataRvCategory();
+        //add button
+        initAddButton(view);
 
     }
 
-
-
+    //Search
+    private void initSearch(View v){
+        svCategory = v.findViewById(R.id.menuItemCategorySvCategory);
+        svCategory.setOnQueryTextListener(this);
+    }
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
-
     @Override
     public boolean onQueryTextChange(String s) {
         categoryAdapter.filter(s);
         return false;
     }
-
     //Category
-    private void init(View v){
+    private void initRvCategory(View v){
         rvCategory = v.findViewById(R.id.menuItemCategoryRvCategory);
         rvCategory.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
-        svCategory = v.findViewById(R.id.menuItemCategorySvCategory);
-        svCategory.setOnQueryTextListener(this);
     }
-    private void initAdapter(){
+    private void initAdapterRvCategory(){
         categoryAdapter = new CardItemCategoryAdapter();
         rvCategory.setAdapter(categoryAdapter);
 
     }
-    private void loadData(){
+    private void loadDataRvCategory(){
         List<CardItemCategoryModel> list = new ArrayList<>();
         list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 1", "Description 1"));
         list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 2", "Description 2"));
@@ -80,6 +91,16 @@ public class menuItemCategoryFragment extends Fragment implements SearchView.OnQ
         list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 5", "Description 5"));
         categoryAdapter.updateList(list);
     }
-
-
+    //add button
+    private void initAddButton(View v){
+        addButton = v.findViewById(R.id.menuItemCategoryAddButton);
+        addButton.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.menuItemCategoryAddButton){
+            Intent intent = new Intent(v.getContext(), MenuItemCategoryAddActivity.class);
+            startActivity(intent);
+        }
+    }
 }

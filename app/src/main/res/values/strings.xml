@@ -19,6 +19,8 @@
     <string name="layoutCardItemProductDetails">Platillo Recomendado</string>
     <string name="layoutCardItemProductBotton">Ordenar</string>
     <string name="menuItemHomeTitleProduct">Productos Recomendados</string>
+    <string name="name">Name</string>
+    <string name="short_description">short description</string>
 
 
 </resources>

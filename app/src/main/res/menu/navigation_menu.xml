@@ -5,28 +5,29 @@
         android:title="@string/menuItemHome"
         android:icon="@drawable/ic_menu_item_home" />
     <item
-        android:id="@+id/menuItemSettings"
-        android:title="@string/menuItemSettings"
-        android:icon="@drawable/ic_menu_item_settings" />
+        android:id="@+id/menuItemCategory"
+        android:title="@string/menuItemCategory"
+        android:icon="@drawable/ic_menu_item_category" />
     <item
-        android:id="@+id/menuItemSupport"
-        android:title="@string/menuItemSupport"
-        android:icon="@drawable/ic_menu_item_support" />
-    <item
-        android:id="@+id/menuItemAbout"
-        android:title="@string/menuItemAbout"
-        android:icon="@drawable/ic_menu_item_about" />
+        android:id="@+id/menuItemProduct"
+        android:title="@string/menuItemProduct"
+        android:icon="@drawable/ic_menu_item_product" />
 
-    <item android:title="@string/subMenuAdmin">
+
+    <item android:title="@string/submenuOther">
         <menu>
-                <item
-                    android:id="@+id/menuItemCategory"
-                    android:title="@string/menuItemCategory"
-                    android:icon="@drawable/ic_menu_item_category" />
-                <item
-                    android:id="@+id/menuItemProduct"
-                    android:title="@string/menuItemProduct"
-                    android:icon="@drawable/ic_menu_item_product" />
+            <item
+                android:id="@+id/menuItemSettings"
+                android:title="@string/menuItemSettings"
+                android:icon="@drawable/ic_menu_item_settings" />
+            <item
+                android:id="@+id/menuItemSupport"
+                android:title="@string/menuItemSupport"
+                android:icon="@drawable/ic_menu_item_support" />
+            <item
+                android:id="@+id/menuItemAbout"
+                android:title="@string/menuItemAbout"
+                android:icon="@drawable/ic_menu_item_about" />
         </menu>
 
     </item>

@@ -32,6 +32,7 @@ public class ProductoAdapters extends BaseAdapter {
     private ProductosServices productosServices;
     private DBHelper dbHelper;
 
+
     public ProductoAdapters(Context context, ArrayList<Producto> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
@@ -71,11 +72,6 @@ public class ProductoAdapters extends BaseAdapter {
         Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
 
 
-        String[] opciones = {"Actualizar", "Eliminar"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);
-        spinnerMenu.setAdapter(adapter);
-
-
         byte[] image = producto.getImagen();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         txtID.setText(String.valueOf(producto.getId()));
@@ -84,18 +80,22 @@ public class ProductoAdapters extends BaseAdapter {
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
 
+        String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);
+        spinnerMenu.setAdapter(adapter);
+
+
         spinnerMenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String elemento = String.valueOf(spinnerMenu.getItemAtPosition(position));
-                if (elemento.equals("Eliminar")) {
+
+                if (parent.getItemAtPosition(position).equals("Eliminar")) {
                     int idP = Integer.parseInt(txtID.getText().toString().trim());
                     dbHelper.eliminarDatos(idP);
                     Intent intent = new Intent(context.getApplicationContext(), Productos.class);
                     context.startActivity(intent);
 
-                }
-                /*if(elemento.equals("Actualizar")){
+                } else if (parent.getItemAtPosition(position).equals("Actualizar")) {
                     Intent intent = new Intent(context.getApplicationContext(), AgregarProducto.class);
                     intent.putExtra("imageAtras", R.mipmap.atras);
                     intent.putExtra("imageTitulo", R.drawable.ferresix);
@@ -110,7 +110,7 @@ public class ProductoAdapters extends BaseAdapter {
                     intent.putExtra("descripcion", txtDescripcionTemplate.getText());
                     intent.putExtra("precio", txtPrecioTemplate.getText());
                     context.startActivity(intent);
-                }*/
+                }
             }
 
             @Override

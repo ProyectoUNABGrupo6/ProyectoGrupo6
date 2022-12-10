@@ -1,11 +1,11 @@
 package grupo6.proyectogrupo6;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,7 +54,6 @@ public class menuItemCategoryFragment extends Fragment
         loadDataRvCategory();
         //add button
         initAddButton(view);
-
     }
 
     //Search
@@ -99,8 +97,26 @@ public class menuItemCategoryFragment extends Fragment
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.menuItemCategoryAddButton){
-            Intent intent = new Intent(v.getContext(), MenuItemCategoryAddActivity.class);
-            startActivity(intent);
+            navigate(v,R.id.menuItemCategoryAdd);
         }
     }
+
+//    public void navActivity(View v, Activity activity){
+//        Intent intent = new Intent(v.getContext(), activity.getClass());
+//        startActivity(intent);
+//    }
+//
+//    public void navFragment( int layout, Fragment fragment){
+//        FragmentManager fragmentManager =  getParentFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .add(layout, fragment)
+//                .setReorderingAllowed(true)
+//                .addToBackStack(fragment.getClass().getName())// name can be null
+//                .commit();
+//    }
+
+    public void navigate(View v, int idFragment){
+        Navigation.findNavController(v).navigate(idFragment);
+    }
+
 }

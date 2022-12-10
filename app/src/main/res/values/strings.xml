@@ -21,6 +21,7 @@
     <string name="menuItemHomeTitleProduct">Productos Recomendados</string>
     <string name="name">Name</string>
     <string name="short_description">short description</string>
+    <string name="add">add</string>
 
 
 </resources>

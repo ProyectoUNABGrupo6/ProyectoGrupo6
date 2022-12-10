@@ -36,4 +36,9 @@
         android:name="grupo6.proyectogrupo6.MenuItemProductFragment"
         android:label="@string/menuItemProduct"
         tools:layout="@layout/fragment_menu_item_product" />
+    <fragment
+        android:id="@+id/menuItemCategoryAdd"
+        android:name="grupo6.proyectogrupo6.MenuItemCategoryAddFragment"
+        android:label="@string/add"
+        tools:layout="@layout/fragment_menu_item_category_add"/>
 </navigation>

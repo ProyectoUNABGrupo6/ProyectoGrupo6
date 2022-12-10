@@ -40,5 +40,13 @@
         android:id="@+id/menuItemCategoryAdd"
         android:name="grupo6.proyectogrupo6.MenuItemCategoryAddFragment"
         android:label="@string/add"
-        tools:layout="@layout/fragment_menu_item_category_add"/>
+        tools:layout="@layout/fragment_menu_item_category_add">
+        <action
+            android:id="@+id/action_menuItemCategoryAdd_to_menuItemCategory"
+            app:destination="@id/menuItemCategory"
+            app:popUpTo="@+id/menuItemCategory"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
 </navigation>

@@ -9,12 +9,15 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,8 +28,14 @@ public class MenuItemCategoryAddFragment extends Fragment
 
     //add photo
     private FloatingActionButton addPhotoButton;
-    private ImageView addImg;
+    private ImageView imgCategory;
     private ActivityResultLauncher<String> mGetContent;
+    //other other fields
+    private TextView nameCategory;
+    private TextView shortDescriptionCategory;
+    //save info
+    private FloatingActionButton addInfoButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,8 @@ public class MenuItemCategoryAddFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         //add photo button
         initSelectPhoto(view);
+        initOtherFields(view);
+        initSaveInfo(view);
     }
 
 
@@ -54,16 +65,15 @@ public class MenuItemCategoryAddFragment extends Fragment
         addPhotoButton = v.findViewById(R.id.menuItemCategoryAddImgButton);
         addPhotoButton.setOnClickListener(this);
         // photo
-        addImg = v.findViewById(R.id.menuItemCategoryAddImg);
+        imgCategory = v.findViewById(R.id.menuItemCategoryAddImg);
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
                     @Override
                     public void onActivityResult(Uri uri) {
-                        if(uri != null) addImg.setImageURI(uri);
+                        if(uri != null) setUriPhoto(uri);
                     }
                 });
     }
-
     @Override
     public void onClick(View v) {
 
@@ -71,17 +81,61 @@ public class MenuItemCategoryAddFragment extends Fragment
             case R.id.menuItemCategoryAddImgButton:
                 chooseFile();
                 break;
-            case R.id.menuItemCategoryOkButton:
+            case R.id.menuItemCategorySaveButton:
+                saveInfo(v);
                 break;
             default:
                 break;
         }
 
     }
-
+    //add photo
     private void chooseFile() {
         mGetContent.launch("image/*");
     }
-
+    private void setUriPhoto(Uri uri){
+        imgCategory.setTag(uri.getPath());
+        imgCategory.setImageURI(uri);
+    }
+    //other other fields
+    private void initOtherFields(View v){
+        nameCategory = v.findViewById(R.id.menuItemCategoryAddName);
+        shortDescriptionCategory = v.findViewById(R.id.menuItemCategoryAddDescription);
+    }
+    //save info
+    private void initSaveInfo(View v){
+        addInfoButton = v.findViewById(R.id.menuItemCategorySaveButton);
+        addInfoButton.setOnClickListener(this);
+    }
+    private void saveInfo(View v){
+        MenuItemCategoryAddModel infoCategory;
+        try {
+            errorFields();
+            infoCategory = getInfo();
+            Log.i("Save",infoCategory.toString());
+            navigate(v,R.id.action_menuItemCategoryAdd_to_menuItemCategory);
+        } catch (Exception e) {
+            Toast toast = Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+    private MenuItemCategoryAddModel getInfo() {
+        MenuItemCategoryAddModel infoCategory = new MenuItemCategoryAddModel();
+        infoCategory.setUrlPhoto(getString(imgCategory.getTag()));
+        infoCategory.setName(getString(nameCategory.getText()));
+        infoCategory.setShortDescription(getString(shortDescriptionCategory.getText()));
+        return infoCategory;
+    }
+    public void navigate(View v, int idFragment){
+        Navigation.findNavController(v).navigate(idFragment);
+    }
+    private void errorFields() throws Exception{
+        if(imgCategory.getTag() == null) throw new Exception("Empty photo");
+        if(nameCategory.getText() == null) throw new Exception("Empty name");
+    }
+    private String getString(Object field){
+        if(field == null) return "";
+        return field.toString();
+    }
 }
 

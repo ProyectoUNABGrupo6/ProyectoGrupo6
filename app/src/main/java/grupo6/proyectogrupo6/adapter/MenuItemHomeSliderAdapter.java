@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6;
+package grupo6.proyectogrupo6.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import com.smarteist.autoimageslider.SliderViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.model.SliderItemImageModel;
 
 public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSliderAdapter.SliderAdapterVH> {

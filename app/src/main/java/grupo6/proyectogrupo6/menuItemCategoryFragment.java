@@ -50,7 +50,7 @@ public class menuItemCategoryFragment extends Fragment
         initSearch(view);
         //Category
         initRvCategory(view);
-        initAdapterRvCategory();
+        initAdapterRvCategory(view);
         loadDataRvCategory();
         //add button
         initAddButton(view);
@@ -75,8 +75,13 @@ public class menuItemCategoryFragment extends Fragment
         rvCategory = v.findViewById(R.id.menuItemCategoryRvCategory);
         rvCategory.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
     }
-    private void initAdapterRvCategory(){
-        categoryAdapter = new CardItemCategoryAdapter();
+    private void initAdapterRvCategory(View v){
+        categoryAdapter = new CardItemCategoryAdapter(new CardItemCategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(CardItemCategoryModel cardItemCategoryModel) {
+                navigate(v,R.id.menuItemCategoryAdd,cardItemCategoryModel);
+            }
+        });
         rvCategory.setAdapter(categoryAdapter);
 
     }
@@ -97,7 +102,7 @@ public class menuItemCategoryFragment extends Fragment
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.menuItemCategoryAddButton){
-            navigate(v,R.id.menuItemCategoryAdd);
+            navigate(v,R.id.menuItemCategoryAdd,null);
         }
     }
 
@@ -115,8 +120,13 @@ public class menuItemCategoryFragment extends Fragment
 //                .commit();
 //    }
 
-    public void navigate(View v, int idFragment){
-        Navigation.findNavController(v).navigate(idFragment);
+    public void navigate(View v, int idFragment, CardItemCategoryModel cardItemCategoryModel){
+        Bundle bundle = new Bundle();
+        if(cardItemCategoryModel != null) {
+            bundle.putString("name",cardItemCategoryModel.getName());
+            bundle.putString("description",cardItemCategoryModel.getDescription());
+        }
+        Navigation.findNavController(v).navigate(idFragment,bundle);
     }
 
 }

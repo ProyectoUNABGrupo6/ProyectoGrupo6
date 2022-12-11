@@ -54,6 +54,7 @@ public class MenuItemCategoryAddFragment extends Fragment
         //add photo button
         initSelectPhoto(view);
         initOtherFields(view);
+        initOtherFieldsData(view);
         initSaveInfo(view);
     }
 
@@ -101,6 +102,15 @@ public class MenuItemCategoryAddFragment extends Fragment
     private void initOtherFields(View v){
         nameCategory = v.findViewById(R.id.menuItemCategoryAddName);
         shortDescriptionCategory = v.findViewById(R.id.menuItemCategoryAddDescription);
+    }
+    private void initOtherFieldsData(View v) {
+        if(getArguments() == null){
+            Toast toast = Toast.makeText(v.getContext(), "bundle == null", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if(getArguments().getString("name") != null) nameCategory.setText(getArguments().getString("name",""));
+        if(getArguments().getString("description") != null) shortDescriptionCategory.setText(getArguments().getString("description",""));
     }
     //save info
     private void initSaveInfo(View v){

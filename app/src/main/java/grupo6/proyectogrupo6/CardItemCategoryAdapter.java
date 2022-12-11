@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
 
     private  List<CardItemCategoryModel> list = new ArrayList<>();
     private  List<CardItemCategoryModel> listInitial = new ArrayList<>();
+    private  CardItemCategoryAdapter.OnItemClickListener listener;
 
     public CardItemCategoryAdapter() {
     }
@@ -26,6 +28,9 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
     public CardItemCategoryAdapter(List<CardItemCategoryModel> list) {
         this.listInitial = list;
         this.list = this.listInitial;
+    }
+    public CardItemCategoryAdapter(CardItemCategoryAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -90,6 +95,16 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
             imgCategory.setImageResource(cardItemCategoryModel.getImage());
             nameCategory.setText(cardItemCategoryModel.getName());
             descriptionCategory.setText(cardItemCategoryModel.getDescription());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(cardItemCategoryModel);
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(CardItemCategoryModel cardItemCategoryModel);
     }
 }

@@ -26,4 +26,27 @@
         android:name="grupo6.proyectogrupo6.MenuItemAboutFragment"
         android:label="@string/menuItemAbout"
         tools:layout="@layout/fragment_menu_item_about" />
+    <fragment
+        android:id="@+id/menuItemCategory"
+        android:name="grupo6.proyectogrupo6.menuItemCategoryFragment"
+        android:label="@string/menuItemCategory"
+        tools:layout="@layout/fragment_menu_item_category" />
+    <fragment
+        android:id="@+id/menuItemProduct"
+        android:name="grupo6.proyectogrupo6.MenuItemProductFragment"
+        android:label="@string/menuItemProduct"
+        tools:layout="@layout/fragment_menu_item_product" />
+    <fragment
+        android:id="@+id/menuItemCategoryAdd"
+        android:name="grupo6.proyectogrupo6.MenuItemCategoryAddFragment"
+        android:label="@string/add"
+        tools:layout="@layout/fragment_menu_item_category_add">
+        <action
+            android:id="@+id/action_menuItemCategoryAdd_to_menuItemCategory"
+            app:destination="@id/menuItemCategory"
+            app:popUpTo="@+id/menuItemCategory"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
 </navigation>

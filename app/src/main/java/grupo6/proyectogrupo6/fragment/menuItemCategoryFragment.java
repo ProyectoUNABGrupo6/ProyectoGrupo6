@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6;
+package grupo6.proyectogrupo6.fragment;
 
 import android.os.Bundle;
 
@@ -20,6 +20,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.adapter.CardItemCategoryAdapter;
+import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 
 public class menuItemCategoryFragment extends Fragment
                                       implements SearchView.OnQueryTextListener,

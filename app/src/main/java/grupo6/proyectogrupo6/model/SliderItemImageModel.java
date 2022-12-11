@@ -1,13 +1,13 @@
-package grupo6.proyectogrupo6;
+package grupo6.proyectogrupo6.model;
 
-public class CardItemRecommendedCategoryModel {
+public class SliderItemImageModel {
 
     private int imagen;
     private String titulo;
 
-    public CardItemRecommendedCategoryModel() {
+    public SliderItemImageModel() {
     }
-    public CardItemRecommendedCategoryModel(int imagen, String titulo) {
+    public SliderItemImageModel(int imagen, String titulo) {
         this.imagen = imagen;
         this.titulo = titulo;
     }

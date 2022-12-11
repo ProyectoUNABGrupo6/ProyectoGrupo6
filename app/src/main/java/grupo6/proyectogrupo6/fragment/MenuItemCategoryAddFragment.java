@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6;
+package grupo6.proyectogrupo6.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
+
+import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
 
 public class MenuItemCategoryAddFragment extends Fragment
                                          implements View.OnClickListener{

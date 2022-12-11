@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6;
+package grupo6.proyectogrupo6.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

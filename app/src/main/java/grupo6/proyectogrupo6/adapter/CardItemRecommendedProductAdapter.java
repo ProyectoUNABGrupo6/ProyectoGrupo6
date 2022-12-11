@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import grupo6.proyectogrupo6.CardItemRecommendedProductModel;
+import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
 import grupo6.proyectogrupo6.R;
 
 public class CardItemRecommendedProductAdapter extends RecyclerView.Adapter<CardItemRecommendedProductAdapter.ViewHolder>{

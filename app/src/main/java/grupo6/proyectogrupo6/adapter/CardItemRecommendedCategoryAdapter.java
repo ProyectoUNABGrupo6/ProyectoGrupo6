@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import grupo6.proyectogrupo6.CardItemRecommendedCategoryModel;
+import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
 import grupo6.proyectogrupo6.R;
 
 public class CardItemRecommendedCategoryAdapter extends RecyclerView.Adapter<CardItemRecommendedCategoryAdapter.ViewHolder>{

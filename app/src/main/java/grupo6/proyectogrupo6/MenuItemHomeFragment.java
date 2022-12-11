@@ -24,6 +24,9 @@ import java.util.List;
 
 import grupo6.proyectogrupo6.adapter.CardItemRecommendedCategoryAdapter;
 import grupo6.proyectogrupo6.adapter.CardItemRecommendedProductAdapter;
+import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
+import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
+import grupo6.proyectogrupo6.model.SliderItemImageModel;
 
 public class MenuItemHomeFragment extends Fragment {
 

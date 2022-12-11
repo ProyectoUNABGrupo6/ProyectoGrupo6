@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grupo6.proyectogrupo6.adapter.CardItemCategoryAdapter;
+import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 
 public class menuItemCategoryFragment extends Fragment
                                       implements SearchView.OnQueryTextListener,

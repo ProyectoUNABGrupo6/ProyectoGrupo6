@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import grupo6.proyectogrupo6.CardItemCategoryModel;
+import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.R;
 
 public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCategoryAdapter.ViewHolder>{

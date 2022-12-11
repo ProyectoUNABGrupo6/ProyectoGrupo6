@@ -23,6 +23,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
+
 public class MenuItemCategoryAddFragment extends Fragment
                                          implements View.OnClickListener{
 

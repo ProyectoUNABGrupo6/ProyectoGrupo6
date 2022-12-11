@@ -14,6 +14,8 @@ import com.smarteist.autoimageslider.SliderViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import grupo6.proyectogrupo6.model.SliderItemImageModel;
+
 public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSliderAdapter.SliderAdapterVH> {
 
     private Context context;

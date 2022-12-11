@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".MenuItemHomeFragment">
+    tools:context=".fragment.MenuItemHomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"

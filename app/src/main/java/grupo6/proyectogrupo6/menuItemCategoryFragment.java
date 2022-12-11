@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import grupo6.proyectogrupo6.adapter.CardItemCategoryAdapter;
+
 public class menuItemCategoryFragment extends Fragment
                                       implements SearchView.OnQueryTextListener,
                                                  View.OnClickListener {

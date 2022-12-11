@@ -22,6 +22,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import grupo6.proyectogrupo6.adapter.CardItemRecommendedCategoryAdapter;
+import grupo6.proyectogrupo6.adapter.CardItemRecommendedProductAdapter;
+
 public class MenuItemHomeFragment extends Fragment {
 
     //Slider Image

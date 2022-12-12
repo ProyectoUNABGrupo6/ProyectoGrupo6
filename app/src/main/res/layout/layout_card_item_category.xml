@@ -24,8 +24,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:contentDescription="Description"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/imgProduct"
                 android:src="@drawable/img_logo" />
 
             <LinearLayout

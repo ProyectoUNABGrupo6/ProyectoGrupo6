@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.adapter;
+package grupo6.proyectogrupo6.Adapter;
 
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import grupo6.proyectogrupo6.model.CardItemCategoryModel;
+import grupo6.proyectogrupo6.Model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.R;
 
 public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCategoryAdapter.ViewHolder>{

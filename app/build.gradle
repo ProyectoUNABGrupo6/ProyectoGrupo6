@@ -48,7 +48,7 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     // Picasso
-    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     //Cargar image
     implementation 'androidx.activity:activity-ktx:1.6.1'
     //firebase

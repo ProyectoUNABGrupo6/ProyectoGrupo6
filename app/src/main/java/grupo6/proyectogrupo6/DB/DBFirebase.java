@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.bd;
+package grupo6.proyectogrupo6.DB;
 
 import static android.service.controls.ControlsProviderService.TAG;
 

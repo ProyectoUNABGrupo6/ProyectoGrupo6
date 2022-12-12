@@ -1,16 +1,8 @@
-package grupo6.proyectogrupo6.fragment;
+package grupo6.proyectogrupo6.Fragment;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,25 +11,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import grupo6.proyectogrupo6.Model.MenuItemCategoryAddModel;
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
 
 public class MenuItemCategoryAddFragment extends Fragment
                                          implements View.OnClickListener{
 
-    //add photo
-    private FloatingActionButton addPhotoButton;
     private ImageView imgCategory;
     private ActivityResultLauncher<String> mGetContent;
     //other other fields
     private TextView nameCategory;
     private TextView shortDescriptionCategory;
-    //save info
-    private FloatingActionButton addInfoButton;
 
 
     @Override
@@ -66,18 +61,17 @@ public class MenuItemCategoryAddFragment extends Fragment
     private void initSelectPhoto(View v) {
 
         //button
-        addPhotoButton = v.findViewById(R.id.menuItemCategoryAddImgButton);
+        //add photo
+        FloatingActionButton addPhotoButton = v.findViewById(R.id.menuItemCategoryAddImgButton);
         addPhotoButton.setOnClickListener(this);
         // photo
         imgCategory = v.findViewById(R.id.menuItemCategoryAddImg);
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        if(uri != null) setUriPhoto(uri);
-                    }
+                uri -> {
+                    if(uri != null) setUriPhoto(uri);
                 });
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
 
@@ -117,7 +111,8 @@ public class MenuItemCategoryAddFragment extends Fragment
     }
     //save info
     private void initSaveInfo(View v){
-        addInfoButton = v.findViewById(R.id.menuItemCategorySaveButton);
+        //save info
+        FloatingActionButton addInfoButton = v.findViewById(R.id.menuItemCategorySaveButton);
         addInfoButton.setOnClickListener(this);
     }
     private void saveInfo(View v){

@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.fragment;
+package grupo6.proyectogrupo6.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemRecommendedCategoryAdapter;
-import grupo6.proyectogrupo6.adapter.CardItemRecommendedProductAdapter;
-import grupo6.proyectogrupo6.adapter.MenuItemHomeSliderAdapter;
-import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
-import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
-import grupo6.proyectogrupo6.model.SliderItemImageModel;
+import grupo6.proyectogrupo6.Adapter.CardItemRecommendedCategoryAdapter;
+import grupo6.proyectogrupo6.Adapter.CardItemRecommendedProductAdapter;
+import grupo6.proyectogrupo6.Adapter.MenuItemHomeSliderAdapter;
+import grupo6.proyectogrupo6.Model.CardItemRecommendedCategoryModel;
+import grupo6.proyectogrupo6.Model.CardItemRecommendedProductModel;
+import grupo6.proyectogrupo6.Model.SliderItemImageModel;
 
 public class MenuItemHomeFragment extends Fragment {
 

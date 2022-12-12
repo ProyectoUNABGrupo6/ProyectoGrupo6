@@ -22,6 +22,7 @@
                 android:id="@+id/cardItemRecommendedCategoryImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:contentDescription="@string/imgProduct"
                 android:scaleType="fitXY"
                 android:src="@drawable/img_logo" />
 
@@ -30,8 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:layout_alignLeft="@+id/cardItemRecommendedCategoryImage"
-                android:layout_alignRight="@+id/cardItemRecommendedCategoryImage"
+                android:layout_alignStart="@+id/cardItemRecommendedCategoryImage"
+                android:layout_alignEnd="@+id/cardItemRecommendedCategoryImage"
                 android:layout_alignBottom="@+id/cardItemRecommendedCategoryImage"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="18sp"

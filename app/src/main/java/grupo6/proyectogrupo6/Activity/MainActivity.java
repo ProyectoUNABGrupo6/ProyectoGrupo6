@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.activity;
+package grupo6.proyectogrupo6.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".fragment.MenuItemHomeFragment">
+    tools:context=".Fragment.MenuItemHomeFragment">
 
     <ScrollView
+        tools:ignore="UselessParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -51,7 +52,7 @@
                 android:fontFamily="@font/san_francisco"
                 android:text="@string/menuItemHomeTitleCategory"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/menuItemHomeRvRecommendedCategory"
@@ -67,7 +68,7 @@
                 android:fontFamily="@font/san_francisco"
                 android:text="@string/menuItemHomeTitleProduct"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

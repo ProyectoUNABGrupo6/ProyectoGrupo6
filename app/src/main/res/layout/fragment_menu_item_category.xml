@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".fragment.menuItemCategoryFragment">
+    tools:context=".Fragment.menuItemCategoryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,6 +33,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="10dp"
         android:clickable="true"
+        android:contentDescription="@string/btnAdd"
         android:focusable="true"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/design_default_color_primary" />

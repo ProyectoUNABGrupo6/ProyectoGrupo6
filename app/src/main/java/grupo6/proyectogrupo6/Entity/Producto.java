@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.entity;
+package grupo6.proyectogrupo6.Entity;
 
 public class Producto {
 

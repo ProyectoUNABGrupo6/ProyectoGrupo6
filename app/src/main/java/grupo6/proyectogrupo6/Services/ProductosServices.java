@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.services;
+package grupo6.proyectogrupo6.Services;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-import grupo6.proyectogrupo6.entity.Producto;
+import grupo6.proyectogrupo6.Entity.Producto;
 
 public class ProductosServices {
 

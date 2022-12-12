@@ -42,11 +42,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        app:layout_constraintStart_toEndOf="@id/menuHeaderImgProfile"
-        app:layout_constraintTop_toBottomOf="@id/menuHeaderViewSupporter"
-        android:textColor="@color/colorGreen"
-        android:textSize="16sp"
         android:text="@string/menuHeaderVerified"
-        />
+        android:textColor="#2E7D32"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/menuHeaderImgProfile"
+        app:layout_constraintTop_toBottomOf="@id/menuHeaderViewSupporter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,38 +7,38 @@
 
     <fragment
         android:id="@+id/menuItemHome"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemHomeFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemHomeFragment"
         android:label="@string/menuItemHome"
         tools:layout="@layout/fragment_menu_item_home" />
 
     <fragment
         android:id="@+id/menuItemSettings"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemSettingsFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemSettingsFragment"
         android:label="@string/menuItemSettings"
         tools:layout="@layout/fragment_menu_item_settings" />
     <fragment
         android:id="@+id/menuItemSupport"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemSupportFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemSupportFragment"
         android:label="@string/menuItemSupport"
         tools:layout="@layout/fragment_menu_item_support" />
     <fragment
         android:id="@+id/menuItemAbout"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemAboutFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemAboutFragment"
         android:label="@string/menuItemAbout"
         tools:layout="@layout/fragment_menu_item_about" />
     <fragment
         android:id="@+id/menuItemCategory"
-        android:name="grupo6.proyectogrupo6.fragment.menuItemCategoryFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.menuItemCategoryFragment"
         android:label="@string/menuItemCategory"
         tools:layout="@layout/fragment_menu_item_category" />
     <fragment
         android:id="@+id/menuItemProduct"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemProductFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemProductFragment"
         android:label="@string/menuItemProduct"
         tools:layout="@layout/fragment_menu_item_product" />
     <fragment
         android:id="@+id/menuItemCategoryAdd"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemCategoryAddFragment"
+        android:name="grupo6.proyectogrupo6.Fragment.MenuItemCategoryAddFragment"
         android:label="@string/add"
         tools:layout="@layout/fragment_menu_item_category_add">
         <action

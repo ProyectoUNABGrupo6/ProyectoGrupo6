@@ -1,4 +1,4 @@
-package grupo6.proyectogrupo6.model;
+package grupo6.proyectogrupo6.Model;
 
 public class MenuItemCategoryAddModel {
     String urlPhoto;

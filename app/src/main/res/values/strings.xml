@@ -10,7 +10,12 @@
     <string name="menuHeaderVerified">Verified</string>
     <string name="menuItemCategory">Category</string>
     <string name="menuItemProduct">Product</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    //Text Imagen
+    <string name="imgProduct">ImgProduct</string>
+    <string name="rating">Rating</string>
+    <string name="btnAdd">btnAdd</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menuItemHome">Home</string>
     <string name="layoutCardItemCategoryText">Categoría 1</string>

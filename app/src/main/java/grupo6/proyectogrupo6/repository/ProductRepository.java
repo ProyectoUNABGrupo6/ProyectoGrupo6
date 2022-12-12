@@ -15,16 +15,16 @@ public class ProductRepository {
     private ProductDao dao;
     private LiveData<List<Product>> allProductOrderByNameAsc;
 
-    ProductRepository(Application application) {
+    public ProductRepository(Application application) {
         DB db = DB.getDatabase(application);
         dao = db.productDao();
         allProductOrderByNameAsc = dao.findAllOrderByNameAsc();
     }
 
-    LiveData<List<Product>> getAllProductOrderByNameAsc() {
+    public LiveData<List<Product>> getAllProductOrderByNameAsc() {
         return allProductOrderByNameAsc;
     }
-    void insert(Product product) {
+    public void insert(Product product) {
         DB.databaseWriteExecutor.execute(() -> {
             dao.save(product);
         });

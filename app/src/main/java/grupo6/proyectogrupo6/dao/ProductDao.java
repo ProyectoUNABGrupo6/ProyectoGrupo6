@@ -1,5 +1,6 @@
 package grupo6.proyectogrupo6.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -24,5 +25,9 @@ public interface ProductDao {
     void update(Product... entities);
     @Delete
     void delete(Product... entities);
+    //---
+    @Query("SELECT * FROM Product ORDER BY name ASC")
+    LiveData<List<Product>> findAllOrderByNameAsc();
+
 
 }

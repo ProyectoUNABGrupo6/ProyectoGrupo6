@@ -68,8 +68,8 @@ public class AgregarProducto extends AppCompatActivity {
             String ida = bundle.getString("id");
             if(ida != null){
                 String id = bundle.getString("id");
-                byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
-                Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                //byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
+                //Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                 String tituloInf = bundle.getString("titulo");
                 String DescripInf = bundle.getString("descripcion");
                 String precInf = bundle.getString("precio");
@@ -77,7 +77,7 @@ public class AgregarProducto extends AppCompatActivity {
                 productoAdd.setText(tituloInf);
                 descripcionAdd.setText(DescripInf);
                 precioAdd.setText(precInf);
-                imgAdd.setImageBitmap(imgPro);
+                //imgAdd.setImageBitmap(imgPro);
                 idAct.setText(id);
             }
 
@@ -87,7 +87,7 @@ public class AgregarProducto extends AppCompatActivity {
         try {
 
             productosServices = new ProductosServices();
-            dbFirebase = new DBFirebase(this);
+            dbFirebase = new DBFirebase();
             dbHelper = new DBHelper(this);
 
         } catch (Exception e) {
@@ -116,13 +116,13 @@ public class AgregarProducto extends AppCompatActivity {
                 );
 
 
-                dbHelper.insetarDatos(
+                /*dbHelper.insetarDatos(
                         productoAdd.getText().toString(),
                         descripcionAdd.getText().toString(),
-                        Integer.parseInt(precioAdd.getText().toString()),
-                        productosServices.imageButtonToByte(imgAdd)
+                        Integer.parseInt(precioAdd.getText().toString())
+                        //productosServices.imageButtonToByte(imgAdd)
 
-                );
+                );*/
 
                 volverAtras(View);
             } else {
@@ -131,12 +131,20 @@ public class AgregarProducto extends AppCompatActivity {
         });
 
         btnActualizar.setOnClickListener(View ->{
+
+            dbFirebase.actualizarDatos(
+                    idAct.getText().toString(),
+                    productoAdd.getText().toString(),
+                    descripcionAdd.getText().toString(),
+                    Integer.parseInt(precioAdd.getText().toString())
+
+            );
             dbHelper.actualizarDatos(
                     idAct.getText().toString(),
                     productoAdd.getText().toString(),
                     descripcionAdd.getText().toString(),
-                    Integer.parseInt(precioAdd.getText().toString()),
-                    productosServices.imageButtonToByte(imgAdd)
+                    Integer.parseInt(precioAdd.getText().toString())
+                    //productosServices.imageButtonToByte(imgAdd)
             );
             volverAtras(View);
         });

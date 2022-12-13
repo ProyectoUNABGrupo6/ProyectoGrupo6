@@ -55,20 +55,20 @@ public class Informacion extends AppCompatActivity {
             botonAtras.setImageResource(imgatras);
 
             String id = bundle.getString("ida");
-            byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
-            Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            //byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
+            //Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             String tituloInf = bundle.getString("titulo");
             String DescripInf = bundle.getString("descripcion");
             String precInf = bundle.getString("precio");
             txtID.setText(id);
-            imgProd.setImageBitmap(imgPro);
+            //imgProd.setImageBitmap(imgPro);
             txtTituloInf.setText(tituloInf);
             txtDescripInf.setText(DescripInf);
             txtPrecioInf.setText(precInf);
         }
 
         botonEliminar.setOnClickListener(View -> {
-            int id = Integer.parseInt(txtID.getText().toString().trim());
+            String id = txtID.getText().toString().trim();
             dbHelper.eliminarDatos(id);
             Intent intent = new Intent(getApplicationContext(), Productos.class);
             intent.putExtra("imageAtras", R.mipmap.atras);
@@ -84,10 +84,10 @@ public class Informacion extends AppCompatActivity {
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
             productosServices = new ProductosServices();
-            byte[] byteArray = productosServices.imageButtonToByte(imgProd);
+            //byte[] byteArray = productosServices.imageButtonToByte(imgProd);
 
             intent.putExtra("id", txtID.getText());
-            intent.putExtra("imageCode", byteArray);
+            //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtTituloInf.getText());
             intent.putExtra("descripcion", txtDescripInf.getText());
             intent.putExtra("precio", txtPrecioInf.getText());

@@ -74,7 +74,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:contentDescription="@string/eliminar"
-                    android:minHeight="48dp" />
+                    android:minHeight="48dp"
+                    android:spinnerMode="dialog"/>
 
             </LinearLayout>
 

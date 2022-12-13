@@ -1,13 +1,13 @@
 package grupo6.proyectogrupo6.Entities;
 
 public class Producto {
-    private int id;
+    private String id;
     private byte[] imagen;
     private String nombre;
     private String descripcion;
     private int precio;
 
-    public Producto(int id, byte[] imagen, String nombre, String descripcion, int precio) {
+    public Producto(String id, byte[] imagen, String nombre, String descripcion, int precio) {
         this.id = id;
         this.imagen = imagen;
         this.nombre = nombre;
@@ -15,11 +15,18 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getId() {
+    public Producto(String id, String nombre, String descripcion, int precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -2,6 +2,7 @@
     <string name="app_name">ProyectoGrupo6</string>
 
     // Activity main
+    <string name="splashScreen">Screen</string>
     <string name="botonProductos">Info</string>
     <string name="imgTienda">FERRESIX</string>
     <string name="imgCarrito">Carrito</string>
@@ -35,10 +36,19 @@
 
     //Spinner
     <string-array name="Opciones">
-        <item></item>
+        <item>Elige una opcion</item>
         <item>Actualizar</item>
         <item>Eliminar</item>
     </string-array>
+    <string name="title_activity_agrergar_categorias">AgrergarCategorias</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 </resources>

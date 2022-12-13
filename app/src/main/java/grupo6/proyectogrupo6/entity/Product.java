@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(tableName = "product")
 public class Product implements Serializable {
@@ -100,5 +101,28 @@ public class Product implements Serializable {
     }
     public void setDeleteDate(Date deleteDate) {
         this.deleteDate = deleteDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(uid, product.uid)
+                && Objects.equals(urlImage, product.urlImage)
+                && Objects.equals(sku, product.sku)
+                && Objects.equals(manufacturer, product.manufacturer)
+                && Objects.equals(reference, product.reference)
+                && Objects.equals(name, product.name)
+                && Objects.equals(description, product.description)
+                && Objects.equals(price, product.price)
+                && Objects.equals(qualifier, product.qualifier)
+                && Objects.equals(updateDate, product.updateDate)
+                && Objects.equals(deleteDate, product.deleteDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uid, urlImage, sku, manufacturer, reference, name, description, price, qualifier, updateDate, deleteDate);
     }
 }

@@ -48,5 +48,16 @@
             app:popUpToInclusive="true"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/menuItemProductAdd"
+        android:name="grupo6.proyectogrupo6.fragment.MenuItemProductAddFragment"
+        android:label="@string/add"
+        tools:layout="@layout/fragment_menu_item_product_add">
+        <action
+            android:id="@+id/action_menuItemProductAdd_to_menuItemProduct"
+            app:destination="@id/menuItemProduct"
+            app:popUpTo="@+id/menuItemProduct"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

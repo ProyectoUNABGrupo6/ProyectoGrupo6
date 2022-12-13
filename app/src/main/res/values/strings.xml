@@ -22,6 +22,7 @@
     <string name="name">Name</string>
     <string name="short_description">short description</string>
     <string name="add">add</string>
+    <string name="priceText">Price</string>
 
 
 </resources>

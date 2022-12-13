@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 import grupo6.proyectogrupo6.entity.Product;
 

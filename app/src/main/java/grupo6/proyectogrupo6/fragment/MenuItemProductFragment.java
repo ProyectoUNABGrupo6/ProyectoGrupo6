@@ -20,10 +20,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemCategoryAdapter;
 import grupo6.proyectogrupo6.adapter.CardItemProductAdapter;
 import grupo6.proyectogrupo6.entity.Product;
-import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
 public class MenuItemProductFragment extends Fragment  implements View.OnClickListener {
@@ -66,7 +64,7 @@ public class MenuItemProductFragment extends Fragment  implements View.OnClickLi
         productAdapter = new CardItemProductAdapter(new CardItemProductAdapter.ProductDiff(), new CardItemProductAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Product product) {
-                navigate(v,R.id.menuItemProductAdd,null);
+                navigate(v,R.id.menuItemProductAdd,product);
             }
         });
     }
@@ -94,11 +92,12 @@ public class MenuItemProductFragment extends Fragment  implements View.OnClickLi
         }
     }
 
-    public void navigate(View v, int idFragment, CardItemCategoryModel cardItemCategoryModel){
+    public void navigate(View v, int idFragment, Product product){
         Bundle bundle = new Bundle();
-        if(cardItemCategoryModel != null) {
-            bundle.putString("name",cardItemCategoryModel.getName());
-            bundle.putString("description",cardItemCategoryModel.getDescription());
+        if(product != null) {
+            bundle.putString("name",product.getName());
+            bundle.putString("description",product.getDescription());
+            bundle.putString("price",product.getPrice());
         }
         Navigation.findNavController(v).navigate(idFragment,bundle);
     }

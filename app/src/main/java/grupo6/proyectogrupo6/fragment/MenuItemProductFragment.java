@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,7 @@ import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
-public class MenuItemProductFragment extends Fragment {
+public class MenuItemProductFragment extends Fragment  implements View.OnClickListener {
 
     private SearchView svProduct;
     //Product
@@ -57,12 +58,17 @@ public class MenuItemProductFragment extends Fragment {
         initViewModelProduct(view);
         //loadDataRvCategory();
         //add button
-        //initAddButton(view);
+        initAddButton(view);
     }
 
     //Product
     private void initAdapterRvProduct(View v){
-        productAdapter = new CardItemProductAdapter(new CardItemProductAdapter.ProductDiff());
+        productAdapter = new CardItemProductAdapter(new CardItemProductAdapter.ProductDiff(), new CardItemProductAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Product product) {
+                navigate(v,R.id.menuItemProductAdd,null);
+            }
+        });
     }
     private void initRvProduct(View v){
         rvProduct = v.findViewById(R.id.menuItemProductRvProduct);
@@ -75,5 +81,25 @@ public class MenuItemProductFragment extends Fragment {
             // Update the cached copy of the words in the adapter.
             productAdapter.submitList(list);
         });
+    }
+    //add button
+    private void initAddButton(View v){
+        addButton = v.findViewById(R.id.menuItemProductAddButton);
+        addButton.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.menuItemProductAddButton){
+            navigate(v,R.id.menuItemProductAdd,null);
+        }
+    }
+
+    public void navigate(View v, int idFragment, CardItemCategoryModel cardItemCategoryModel){
+        Bundle bundle = new Bundle();
+        if(cardItemCategoryModel != null) {
+            bundle.putString("name",cardItemCategoryModel.getName());
+            bundle.putString("description",cardItemCategoryModel.getDescription());
+        }
+        Navigation.findNavController(v).navigate(idFragment,bundle);
     }
 }

@@ -6,20 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import grupo6.proyectogrupo6.model.CardItemCategoryModel;
 import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 import grupo6.proyectogrupo6.entity.Product;
 
 public class CardItemProductAdapter extends ListAdapter<Product, ProductViewHolder> {
 
+    public  CardItemProductAdapter.OnItemClickListener listener;
 
     public CardItemProductAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback) {
         super(diffCallback);
+    }
+    public CardItemProductAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback,CardItemProductAdapter.OnItemClickListener listener) {
+        super(diffCallback);
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return ProductViewHolder.create(parent);
+        return ProductViewHolder.create(parent,this);
     }
 
     @Override
@@ -39,6 +45,11 @@ public class CardItemProductAdapter extends ListAdapter<Product, ProductViewHold
         public boolean areContentsTheSame(@NonNull Product oldItem, @NonNull Product newItem) {
             return oldItem.equals(newItem);
         }
+    }
+
+    //---
+    public interface OnItemClickListener {
+        void onItemClick(Product product);
     }
 
 }

@@ -28,6 +28,8 @@ public interface ProductDao {
     //---
     @Query("SELECT * FROM Product ORDER BY name ASC")
     LiveData<List<Product>> findAllOrderByNameAsc();
+    @Query("DELETE FROM PRODUCT")
+    void deleteAll();
 
 
 }

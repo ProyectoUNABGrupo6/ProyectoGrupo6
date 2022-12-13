@@ -22,7 +22,7 @@ public class ProductViewModel extends AndroidViewModel {
         allProductOrderByNameAsc = r.getAllProductOrderByNameAsc();
     }
 
-    LiveData<List<Product>> getAllProductOrderByNameAsc() {
+    public LiveData<List<Product>> getAllProductOrderByNameAsc() {
         return allProductOrderByNameAsc;
     }
     public void insert(Product product) {

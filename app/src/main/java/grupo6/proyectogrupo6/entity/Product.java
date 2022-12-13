@@ -35,6 +35,11 @@ public class Product implements Serializable {
     private Date deleteDate;
 
 
+    public Product(String name, String description, String price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     public Long getUid() {
         return uid;

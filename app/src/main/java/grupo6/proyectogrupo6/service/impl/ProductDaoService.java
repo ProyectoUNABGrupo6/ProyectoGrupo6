@@ -6,13 +6,13 @@ import grupo6.proyectogrupo6.dao.ProductDao;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.service.ProductService;
 
-public class DaoProductService implements ProductService {
+public class ProductDaoService implements ProductService {
 
     private ProductDao dao;
 
-    public DaoProductService() {
+    public ProductDaoService() {
     }
-    public DaoProductService(ProductDao r) {
+    public ProductDaoService(ProductDao r) {
         this.dao = r;
     }
     public ProductDao getDao() {

@@ -23,24 +23,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemRecommendedCategoryAdapter;
-import grupo6.proyectogrupo6.adapter.CardItemRecommendedProductAdapter;
-import grupo6.proyectogrupo6.adapter.MenuItemHomeSliderAdapter;
-import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
-import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
+import grupo6.proyectogrupo6.adapter.HomeCategoryRecommendedRecycleViewAdapter;
+import grupo6.proyectogrupo6.adapter.HomeProductRecommendedRecycleViewAdapter;
+import grupo6.proyectogrupo6.adapter.HomeSliderAdapter;
+import grupo6.proyectogrupo6.model.HomeCategoryRecommendedItemRecycleViewModel;
+import grupo6.proyectogrupo6.model.HomeProductRecommendedItemRecycleViewModel;
 import grupo6.proyectogrupo6.model.SliderItemImageModel;
 
-public class MenuItemHomeFragment extends Fragment {
+public class HomeMainFragment extends Fragment {
 
     //Slider Image
     private SliderView svm;
-    private MenuItemHomeSliderAdapter misa;
+    private HomeSliderAdapter misa;
     //Recommended category
     private RecyclerView rvCategorias;
-    private CardItemRecommendedCategoryAdapter categoryAdapter;
+    private HomeCategoryRecommendedRecycleViewAdapter categoryAdapter;
     //Recommended product
     private RecyclerView rvProduct;
-    private CardItemRecommendedProductAdapter productAdapter;
+    private HomeProductRecommendedRecycleViewAdapter productAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class MenuItemHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_item_home, container, false);
+        return inflater.inflate(R.layout.home_main_fragment, container, false);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MenuItemHomeFragment extends Fragment {
         svm = v.findViewById(R.id.menuItemHomeSliderImage);
     }
     private void initAdapterSliderImage() {
-        misa = new MenuItemHomeSliderAdapter(getContext());
+        misa = new HomeSliderAdapter(getContext());
         svm.setSliderAdapter(misa);
         svm.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         svm.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -88,9 +88,9 @@ public class MenuItemHomeFragment extends Fragment {
     private void loadDataSliderImage() {
 
         List<SliderItemImageModel> lista = new ArrayList<>();
-        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 1"));
+        lista.add(new SliderItemImageModel(R.drawable.img_muestra, "Imagen 1"));
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 2"));
-        lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 3"));
+        lista.add(new SliderItemImageModel(R.drawable.img_muestra, "Imagen 3"));
         lista.add(new SliderItemImageModel(R.drawable.img_logo, "Imagen 4"));
         misa.updateItem(lista);
     }
@@ -100,17 +100,17 @@ public class MenuItemHomeFragment extends Fragment {
         rvCategorias.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false));
     }
     private void initAdapterRecommendedCategory(){
-        categoryAdapter = new CardItemRecommendedCategoryAdapter();
+        categoryAdapter = new HomeCategoryRecommendedRecycleViewAdapter();
         rvCategorias.setAdapter(categoryAdapter);
 
     }
     private void loadDataRecommendedCategory(){
-        List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
-        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 1"));
-        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 2"));
-        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 3"));
-        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 4"));
-        list.add(new CardItemRecommendedCategoryModel(R.drawable.img_logo, "Image 5"));
+        List<HomeCategoryRecommendedItemRecycleViewModel> list = new ArrayList<>();
+        list.add(new HomeCategoryRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 1"));
+        list.add(new HomeCategoryRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 2"));
+        list.add(new HomeCategoryRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 3"));
+        list.add(new HomeCategoryRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 4"));
+        list.add(new HomeCategoryRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 5"));
         categoryAdapter.updateList(list);
     }
     //Recommended Product
@@ -119,19 +119,19 @@ public class MenuItemHomeFragment extends Fragment {
         rvProduct.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
     }
     private void initAdapterRecommendedProduct(){
-        productAdapter = new CardItemRecommendedProductAdapter();
+        productAdapter = new HomeProductRecommendedRecycleViewAdapter();
         rvProduct.setAdapter(productAdapter);
 
     }
     private void loadDataRecommendedProduct(){
-        List<CardItemRecommendedProductModel> list = new ArrayList<>();
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 1","details 1"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 2","details 2"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 3","details 3"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 4","details 4"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 5","details 5"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 6","details 6"));
-        list.add(new CardItemRecommendedProductModel(R.drawable.img_logo, "Image 7","details 7"));
+        List<HomeProductRecommendedItemRecycleViewModel> list = new ArrayList<>();
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 1","details 1"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 2","details 2"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 3","details 3"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 4","details 4"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 5","details 5"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 6","details 6"));
+        list.add(new HomeProductRecommendedItemRecycleViewModel(R.drawable.img_logo, "Image 7","details 7"));
         productAdapter.updateList(list);
     }
 }

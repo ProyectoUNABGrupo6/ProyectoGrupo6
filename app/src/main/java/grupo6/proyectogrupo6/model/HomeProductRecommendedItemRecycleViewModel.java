@@ -1,15 +1,15 @@
 package grupo6.proyectogrupo6.model;
 
-public class CardItemRecommendedProductModel {
+public class HomeProductRecommendedItemRecycleViewModel {
 
     private int image;
     private String name;
     private String details;
 
-    public CardItemRecommendedProductModel() {
+    public HomeProductRecommendedItemRecycleViewModel() {
     }
 
-    public CardItemRecommendedProductModel(int image, String titulo, String detalles) {
+    public HomeProductRecommendedItemRecycleViewModel(int image, String titulo, String detalles) {
         this.image = image;
         this.name = titulo;
         this.details = detalles;

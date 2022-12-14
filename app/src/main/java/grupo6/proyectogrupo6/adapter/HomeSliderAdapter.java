@@ -1,7 +1,6 @@
 package grupo6.proyectogrupo6.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +16,18 @@ import java.util.List;
 import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.model.SliderItemImageModel;
 
-public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSliderAdapter.SliderAdapterVH> {
+public class HomeSliderAdapter extends SliderViewAdapter<HomeSliderAdapter.SliderAdapterVH> {
 
     private Context context;
     List<SliderItemImageModel> mSliderItems = new ArrayList<>();
 
-    public MenuItemHomeSliderAdapter(Context context) {
+    public HomeSliderAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.slider_item_image_layout, null);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_slider_fragment, null);
         return new SliderAdapterVH(inflate);
     }
 
@@ -37,8 +36,6 @@ public class MenuItemHomeSliderAdapter extends SliderViewAdapter<MenuItemHomeSli
         SliderItemImageModel sliderItem = mSliderItems.get(position);
 
         viewHolder.textView.setText(sliderItem.getTitulo());
-        viewHolder.textView.setTextSize(16);
-        viewHolder.textView.setTextColor(Color.WHITE);
         Glide.with(viewHolder.itemView)
                 .load(sliderItem.getImagen())
                 .fitCenter()

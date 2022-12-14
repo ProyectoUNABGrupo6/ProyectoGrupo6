@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -25,32 +24,31 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.entity.Product;
-import grupo6.proyectogrupo6.viewModel.ProductViewModel;
+import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
 
-public class MenuItemProductAddFragment extends Fragment
-                                        implements View.OnClickListener{
+public class CategoryManagerFragment extends Fragment
+                                         implements View.OnClickListener{
 
     //add photo
     private FloatingActionButton addPhotoButton;
-    private ImageView img;
+    private ImageView imgCategory;
     private ActivityResultLauncher<String> mGetContent;
     //other other fields
-    private TextView name;
-    private TextView description;
-    private TextView price;
+    private TextView nameCategory;
+    private TextView shortDescriptionCategory;
     //save info
     private FloatingActionButton addInfoButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_item_product_add, container, false);
+        return inflater.inflate(R.layout.category_manager_fragment, container, false);
     }
 
     @Override
@@ -62,14 +60,16 @@ public class MenuItemProductAddFragment extends Fragment
         initOtherFieldsData(view);
         initSaveInfo(view);
     }
+
+
     //add photo button
     private void initSelectPhoto(View v) {
 
         //button
-        addPhotoButton = v.findViewById(R.id.menuItemProductAddImgButton);
+        addPhotoButton = v.findViewById(R.id.menuItemCategoryAddImgButton);
         addPhotoButton.setOnClickListener(this);
         // photo
-        img = v.findViewById(R.id.menuItemProductAddImg);
+        imgCategory = v.findViewById(R.id.menuItemCategoryAddImg);
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
                     @Override
@@ -82,10 +82,10 @@ public class MenuItemProductAddFragment extends Fragment
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.menuItemProductAddImgButton:
+            case R.id.menuItemCategoryAddImgButton:
                 chooseFile();
                 break;
-            case R.id.menuItemProductSaveButton:
+            case R.id.menuItemCategorySaveButton:
                 saveInfo(v);
                 break;
             default:
@@ -93,20 +93,18 @@ public class MenuItemProductAddFragment extends Fragment
         }
 
     }
-
     //add photo
     private void chooseFile() {
         mGetContent.launch("image/*");
     }
     private void setUriPhoto(Uri uri){
-        img.setTag(uri.getPath());
-        img.setImageURI(uri);
+        imgCategory.setTag(uri.getPath());
+        imgCategory.setImageURI(uri);
     }
     //other other fields
     private void initOtherFields(View v){
-        name = v.findViewById(R.id.menuItemProductAddName);
-        description = v.findViewById(R.id.menuItemProductAddDescription);
-        price = v.findViewById(R.id.menuItemProductAddPrice);
+        nameCategory = v.findViewById(R.id.menuItemCategoryAddName);
+        shortDescriptionCategory = v.findViewById(R.id.menuItemCategoryAddDescription);
     }
     private void initOtherFieldsData(View v) {
         if(getArguments() == null){
@@ -114,50 +112,43 @@ public class MenuItemProductAddFragment extends Fragment
             toast.show();
             return;
         }
-        if(getArguments().getString("name") != null) name.setText(getArguments().getString("name",""));
-        if(getArguments().getString("description") != null) description.setText(getArguments().getString("description",""));
-        if(getArguments().getString("price") != null) price.setText(getArguments().getString("price",""));
+        if(getArguments().getString("name") != null) nameCategory.setText(getArguments().getString("name",""));
+        if(getArguments().getString("description") != null) shortDescriptionCategory.setText(getArguments().getString("description",""));
     }
     //save info
     private void initSaveInfo(View v){
-        addInfoButton = v.findViewById(R.id.menuItemProductSaveButton);
+        addInfoButton = v.findViewById(R.id.menuItemCategorySaveButton);
         addInfoButton.setOnClickListener(this);
     }
     private void saveInfo(View v){
-        Product infoProduct;
+        MenuItemCategoryAddModel infoCategory;
         try {
             errorFields();
-            infoProduct = getInfo();
-            Log.i("Save",infoProduct.toString());
-            saveData(infoProduct);
-            navigate(v,R.id.action_menuItemProductAdd_to_menuItemProduct);
+            infoCategory = getInfo();
+            Log.i("Save",infoCategory.toString());
+            navigate(v,R.id.action_menuItemCategoryAdd_to_menuItemCategory);
         } catch (Exception e) {
             Toast toast = Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
         }
     }
-    private Product getInfo() {
-        Product infoProduct = new Product();
-        infoProduct.setUrlImage(getString(img.getTag()));
-        infoProduct.setName(getString(name.getText()));
-        infoProduct.setDescription(getString(description.getText()));
-        infoProduct.setPrice(getString(price.getText()));
-        return infoProduct;
+    private MenuItemCategoryAddModel getInfo() {
+        MenuItemCategoryAddModel infoCategory = new MenuItemCategoryAddModel();
+        infoCategory.setUrlPhoto(getString(imgCategory.getTag()));
+        infoCategory.setName(getString(nameCategory.getText()));
+        infoCategory.setShortDescription(getString(shortDescriptionCategory.getText()));
+        return infoCategory;
     }
     public void navigate(View v, int idFragment){
         Navigation.findNavController(v).navigate(idFragment);
     }
     private void errorFields() throws Exception{
-        if(img.getTag() == null) throw new Exception("Empty photo");
-        if(name.getText() == null) throw new Exception("Empty name");
+        if(imgCategory.getTag() == null) throw new Exception("Empty photo");
+        if(nameCategory.getText() == null) throw new Exception("Empty name");
     }
     private String getString(Object field){
         if(field == null) return "";
         return field.toString();
     }
-    //---
-    public void saveData(Product data){
-        ProductViewModel productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.insert(data);
-    }
 }
+

@@ -12,10 +12,10 @@ import grupo6.proyectogrupo6.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MenuItemSupportFragment#newInstance} factory method to
+ * Use the {@link AboutMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuItemSupportFragment extends Fragment {
+public class AboutMainFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class MenuItemSupportFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MenuItemSupportFragment() {
+    public AboutMainFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class MenuItemSupportFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment supportFragment.
+     * @return A new instance of fragment AboutFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuItemSupportFragment newInstance(String param1, String param2) {
-        MenuItemSupportFragment fragment = new MenuItemSupportFragment();
+    public static AboutMainFragment newInstance(String param1, String param2) {
+        AboutMainFragment fragment = new AboutMainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class MenuItemSupportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_item_support, container, false);
+        return inflater.inflate(R.layout.about_main_fragment, container, false);
     }
 }

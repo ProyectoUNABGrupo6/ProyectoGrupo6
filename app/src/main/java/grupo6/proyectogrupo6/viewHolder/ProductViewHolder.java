@@ -45,7 +45,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
 
     public static ProductViewHolder create(ViewGroup parent,CardItemProductAdapter adapter) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_card_item_product, parent, false);
+                .inflate(R.layout.product_item_layout, parent, false);
         return new ProductViewHolder(view,adapter);
     }
 }

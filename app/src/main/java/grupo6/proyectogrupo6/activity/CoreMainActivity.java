@@ -18,12 +18,12 @@ import com.google.android.material.navigation.NavigationView;
 
 import grupo6.proyectogrupo6.R;
 
-public class MainActivity extends AppCompatActivity {
+public class CoreMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.core_main_activity);
 
         initMenu();
 

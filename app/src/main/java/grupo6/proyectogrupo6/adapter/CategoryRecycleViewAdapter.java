@@ -14,30 +14,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import grupo6.proyectogrupo6.model.CardItemCategoryModel;
+import grupo6.proyectogrupo6.model.CategoryItemRecycleViewModel;
 import grupo6.proyectogrupo6.R;
 
-public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCategoryAdapter.ViewHolder>{
+public class CategoryRecycleViewAdapter extends RecyclerView.Adapter<CategoryRecycleViewAdapter.ViewHolder>{
 
-    private  List<CardItemCategoryModel> list = new ArrayList<>();
-    private  List<CardItemCategoryModel> listInitial = new ArrayList<>();
-    private  CardItemCategoryAdapter.OnItemClickListener listener;
+    private  List<CategoryItemRecycleViewModel> list = new ArrayList<>();
+    private  List<CategoryItemRecycleViewModel> listInitial = new ArrayList<>();
+    private  CategoryRecycleViewAdapter.OnItemClickListener listener;
 
-    public CardItemCategoryAdapter() {
+    public CategoryRecycleViewAdapter() {
     }
 
-    public CardItemCategoryAdapter(List<CardItemCategoryModel> list) {
+    public CategoryRecycleViewAdapter(List<CategoryItemRecycleViewModel> list) {
         this.listInitial = list;
         this.list = this.listInitial;
     }
-    public CardItemCategoryAdapter(CardItemCategoryAdapter.OnItemClickListener listener) {
+    public CategoryRecycleViewAdapter(CategoryRecycleViewAdapter.OnItemClickListener listener) {
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_category,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item_layout,parent,false);
         return new ViewHolder(view);
     }
 
@@ -52,7 +52,7 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
     }
 
 
-    public void updateList(List<CardItemCategoryModel> list) {
+    public void updateList(List<CategoryItemRecycleViewModel> list) {
         this.listInitial = list;
         this.list = this.listInitial;
         notifyDataSetChanged();
@@ -70,7 +70,7 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
                         .collect(Collectors.toList());
             }else {
                 list.clear();
-                for (CardItemCategoryModel item : listInitial){
+                for (CategoryItemRecycleViewModel item : listInitial){
                     if(item.getName().toLowerCase().contains(search.toLowerCase())) list.add(item);
                 }
             }
@@ -92,7 +92,7 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
            descriptionCategory= itemView.findViewById(R.id.cardItemCategoryDescription);
         }
 
-        public void updateItem(CardItemCategoryModel cardItemCategoryModel) {
+        public void updateItem(CategoryItemRecycleViewModel cardItemCategoryModel) {
             imgCategory.setImageResource(cardItemCategoryModel.getImage());
             nameCategory.setText(cardItemCategoryModel.getName());
             descriptionCategory.setText(cardItemCategoryModel.getDescription());
@@ -106,6 +106,6 @@ public class CardItemCategoryAdapter extends RecyclerView.Adapter<CardItemCatego
     }
 
     public interface OnItemClickListener {
-        void onItemClick(CardItemCategoryModel cardItemCategoryModel);
+        void onItemClick(CategoryItemRecycleViewModel cardItemCategoryModel);
     }
 }

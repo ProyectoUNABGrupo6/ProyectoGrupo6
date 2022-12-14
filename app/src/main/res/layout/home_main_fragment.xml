@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".fragment.MenuItemHomeFragment">
+    tools:context=".fragment.HomeMainFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="5dp"
                 app:cardCornerRadius="6dp">
 
                 <com.smarteist.autoimageslider.SliderView
@@ -36,10 +36,10 @@
                     app:sliderIndicatorOrientation="horizontal"
                     app:sliderIndicatorPadding="3dp"
                     app:sliderIndicatorRadius="2dp"
-                    app:sliderIndicatorSelectedColor="#5A5A5A"
-                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderIndicatorSelectedColor="@color/colorPrimary"
+                    app:sliderIndicatorUnselectedColor="@color/material_on_background_emphasis_high_type"
                     app:sliderScrollTimeInSec="1"
-                    app:sliderStartAutoCycle="true" />
+                    app:sliderStartAutoCycle="true"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -57,7 +57,10 @@
                 android:id="@+id/menuItemHomeRvRecommendedCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                tools:itemCount="1"
+                tools:listitem="@layout/home_category_recommended_item_layout" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,8 +80,9 @@
                     android:id="@+id/menuItemHomeRvRecommendedProduct"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
                     android:layout_margin="8dp"
-                    android:layout_alignParentBottom="true"/>
+                    tools:listitem="@layout/home_product_recommended_item_layout" />
 
             </RelativeLayout>
 

@@ -15,21 +15,21 @@ import java.util.List;
 import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
 import grupo6.proyectogrupo6.R;
 
-public class CardItemRecommendedCategoryAdapter extends RecyclerView.Adapter<CardItemRecommendedCategoryAdapter.ViewHolder>{
+public class HomeCategoryRecommendedItemAdapter extends RecyclerView.Adapter<HomeCategoryRecommendedItemAdapter.ViewHolder>{
 
     private  List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
 
-    public CardItemRecommendedCategoryAdapter() {
+    public HomeCategoryRecommendedItemAdapter() {
     }
 
-    public CardItemRecommendedCategoryAdapter(List<CardItemRecommendedCategoryModel> list) {
+    public HomeCategoryRecommendedItemAdapter(List<CardItemRecommendedCategoryModel> list) {
         this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_category,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_category_recommended_item_layout,parent,false);
         return new ViewHolder(view);
     }
 

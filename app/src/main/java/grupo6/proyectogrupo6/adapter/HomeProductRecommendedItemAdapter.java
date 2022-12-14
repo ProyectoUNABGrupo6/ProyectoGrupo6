@@ -15,15 +15,15 @@ import java.util.List;
 import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
 import grupo6.proyectogrupo6.R;
 
-public class CardItemRecommendedProductAdapter extends RecyclerView.Adapter<CardItemRecommendedProductAdapter.ViewHolder>{
+public class HomeProductRecommendedItemAdapter extends RecyclerView.Adapter<HomeProductRecommendedItemAdapter.ViewHolder>{
 
     private List<CardItemRecommendedProductModel> list = new ArrayList<>();
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_item_recommended_product,parent,false);
-        return new CardItemRecommendedProductAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_product_recommended_item_layout,parent,false);
+        return new HomeProductRecommendedItemAdapter.ViewHolder(view);
     }
 
     @Override

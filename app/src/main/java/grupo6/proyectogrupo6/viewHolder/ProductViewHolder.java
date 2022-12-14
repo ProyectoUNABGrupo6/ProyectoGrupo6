@@ -23,10 +23,10 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
 
     public ProductViewHolder(@NonNull View itemView, ProductRecycleViewAdapter adapter) {
         super(itemView);
-        this.img = itemView.findViewById(R.id.cardItemProductImage);
-        this.name = itemView.findViewById(R.id.cardItemProductName);
-        this.description = itemView.findViewById(R.id.cardItemProductDescription);
-        this.price = itemView.findViewById(R.id.cardItemProductPrice);
+        this.img = itemView.findViewById(R.id.ProductItemImage);
+        this.name = itemView.findViewById(R.id.ProductItemName);
+        this.description = itemView.findViewById(R.id.ProductItemDescription);
+        this.price = itemView.findViewById(R.id.ProductItemPrice);
         this.adapter = adapter;
     }
 

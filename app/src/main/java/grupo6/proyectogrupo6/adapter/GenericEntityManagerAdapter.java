@@ -1,15 +1,22 @@
 package grupo6.proyectogrupo6.adapter;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import grupo6.proyectogrupo6.R;
 
 public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, GenericEntityManagerAdapter.ViewHolder> {
 
@@ -37,6 +44,19 @@ public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, Gene
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         E current = getItem(position);
         setItemView(current);
+    }
+    public void setImageView(ImageView imageView,String StringUri){
+        try {
+            if(StringUri != null && !StringUri.isEmpty()){
+                Uri uri = Uri.parse(StringUri);
+                imageView.setImageURI(uri);
+            }
+            else {
+                imageView.setImageResource(R.drawable.img_not_available);
+            }
+        }catch (Exception e){
+            imageView.setImageResource(R.drawable.img_not_available);
+        }
     }
     //---
     public interface OnItemClickListener<E> {

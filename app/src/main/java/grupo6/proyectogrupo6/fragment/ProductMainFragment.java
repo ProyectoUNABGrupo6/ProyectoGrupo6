@@ -20,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemProductAdapter;
+import grupo6.proyectogrupo6.adapter.ProductRecycleViewAdapter;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
@@ -29,7 +29,7 @@ public class ProductMainFragment extends Fragment  implements View.OnClickListen
     private SearchView svProduct;
     //Product
     private RecyclerView rvProduct;
-    private CardItemProductAdapter productAdapter;
+    private ProductRecycleViewAdapter productAdapter;
     private ProductViewModel  productViewModel;
     //add button
     private FloatingActionButton addButton;
@@ -61,7 +61,7 @@ public class ProductMainFragment extends Fragment  implements View.OnClickListen
 
     //Product
     private void initAdapterRvProduct(View v){
-        productAdapter = new CardItemProductAdapter(new CardItemProductAdapter.ProductDiff(), new CardItemProductAdapter.OnItemClickListener() {
+        productAdapter = new ProductRecycleViewAdapter(new ProductRecycleViewAdapter.ProductDiff(), new ProductRecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Product product) {
                 navigate(v,R.id.menuItemProductAdd,product);

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemProductAdapter;
+import grupo6.proyectogrupo6.adapter.ProductRecycleViewAdapter;
 import grupo6.proyectogrupo6.entity.Product;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder{
@@ -19,9 +19,9 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
     private final TextView name;
     private final TextView description;
     private final TextView price;
-    private final CardItemProductAdapter adapter;
+    private final ProductRecycleViewAdapter adapter;
 
-    public ProductViewHolder(@NonNull View itemView,CardItemProductAdapter adapter) {
+    public ProductViewHolder(@NonNull View itemView, ProductRecycleViewAdapter adapter) {
         super(itemView);
         this.img = itemView.findViewById(R.id.cardItemProductImage);
         this.name = itemView.findViewById(R.id.cardItemProductName);
@@ -43,7 +43,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder{
         });
     }
 
-    public static ProductViewHolder create(ViewGroup parent,CardItemProductAdapter adapter) {
+    public static ProductViewHolder create(ViewGroup parent, ProductRecycleViewAdapter adapter) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.product_item_layout, parent, false);
         return new ProductViewHolder(view,adapter);

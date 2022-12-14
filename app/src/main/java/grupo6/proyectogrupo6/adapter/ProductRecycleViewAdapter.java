@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.ListAdapter;
 import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 import grupo6.proyectogrupo6.entity.Product;
 
-public class CardItemProductAdapter extends ListAdapter<Product, ProductViewHolder> {
+public class ProductRecycleViewAdapter extends ListAdapter<Product, ProductViewHolder> {
 
-    public  CardItemProductAdapter.OnItemClickListener listener;
+    public  ProductRecycleViewAdapter.OnItemClickListener listener;
 
-    public CardItemProductAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback) {
+    public ProductRecycleViewAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback) {
         super(diffCallback);
     }
-    public CardItemProductAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback,CardItemProductAdapter.OnItemClickListener listener) {
+    public ProductRecycleViewAdapter(@NonNull DiffUtil.ItemCallback<Product> diffCallback, ProductRecycleViewAdapter.OnItemClickListener listener) {
         super(diffCallback);
         this.listener = listener;
     }

@@ -12,10 +12,10 @@ import grupo6.proyectogrupo6.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MenuItemSettingsFragment#newInstance} factory method to
+ * Use the {@link SettingsMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuItemSettingsFragment extends Fragment {
+public class SettingsMainFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class MenuItemSettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MenuItemSettingsFragment() {
+    public SettingsMainFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class MenuItemSettingsFragment extends Fragment {
      * @return A new instance of fragment settingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuItemSettingsFragment newInstance(String param1, String param2) {
-        MenuItemSettingsFragment fragment = new MenuItemSettingsFragment();
+    public static SettingsMainFragment newInstance(String param1, String param2) {
+        SettingsMainFragment fragment = new SettingsMainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class MenuItemSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_item_settings, container, false);
+        return inflater.inflate(R.layout.settings_mainfragment, container, false);
     }
 }

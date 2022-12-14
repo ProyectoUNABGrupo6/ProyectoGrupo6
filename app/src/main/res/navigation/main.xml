@@ -13,19 +13,19 @@
 
     <fragment
         android:id="@+id/menuItemSettings"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemSettingsFragment"
+        android:name="grupo6.proyectogrupo6.fragment.SettingsMainFragment"
         android:label="@string/menuItemSettings"
-        tools:layout="@layout/fragment_menu_item_settings" />
+        tools:layout="@layout/settings_mainfragment" />
     <fragment
         android:id="@+id/menuItemSupport"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemSupportFragment"
+        android:name="grupo6.proyectogrupo6.fragment.SupportMainFragment"
         android:label="@string/menuItemSupport"
-        tools:layout="@layout/fragment_menu_item_support" />
+        tools:layout="@layout/support_main_fragment" />
     <fragment
         android:id="@+id/menuItemAbout"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemAboutFragment"
+        android:name="grupo6.proyectogrupo6.fragment.AboutMainFragment"
         android:label="@string/menuItemAbout"
-        tools:layout="@layout/fragment_menu_item_about" />
+        tools:layout="@layout/about_main_fragment" />
     <fragment
         android:id="@+id/menuItemCategory"
         android:name="grupo6.proyectogrupo6.fragment.menuItemCategoryFragment"

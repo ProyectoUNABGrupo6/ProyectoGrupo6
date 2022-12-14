@@ -21,7 +21,7 @@ public class ProductosServices {
             while (cursor.moveToNext()) {
                 Producto producto = new Producto(
                         cursor.getString(0),
-                        cursor.getBlob(4),
+                        cursor.getString(4),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getInt(3)

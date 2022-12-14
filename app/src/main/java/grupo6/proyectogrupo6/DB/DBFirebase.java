@@ -5,17 +5,15 @@ import static android.service.controls.ControlsProviderService.TAG;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
 import grupo6.proyectogrupo6.Entities.Producto;
@@ -28,12 +26,14 @@ public class DBFirebase {
         this.PRODUCTOS = FirebaseFirestore.getInstance();
     }
 
-    public void insertarDatos(String nombre, String descripcion, int precio, byte[] image) {
+    public void insertarDatos(Producto producto) {
         Map<String, Object> PRODUCTO = new HashMap<>();
-        PRODUCTO.put("NOMBRE", nombre);
-        PRODUCTO.put("DESCRIPCION", descripcion);
-        PRODUCTO.put("PRECIO", precio);
-        //PRODUCTOS.put("IMAGEN", image);
+        PRODUCTO.put("id", producto.getId());
+        PRODUCTO.put("NOMBRE", producto.getNombre());
+        PRODUCTO.put("DESCRIPCION", producto.getDescripcion());
+        PRODUCTO.put("PRECIO", producto.getPrecio());
+        PRODUCTO.put("IMAGEN", producto.getImagen());
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             PRODUCTOS.collection("PRODUCTOS")
@@ -56,10 +56,10 @@ public class DBFirebase {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Producto producto = new Producto(
-                                    document.getId(),
-                                    document.getData().get("NOMBRE").toString(),
-                                    document.getData().get("DESCRIPCION").toString(),
-                                    Integer.parseInt(document.getData().get("PRECIO").toString())
+                                    Objects.requireNonNull(document.getData().get("id")).toString(),
+                                    Objects.requireNonNull(document.getData().get("NOMBRE")).toString(),
+                                    Objects.requireNonNull(document.getData().get("DESCRIPCION")).toString(),
+                                    Integer.parseInt(Objects.requireNonNull(document.getData().get("PRECIO")).toString())
                             );
                             list.add(producto);
                         }
@@ -77,22 +77,16 @@ public class DBFirebase {
                         "NOMBRE", NOMBRE,
                         "DESCRIPCION", DESCRIPCION,
                         "PRECIO", PRECIO)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                .addOnCompleteListener(task -> {
 
-                    }
                 });
     }
     public void eliminarDatos(String id){
         PRODUCTOS.collection("PRODUCTOS")
                 .document(id)
                 .delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                .addOnCompleteListener(task -> {
 
-                    }
                 });
     }
 }

@@ -11,13 +11,18 @@
         android:id="@+id/itemCompartir"
         android:icon="@drawable/ic_baseline_share_24"
         android:title=""
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/itemMas"
         android:icon="@drawable/ic_baseline_playlist_add_24"
         android:title=""
         app:showAsAction="always">
         <menu>
+            <item
+                android:id="@+id/geo"
+                android:icon="@drawable/baseline_map"
+                android:title="@string/Geo"
+                app:showAsAction="always" />
             <item
                 android:id="@+id/actionAdd"
                 android:title="@string/agregar"

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import grupo6.proyectogrupo6.Entities.Producto;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private final SQLiteDatabase FerreteriaDB;
@@ -23,7 +25,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id VARCHAR," +
                 "NOMBRE VARCHAR," +
                 "DESCRIPCION VARCHAR," +
-                "PRECIO INTEGER" +
+                "PRECIO INTEGER," +
+                "IMAGEN VARCHAR," +
+                "ELIMINAR BOOLEAN," +
+                "FECHACREACION DATETIME," +
+                "FECHAACTUALIZACION DATETIME" +
                 ")");
 
     }
@@ -36,16 +42,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //CRUD
 
-    public void insetarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO) {
+    public void insetarDatos(Producto producto) {
 
-        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?)";
         SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
 
-        statement.bindString(1, id);
-        statement.bindString(2, NOMBRE);
-        statement.bindString(3, DESCRIPCION);
-        statement.bindLong(4, PRECIO);
-        //statement.bindBlob(4, IMAGEN);
+        statement.bindString(1, producto.getId());
+        statement.bindString(2, producto.getNombre());
+        statement.bindString(3, producto.getDescripcion());
+        statement.bindLong(4, producto.getPrecio());
+        statement.bindString(5, producto.getImagen());
+        statement.bindString(6, String.valueOf(producto.isEliminado()));
+        statement.bindString(7, producto.getCreado().toString());
+        statement.bindString(8, producto.getActualizacion().toString());
 
         statement.executeInsert();
         statement.close();
@@ -67,12 +76,12 @@ public class DBHelper extends SQLiteOpenHelper {
         //FerreteriaDB.close();
     }
 
-    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO) {
+    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("NOMBRE", NOMBRE);
         contentValues.put("DESCRIPCION", DESCRIPCION);
         contentValues.put("PRECIO", PRECIO);
-        //contentValues.put("IMAGEN", IMAGEN);
+        contentValues.put("IMAGEN", IMAGEN);
 
         FerreteriaDB.update("PRODUCTOS", contentValues, "id = ?", new String[]{String.valueOf(id)});
     }

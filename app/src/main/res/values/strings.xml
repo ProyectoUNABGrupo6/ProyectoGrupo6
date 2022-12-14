@@ -2,6 +2,7 @@
     <string name="app_name">ProyectoGrupo6</string>
 
     // Activity main
+    <string name="Geo">Geo</string>
     <string name="splashScreen">Screen</string>
     <string name="botonProductos">Info</string>
     <string name="imgTienda">FERRESIX</string>
@@ -18,7 +19,7 @@
     <string name="imgAtras">Atras</string>
 
     //Formulario
-    <string name="formulario">Formulario</string>
+    <string name="agregarProducto">Agregar Producto</string>
     <string name="imgAgregar">Agregar Imagen</string>
     <string name="insAgregarNombre">Producto</string>
     <string name="insAgregarDescripcion">Descripcion del Producto</string>
@@ -47,8 +48,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    //Categorias
+    <string name="insCategoria">Nombre de la Categoria</string>
+    <string name="imgCategoria">imagen de la Categoria</string>
+    <string name="agregarCategoria">Agregar Categoria</string>
 
 
 </resources>

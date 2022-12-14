@@ -2,8 +2,6 @@ package grupo6.proyectogrupo6;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
+import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class AgregarProducto extends AppCompatActivity {
@@ -38,7 +37,6 @@ public class AgregarProducto extends AppCompatActivity {
 
     public ImageButton botonAtrasForm;
     public ImageView imgTituloForm;
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -66,14 +64,14 @@ public class AgregarProducto extends AppCompatActivity {
             imgTituloForm.setImageResource(imgTit);
 
             String ida = bundle.getString("id");
-            if(ida != null){
+            if (ida != null) {
                 String id = bundle.getString("id");
                 //byte[] byteArray = getIntent().getByteArrayExtra("imageCode");
                 //Bitmap imgPro = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                 String tituloInf = bundle.getString("titulo");
                 String DescripInf = bundle.getString("descripcion");
                 String precInf = bundle.getString("precio");
-                precInf = precInf.replaceAll("[$]","");
+                precInf = precInf.replaceAll("[$]", "");
                 productoAdd.setText(tituloInf);
                 descripcionAdd.setText(DescripInf);
                 precioAdd.setText(precInf);
@@ -105,32 +103,24 @@ public class AgregarProducto extends AppCompatActivity {
         botonAgregarPro.setOnClickListener(View -> {
 
 
-
             if (!(productoAdd.getText().toString()).isEmpty() && !(descripcionAdd.getText().toString()).isEmpty() && !(precioAdd.getText().toString()).isEmpty()) {
-
-                dbFirebase.insertarDatos(
-                        productoAdd.getText().toString(),
-                        descripcionAdd.getText().toString(),
-                        Integer.parseInt(precioAdd.getText().toString()),
-                        productosServices.imageButtonToByte(imgAdd)
-                );
-
-
-                /*dbHelper.insetarDatos(
-                        productoAdd.getText().toString(),
-                        descripcionAdd.getText().toString(),
-                        Integer.parseInt(precioAdd.getText().toString())
-                        //productosServices.imageButtonToByte(imgAdd)
-
-                );*/
-
-                volverAtras(View);
+                try {
+                    Producto producto = new Producto(
+                            productoAdd.getText().toString(),
+                            descripcionAdd.getText().toString(),
+                            Integer.parseInt(precioAdd.getText().toString())
+                    );
+                    dbFirebase.insertarDatos(producto);
+                    volverAtras(View);
+                } catch (Exception e) {
+                    Log.e("DB Insert", e.toString());
+                }
             } else {
                 Toast.makeText(this, "Los campos no deben estar vacios", Toast.LENGTH_LONG).show();
             }
         });
 
-        btnActualizar.setOnClickListener(View ->{
+        btnActualizar.setOnClickListener(View -> {
 
             dbFirebase.actualizarDatos(
                     idAct.getText().toString(),
@@ -143,7 +133,8 @@ public class AgregarProducto extends AppCompatActivity {
                     idAct.getText().toString(),
                     productoAdd.getText().toString(),
                     descripcionAdd.getText().toString(),
-                    Integer.parseInt(precioAdd.getText().toString())
+                    Integer.parseInt(precioAdd.getText().toString()),
+                    ""
                     //productosServices.imageButtonToByte(imgAdd)
             );
             volverAtras(View);

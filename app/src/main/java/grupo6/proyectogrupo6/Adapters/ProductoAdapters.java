@@ -3,8 +3,7 @@ package grupo6.proyectogrupo6.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,7 @@ public class ProductoAdapters extends BaseAdapter {
         Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
 
 
-        //byte[] image = producto.getImagen();
+        //String image = producto.getImagen();
         //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         txtID.setText(String.valueOf(producto.getId()));
         //imgProductoTemplate.setImageBitmap(bitmap);
@@ -83,16 +82,19 @@ public class ProductoAdapters extends BaseAdapter {
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
 
-        String precio = txtPrecioTemplate.getText().toString();
-        precio = precio.replaceAll("[$]","");
-        dbHelper.insetarDatos(
-                txtID.getText().toString(),
-                txtProductoTituloTemplate.getText().toString(),
-                txtDescripcionTemplate.getText().toString(),
-                Integer.parseInt(precio)
-                //productosServices.imageButtonToByte(imgAdd)
-
-        );
+        try {
+            String precio = txtPrecioTemplate.getText().toString();
+            precio = precio.replaceAll("[$]", "");
+            Producto producto1 = new Producto(
+                    txtID.getText().toString(),
+                    txtProductoTituloTemplate.getText().toString(),
+                    txtDescripcionTemplate.getText().toString(),
+                    Integer.parseInt(precio)
+            );
+            dbHelper.insetarDatos(producto1);
+        } catch (Exception w) {
+            Log.w("BD Sync", w.toString());
+        }
 
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);

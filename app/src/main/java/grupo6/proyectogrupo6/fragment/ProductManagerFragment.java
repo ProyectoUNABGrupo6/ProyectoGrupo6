@@ -28,7 +28,7 @@ import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
-public class MenuItemProductAddFragment extends Fragment
+public class ProductManagerFragment extends Fragment
                                         implements View.OnClickListener{
 
     //add photo
@@ -50,7 +50,7 @@ public class MenuItemProductAddFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_item_product_add, container, false);
+        return inflater.inflate(R.layout.product_manager_fragment, container, false);
     }
 
     @Override

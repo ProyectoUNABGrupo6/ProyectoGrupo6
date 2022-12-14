@@ -33,9 +33,9 @@
         tools:layout="@layout/category_main_fragment" />
     <fragment
         android:id="@+id/menuItemProduct"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemProductFragment"
+        android:name="grupo6.proyectogrupo6.fragment.ProductMainFragment"
         android:label="@string/menuItemProduct"
-        tools:layout="@layout/fragment_menu_item_product" />
+        tools:layout="@layout/product_main_fragment" />
     <fragment
         android:id="@+id/menuItemCategoryAdd"
         android:name="grupo6.proyectogrupo6.fragment.CategoryManagerFragment"
@@ -50,9 +50,9 @@
     </fragment>
     <fragment
         android:id="@+id/menuItemProductAdd"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemProductAddFragment"
+        android:name="grupo6.proyectogrupo6.fragment.ProductManagerFragment"
         android:label="@string/add"
-        tools:layout="@layout/fragment_menu_item_product_add">
+        tools:layout="@layout/product_manager_fragment">
         <action
             android:id="@+id/action_menuItemProductAdd_to_menuItemProduct"
             app:destination="@id/menuItemProduct"

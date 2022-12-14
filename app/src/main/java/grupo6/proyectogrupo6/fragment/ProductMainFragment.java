@@ -24,7 +24,7 @@ import grupo6.proyectogrupo6.adapter.CardItemProductAdapter;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
-public class MenuItemProductFragment extends Fragment  implements View.OnClickListener {
+public class ProductMainFragment extends Fragment  implements View.OnClickListener {
 
     private SearchView svProduct;
     //Product
@@ -42,7 +42,7 @@ public class MenuItemProductFragment extends Fragment  implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_item_product, container, false);
+        return inflater.inflate(R.layout.product_main_fragment, container, false);
     }
 
     @Override

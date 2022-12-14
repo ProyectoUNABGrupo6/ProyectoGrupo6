@@ -2,6 +2,7 @@ package grupo6.proyectogrupo6;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
+import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Services.ProductosServices;
@@ -23,6 +26,7 @@ import grupo6.proyectogrupo6.Services.ProductosServices;
 public class Productos extends AppCompatActivity {
 
     public DBHelper dbHelper;
+    public DBFirebase dbFirebase;
     public ProductosServices productosServices;
     public ImageButton botonAtras;
     public ImageView imgTitulo;
@@ -34,6 +38,7 @@ public class Productos extends AppCompatActivity {
     public ProductoAdapters productoAdapters;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,7 @@ public class Productos extends AppCompatActivity {
 
         try {
             dbHelper = new DBHelper(this);
+            dbFirebase = new DBFirebase();
 
             productosServices = new ProductosServices();
             Cursor cursor = dbHelper.consultarDatos();
@@ -76,6 +82,8 @@ public class Productos extends AppCompatActivity {
 
         listViewProductos = findViewById(R.id.listViewProductos);
         listViewProductos.setAdapter(productoAdapters);
+        dbFirebase.buscarDatos(productoAdapters, arrayList);
+
 
 
     }

@@ -1,33 +1,84 @@
 package grupo6.proyectogrupo6.Entities;
 
+import java.util.Date;
+import java.util.UUID;
+
 public class Producto {
-    private int id;
-    private byte[] imagen;
+    private String id;
+    private String imagen;
     private String nombre;
     private String descripcion;
     private int precio;
+    private boolean eliminado;
+    private Date actualizacion;
+    private Date creado;
 
-    public Producto(int id, byte[] imagen, String nombre, String descripcion, int precio) {
+
+    public Producto(String id, String imagen, String nombre, String descripcion, int precio) {
         this.id = id;
         this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.creado = new Date();
+        this.eliminado = false;
     }
 
-    public int getId() {
+    public Producto(String nombre, String descripcion, int precio) {
+
+        this.id = UUID.randomUUID().toString();
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
+    public Producto(String id, String nombre, String descripcion, int precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.creado = new Date();
+        this.eliminado = false;
+    }
+
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public Date getActualizacion() {
+        return actualizacion;
+    }
+
+    public void setActualizacion(Date actualizacion) {
+        this.actualizacion = actualizacion;
+    }
+
+    public Date getCreado() {
+        return creado;
+    }
+
+    public void setCreado(Date creado) {
+        this.creado = creado;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

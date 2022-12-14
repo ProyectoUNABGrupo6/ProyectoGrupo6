@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import grupo6.proyectogrupo6.Entities.Producto;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private final SQLiteDatabase FerreteriaDB;
@@ -20,11 +22,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase FerreteriaDB) {
 
         FerreteriaDB.execSQL("CREATE TABLE PRODUCTOS(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "id VARCHAR," +
                 "NOMBRE VARCHAR," +
                 "DESCRIPCION VARCHAR," +
                 "PRECIO INTEGER," +
-                "IMAGEN BLOB" +
+                "IMAGEN VARCHAR," +
+                "ELIMINAR BOOLEAN," +
+                "FECHACREACION DATETIME," +
+                "FECHAACTUALIZACION DATETIME" +
                 ")");
 
     }
@@ -37,14 +42,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //CRUD
 
-    public void insetarDatos(String NOMBRE, String DESCRIPCION, int PRECIO, byte[] IMAGEN) {
+    public void insetarDatos(Producto producto) {
 
-        String sql = "INSERT INTO PRODUCTOS VALUES(null, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?)";
         SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
-        statement.bindString(1, NOMBRE);
-        statement.bindString(2, DESCRIPCION);
-        statement.bindLong(3, PRECIO);
-        statement.bindBlob(4, IMAGEN);
+
+        statement.bindString(1, producto.getId());
+        statement.bindString(2, producto.getNombre());
+        statement.bindString(3, producto.getDescripcion());
+        statement.bindLong(4, producto.getPrecio());
+        statement.bindString(5, producto.getImagen());
+        statement.bindString(6, String.valueOf(producto.isEliminado()));
+        statement.bindString(7, producto.getCreado().toString());
+        statement.bindString(8, producto.getActualizacion().toString());
 
         statement.executeInsert();
         statement.close();
@@ -60,13 +70,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS WHERE id = " + id, null);
     }
 
-    public void eliminarDatos(int id) {
+    public void eliminarDatos(String id) {
         FerreteriaDB.execSQL("DELETE  FROM PRODUCTOS WHERE id =" + id);
         FerreteriaDB.execSQL("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'PRODUCTOS'");
         //FerreteriaDB.close();
     }
 
-    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, byte[] IMAGEN) {
+    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("NOMBRE", NOMBRE);
         contentValues.put("DESCRIPCION", DESCRIPCION);

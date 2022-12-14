@@ -2,6 +2,8 @@
     <string name="app_name">ProyectoGrupo6</string>
 
     // Activity main
+    <string name="Geo">Geo</string>
+    <string name="splashScreen">Screen</string>
     <string name="botonProductos">Info</string>
     <string name="imgTienda">FERRESIX</string>
     <string name="imgCarrito">Carrito</string>
@@ -17,7 +19,7 @@
     <string name="imgAtras">Atras</string>
 
     //Formulario
-    <string name="formulario">Formulario</string>
+    <string name="agregarProducto">Agregar Producto</string>
     <string name="imgAgregar">Agregar Imagen</string>
     <string name="insAgregarNombre">Producto</string>
     <string name="insAgregarDescripcion">Descripcion del Producto</string>
@@ -32,6 +34,24 @@
 
     //informacion
     <string name="id">id</string>
+
+    //Spinner
+    <string-array name="Opciones">
+        <item>Elige una opcion</item>
+        <item>Actualizar</item>
+        <item>Eliminar</item>
+    </string-array>
+    <string name="title_activity_agrergar_categorias">AgrergarCategorias</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    //Categorias
+    <string name="insCategoria">Nombre de la Categoria</string>
+    <string name="imgCategoria">imagen de la Categoria</string>
+    <string name="agregarCategoria">Agregar Categoria</string>
 
 
 </resources>

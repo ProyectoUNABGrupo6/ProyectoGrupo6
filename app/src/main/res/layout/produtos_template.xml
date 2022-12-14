@@ -6,35 +6,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imgAtrasTemplate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/imgAtras"
-            android:minHeight="48dp"
-            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
-
-        <ImageView
-            android:id="@+id/imgTituloTemplate"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="100dp"
-            android:contentDescription="@string/imgTienda"
-            tools:ignore="ImageContrastCheck" />
-
-        <ImageView
-            android:id="@+id/imgCarritoTemplate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/imgCarrito" />
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -74,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:contentDescription="@string/eliminar"
-                    android:minHeight="48dp" />
+                    android:minHeight="48dp"
+                    android:spinnerMode="dialog"/>
 
             </LinearLayout>
 

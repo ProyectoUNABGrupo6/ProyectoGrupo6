@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import grupo6.proyectogrupo6.model.CardItemRecommendedCategoryModel;
+import grupo6.proyectogrupo6.model.HomeCategoryRecommendedItemRecycleViewModel;
 import grupo6.proyectogrupo6.R;
 
-public class HomeCategoryRecommendedItemAdapter extends RecyclerView.Adapter<HomeCategoryRecommendedItemAdapter.ViewHolder>{
+public class HomeCategoryRecommendedRecycleViewAdapter extends RecyclerView.Adapter<HomeCategoryRecommendedRecycleViewAdapter.ViewHolder>{
 
-    private  List<CardItemRecommendedCategoryModel> list = new ArrayList<>();
+    private  List<HomeCategoryRecommendedItemRecycleViewModel> list = new ArrayList<>();
 
-    public HomeCategoryRecommendedItemAdapter() {
+    public HomeCategoryRecommendedRecycleViewAdapter() {
     }
 
-    public HomeCategoryRecommendedItemAdapter(List<CardItemRecommendedCategoryModel> list) {
+    public HomeCategoryRecommendedRecycleViewAdapter(List<HomeCategoryRecommendedItemRecycleViewModel> list) {
         this.list = list;
     }
 
@@ -43,7 +43,7 @@ public class HomeCategoryRecommendedItemAdapter extends RecyclerView.Adapter<Hom
         return list.size();
     }
 
-    public void updateList(List<CardItemRecommendedCategoryModel> list) {
+    public void updateList(List<HomeCategoryRecommendedItemRecycleViewModel> list) {
         this.list.clear();
         this.list = list;
         notifyDataSetChanged();
@@ -60,7 +60,7 @@ public class HomeCategoryRecommendedItemAdapter extends RecyclerView.Adapter<Hom
            titleCategory= itemView.findViewById(R.id.cardItemRecommendedCategoryName);
         }
 
-        public void updateItem(CardItemRecommendedCategoryModel cardItemRecommendedCategoryModel) {
+        public void updateItem(HomeCategoryRecommendedItemRecycleViewModel cardItemRecommendedCategoryModel) {
             imgCategory.setImageResource(cardItemRecommendedCategoryModel.getImagen());
             titleCategory.setText(cardItemRecommendedCategoryModel.getTitulo());
         }

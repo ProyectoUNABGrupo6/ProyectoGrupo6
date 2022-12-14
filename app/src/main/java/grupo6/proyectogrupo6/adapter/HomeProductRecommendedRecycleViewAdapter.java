@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import grupo6.proyectogrupo6.model.CardItemRecommendedProductModel;
+import grupo6.proyectogrupo6.model.HomeProductRecommendedItemRecycleViewModel;
 import grupo6.proyectogrupo6.R;
 
-public class HomeProductRecommendedItemAdapter extends RecyclerView.Adapter<HomeProductRecommendedItemAdapter.ViewHolder>{
+public class HomeProductRecommendedRecycleViewAdapter extends RecyclerView.Adapter<HomeProductRecommendedRecycleViewAdapter.ViewHolder>{
 
-    private List<CardItemRecommendedProductModel> list = new ArrayList<>();
+    private List<HomeProductRecommendedItemRecycleViewModel> list = new ArrayList<>();
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_product_recommended_item_layout,parent,false);
-        return new HomeProductRecommendedItemAdapter.ViewHolder(view);
+        return new HomeProductRecommendedRecycleViewAdapter.ViewHolder(view);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class HomeProductRecommendedItemAdapter extends RecyclerView.Adapter<Home
         return list.size();
     }
 
-    public void updateList(List<CardItemRecommendedProductModel> list) {
+    public void updateList(List<HomeProductRecommendedItemRecycleViewModel> list) {
         this.list.clear();
         this.list = list;
         notifyDataSetChanged();
@@ -55,7 +55,7 @@ public class HomeProductRecommendedItemAdapter extends RecyclerView.Adapter<Home
             detailsCategory = itemView.findViewById(R.id.cardItemRecommendedProductDetails);
         }
 
-        public void updateItem(CardItemRecommendedProductModel cardItemRecommendedProductModel) {
+        public void updateItem(HomeProductRecommendedItemRecycleViewModel cardItemRecommendedProductModel) {
             imgCategory.setImageResource(cardItemRecommendedProductModel.getImage());
             nameCategory.setText(cardItemRecommendedProductModel.getName());
             detailsCategory.setText(cardItemRecommendedProductModel.getDetails());

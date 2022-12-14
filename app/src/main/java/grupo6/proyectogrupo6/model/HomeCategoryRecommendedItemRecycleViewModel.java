@@ -1,13 +1,13 @@
 package grupo6.proyectogrupo6.model;
 
-public class CardItemRecommendedCategoryModel {
+public class HomeCategoryRecommendedItemRecycleViewModel {
 
     private int imagen;
     private String titulo;
 
-    public CardItemRecommendedCategoryModel() {
+    public HomeCategoryRecommendedItemRecycleViewModel() {
     }
-    public CardItemRecommendedCategoryModel(int imagen, String titulo) {
+    public HomeCategoryRecommendedItemRecycleViewModel(int imagen, String titulo) {
         this.imagen = imagen;
         this.titulo = titulo;
     }

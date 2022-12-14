@@ -75,7 +75,7 @@ public class ProductMainFragment extends Fragment  implements View.OnClickListen
     }
     private void initViewModelProduct(View v){
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.getAllProductOrderByNameAsc().observe(getViewLifecycleOwner(), list -> {
+        productViewModel.getEntities().observe(getViewLifecycleOwner(), list -> {
             // Update the cached copy of the words in the adapter.
             productAdapter.submitList(list);
         });

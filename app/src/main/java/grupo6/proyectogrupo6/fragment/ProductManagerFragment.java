@@ -158,6 +158,6 @@ public class ProductManagerFragment extends Fragment
     //---
     public void saveData(Product data){
         ProductViewModel productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.insert(data);
+        productViewModel.save(data);
     }
 }

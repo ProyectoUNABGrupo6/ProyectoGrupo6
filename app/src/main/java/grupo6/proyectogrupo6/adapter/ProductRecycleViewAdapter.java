@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 import grupo6.proyectogrupo6.entity.Product;
+import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 
 public class ProductRecycleViewAdapter extends ListAdapter<Product, ProductViewHolder> {
 

@@ -16,9 +16,11 @@ import grupo6.proyectogrupo6.entity.Product;
 public interface ProductDao {
 
     @Query("SELECT * FROM Product")
-    List<Product> findAll();
+    LiveData<List<Product>> findAll();
     @Query("SELECT * FROM PRODUCT WHERE uid= :id")
     Product findById(Long id);
+    @Query("SELECT * FROM PRODUCT WHERE name LIKE :name ")
+    LiveData<List<Product>> findByNameLike(String name);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(Product... entities);
     @Update

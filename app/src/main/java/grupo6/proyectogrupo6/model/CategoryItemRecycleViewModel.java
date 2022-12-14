@@ -2,13 +2,13 @@ package grupo6.proyectogrupo6.model;
 
 import java.io.Serializable;
 
-public class CardItemCategoryModel implements Serializable {
+public class CategoryItemRecycleViewModel implements Serializable {
 
     private int image;
     private String name;
     private String description;
 
-    public CardItemCategoryModel(int image, String name, String description) {
+    public CategoryItemRecycleViewModel(int image, String name, String description) {
         this.image = image;
         this.name = name;
         this.description = description;

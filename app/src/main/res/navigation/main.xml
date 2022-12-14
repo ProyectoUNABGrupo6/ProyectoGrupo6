@@ -28,9 +28,9 @@
         tools:layout="@layout/about_main_fragment" />
     <fragment
         android:id="@+id/menuItemCategory"
-        android:name="grupo6.proyectogrupo6.fragment.menuItemCategoryFragment"
+        android:name="grupo6.proyectogrupo6.fragment.CategoryMainFragment"
         android:label="@string/menuItemCategory"
-        tools:layout="@layout/fragment_menu_item_category" />
+        tools:layout="@layout/category_main_fragment" />
     <fragment
         android:id="@+id/menuItemProduct"
         android:name="grupo6.proyectogrupo6.fragment.MenuItemProductFragment"
@@ -38,9 +38,9 @@
         tools:layout="@layout/fragment_menu_item_product" />
     <fragment
         android:id="@+id/menuItemCategoryAdd"
-        android:name="grupo6.proyectogrupo6.fragment.MenuItemCategoryAddFragment"
+        android:name="grupo6.proyectogrupo6.fragment.CategoryManagerFragment"
         android:label="@string/add"
-        tools:layout="@layout/fragment_menu_item_category_add">
+        tools:layout="@layout/category_manager_fragment">
         <action
             android:id="@+id/action_menuItemCategoryAdd_to_menuItemCategory"
             app:destination="@id/menuItemCategory"

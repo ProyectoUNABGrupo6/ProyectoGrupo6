@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
 
-public class MenuItemCategoryAddFragment extends Fragment
+public class CategoryManagerFragment extends Fragment
                                          implements View.OnClickListener{
 
     //add photo
@@ -48,7 +48,7 @@ public class MenuItemCategoryAddFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_item_category_add, container, false);
+        return inflater.inflate(R.layout.category_manager_fragment, container, false);
     }
 
     @Override

@@ -22,17 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.adapter.CardItemCategoryAdapter;
-import grupo6.proyectogrupo6.model.CardItemCategoryModel;
+import grupo6.proyectogrupo6.adapter.CategoryRecycleViewAdapter;
+import grupo6.proyectogrupo6.model.CategoryItemRecycleViewModel;
 
-public class menuItemCategoryFragment extends Fragment
+public class CategoryMainFragment extends Fragment
                                       implements SearchView.OnQueryTextListener,
                                                  View.OnClickListener {
 
     private SearchView svCategory;
     //Category
     private RecyclerView rvCategory;
-    private CardItemCategoryAdapter categoryAdapter;
+    private CategoryRecycleViewAdapter categoryAdapter;
     //add button
     private FloatingActionButton addButton;
 
@@ -44,7 +44,7 @@ public class menuItemCategoryFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_item_category, container, false);
+        return inflater.inflate(R.layout.category_main_fragment, container, false);
     }
 
     @Override
@@ -80,9 +80,9 @@ public class menuItemCategoryFragment extends Fragment
         rvCategory.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
     }
     private void initAdapterRvCategory(View v){
-        categoryAdapter = new CardItemCategoryAdapter(new CardItemCategoryAdapter.OnItemClickListener() {
+        categoryAdapter = new CategoryRecycleViewAdapter(new CategoryRecycleViewAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(CardItemCategoryModel cardItemCategoryModel) {
+            public void onItemClick(CategoryItemRecycleViewModel cardItemCategoryModel) {
                 navigate(v,R.id.menuItemCategoryAdd,cardItemCategoryModel);
             }
         });
@@ -90,12 +90,12 @@ public class menuItemCategoryFragment extends Fragment
 
     }
     private void loadDataRvCategory(){
-        List<CardItemCategoryModel> list = new ArrayList<>();
-        list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 1", "Description 1"));
-        list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 2", "Description 2"));
-        list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 3", "Description 3"));
-        list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 4", "Description 4"));
-        list.add(new CardItemCategoryModel(R.drawable.img_logo, "category 5", "Description 5"));
+        List<CategoryItemRecycleViewModel> list = new ArrayList<>();
+        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 1", "Description 1"));
+        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 2", "Description 2"));
+        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 3", "Description 3"));
+        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 4", "Description 4"));
+        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 5", "Description 5"));
         categoryAdapter.updateList(list);
     }
     //add button
@@ -124,7 +124,7 @@ public class menuItemCategoryFragment extends Fragment
 //                .commit();
 //    }
 
-    public void navigate(View v, int idFragment, CardItemCategoryModel cardItemCategoryModel){
+    public void navigate(View v, int idFragment, CategoryItemRecycleViewModel cardItemCategoryModel){
         Bundle bundle = new Bundle();
         if(cardItemCategoryModel != null) {
             bundle.putString("name",cardItemCategoryModel.getName());

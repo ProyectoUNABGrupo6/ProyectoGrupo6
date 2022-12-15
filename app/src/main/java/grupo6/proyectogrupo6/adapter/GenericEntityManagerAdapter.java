@@ -53,7 +53,7 @@ public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, Gene
             Bitmap imgBitmap = null;
             if(StringUri != null && !StringUri.isEmpty()) {
                 File imgFile = new File(StringUri);
-                if (imgFile.exists())imgBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                if (imgFile.exists()) imgBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             }
             if(imgBitmap != null) imageView.setImageBitmap(imgBitmap);
             else imageView.setImageResource(R.drawable.img_not_available);

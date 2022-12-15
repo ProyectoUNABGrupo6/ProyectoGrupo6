@@ -1,5 +1,6 @@
 package grupo6.proyectogrupo6.fragment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.RealPathUtil;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
@@ -74,7 +76,7 @@ public class ProductManagerFragment extends Fragment
                 new ActivityResultCallback<Uri>() {
                     @Override
                     public void onActivityResult(Uri uri) {
-                        if(uri != null) setUriPhoto(uri);
+                        if(uri != null) setUriPhoto(uri,getContext());
                     }
                 });
     }
@@ -98,8 +100,9 @@ public class ProductManagerFragment extends Fragment
     private void chooseFile() {
         mGetContent.launch("image/*");
     }
-    private void setUriPhoto(Uri uri){
-        img.setTag(uri.getPath());
+    private void setUriPhoto(Uri uri, Context c){
+        String path = RealPathUtil.getRealPath(c, uri);
+        img.setTag(path);
         img.setImageURI(uri);
     }
     //other other fields

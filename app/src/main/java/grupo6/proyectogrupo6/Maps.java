@@ -43,7 +43,6 @@ public class Maps extends AppCompatActivity {
         }
 
 
-
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
         map = (MapView) findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
@@ -70,6 +69,8 @@ public class Maps extends AppCompatActivity {
 
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, mapEventsReceiver);
         map.getOverlays().add(mapEventsOverlay);
+
+        botonAtrasForm.setOnClickListener(this::volverAtras);
     }
 
     public void volverAtras(View view) {

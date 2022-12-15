@@ -66,6 +66,7 @@ public class Maps extends AppCompatActivity {
                 return false;
             }
         };
+
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, mapEventsReceiver);
         map.getOverlays().add(mapEventsOverlay);
 
@@ -78,4 +79,5 @@ public class Maps extends AppCompatActivity {
         intent.putExtra("imageCarrito", R.drawable.carrito);
         startActivity(intent);
     }
+
 }

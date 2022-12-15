@@ -8,28 +8,31 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class DBHelper extends SQLiteOpenHelper {
 
     private final SQLiteDatabase FerreteriaDB;
+    private ProductosServices productosServices;
 
     public DBHelper(Context context) {
         super(context, "FerreteriaDB.db", null, 1);
         FerreteriaDB = this.getWritableDatabase();
+        this.productosServices = new ProductosServices();
     }
 
     @Override
     public void onCreate(SQLiteDatabase FerreteriaDB) {
 
         FerreteriaDB.execSQL("CREATE TABLE PRODUCTOS(" +
-                "id VARCHAR," +
+                "id VARCHAR PRIMARY KEY," +
                 "NOMBRE VARCHAR," +
                 "DESCRIPCION VARCHAR," +
                 "PRECIO INTEGER," +
                 "IMAGEN VARCHAR," +
-                "ELIMINAR BOOLEAN," +
-                "FECHACREACION DATETIME," +
-                "FECHAACTUALIZACION DATETIME" +
+                "F_ELIMINAR BOOLEAN," +
+                "F_CREACION TEXT," +
+                "F_ACTUALIZADO TEXT" +
                 ")");
 
     }
@@ -44,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void insetarDatos(Producto producto) {
 
-        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
 
         statement.bindString(1, producto.getId());
@@ -53,11 +56,11 @@ public class DBHelper extends SQLiteOpenHelper {
         statement.bindLong(4, producto.getPrecio());
         statement.bindString(5, producto.getImagen());
         statement.bindString(6, String.valueOf(producto.isEliminado()));
-        statement.bindString(7, producto.getCreado().toString());
-        statement.bindString(8, producto.getActualizacion().toString());
+        statement.bindString(7, String.valueOf(producto.getCreado()));
+        statement.bindString(8, String.valueOf(producto.getActualizacion()));
 
         statement.executeInsert();
-        statement.close();
+        //statement.close();
 
 
     }

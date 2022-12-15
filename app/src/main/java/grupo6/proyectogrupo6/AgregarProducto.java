@@ -108,8 +108,10 @@ public class AgregarProducto extends AppCompatActivity {
                     Producto producto = new Producto(
                             productoAdd.getText().toString(),
                             descripcionAdd.getText().toString(),
-                            Integer.parseInt(precioAdd.getText().toString())
+                            Integer.parseInt(precioAdd.getText().toString()),
+                            ""
                     );
+                    dbHelper.insetarDatos(producto);
                     dbFirebase.insertarDatos(producto);
                     volverAtras(View);
                 } catch (Exception e) {
@@ -126,7 +128,8 @@ public class AgregarProducto extends AppCompatActivity {
                     idAct.getText().toString(),
                     productoAdd.getText().toString(),
                     descripcionAdd.getText().toString(),
-                    Integer.parseInt(precioAdd.getText().toString())
+                    Integer.parseInt(precioAdd.getText().toString()),
+                    ""
 
             );
             dbHelper.actualizarDatos(

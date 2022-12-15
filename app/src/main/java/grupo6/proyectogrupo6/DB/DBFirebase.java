@@ -56,7 +56,7 @@ public class DBFirebase {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Producto producto = new Producto(
-                                    Objects.requireNonNull(document.getData().get("id")).toString(),
+                                    document.getId(),
                                     Objects.requireNonNull(document.getData().get("NOMBRE")).toString(),
                                     Objects.requireNonNull(document.getData().get("DESCRIPCION")).toString(),
                                     Integer.parseInt(Objects.requireNonNull(document.getData().get("PRECIO")).toString())

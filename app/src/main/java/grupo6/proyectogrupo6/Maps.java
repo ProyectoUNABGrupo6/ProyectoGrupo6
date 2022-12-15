@@ -1,7 +1,9 @@
 package grupo6.proyectogrupo6;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,8 +19,8 @@ import org.osmdroid.views.overlay.MapEventsOverlay;
 
 public class Maps extends AppCompatActivity {
 
-    private MapView map;
-    private MapController mapController;
+    public MapView map;
+    public MapController mapController;
 
     public ImageButton botonAtrasForm;
     public ImageView imgTituloForm;
@@ -41,9 +43,8 @@ public class Maps extends AppCompatActivity {
         }
 
 
-
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
-        map = (MapView) findViewById(R.id.map);
+        map = findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
         mapController = (MapController) map.getController();
         GeoPoint colombia = new GeoPoint(4.570868, -74.297333);
@@ -67,5 +68,14 @@ public class Maps extends AppCompatActivity {
         };
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, mapEventsReceiver);
         map.getOverlays().add(mapEventsOverlay);
+
+        botonAtrasForm.setOnClickListener(this::volverAtras);
+    }
+
+    public void volverAtras(View view) {
+        Intent intent = new Intent(getApplicationContext(), Productos.class);
+        intent.putExtra("imageTitulo", R.drawable.ferresix);
+        intent.putExtra("imageCarrito", R.drawable.carrito);
+        startActivity(intent);
     }
 }

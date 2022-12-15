@@ -5,42 +5,48 @@ import java.util.UUID;
 
 public class Producto {
     private String id;
-    private String imagen;
     private String nombre;
     private String descripcion;
     private int precio;
+    private String imagen;
     private boolean eliminado;
     private Date actualizacion;
     private Date creado;
 
 
-    public Producto(String id, String imagen, String nombre, String descripcion, int precio) {
+
+    public Producto(String id, String nombre, String descripcion, int precio, String imagen) {
         this.id = id;
-        this.imagen = imagen;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.imagen = imagen;
         this.creado = new Date();
+        this.actualizacion = new Date();
         this.eliminado = false;
     }
 
-    public Producto(String nombre, String descripcion, int precio) {
-
+    public Producto(String nombre, String descripcion, int precio, String imagen) {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.imagen = imagen;
+        this.creado = new Date();
+        this.actualizacion = new Date();
+        this.eliminado = false;
     }
 
-    public Producto(String id, String nombre, String descripcion, int precio) {
+    public Producto(String id, String nombre, String descripcion, int precio, String imagen, Boolean eliminado, Date creado, Date actualizacion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.creado = new Date();
-        this.eliminado = false;
+        this.imagen = imagen;
+        this.creado = creado;
+        this.actualizacion = actualizacion;
+        this.eliminado = eliminado;
     }
-
 
     public boolean isEliminado() {
         return eliminado;

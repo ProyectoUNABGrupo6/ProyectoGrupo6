@@ -33,9 +33,9 @@ public abstract class GenericEntityManagerFragment<E,
 
 
     public abstract int getLayout();
-    public abstract int getItemLayout();
+    public abstract int getRecycleView();
     public abstract int getSearchView();
-    public abstract int getManagerItemLayout();
+    public abstract int getNavigationManagerFragment();
     public abstract int getAddItemButton();
     public abstract void buildBundle(Bundle bundle,E entity);
     public abstract A getAdapter(GenericEntityManagerAdapter.OnItemClickListener<E> onItemClickListener);
@@ -76,19 +76,19 @@ public abstract class GenericEntityManagerFragment<E,
     @Override
     public void onClick(@NonNull View v) {
         if(v.getId() == getAddItemButton()){
-            navigate(v,getManagerItemLayout(),null);
+            navigate(v,getNavigationManagerFragment(),null);
         }
     }
     public void initAdapter(View v){
         adapter = getAdapter(new GenericEntityManagerAdapter.OnItemClickListener<E>() {
             @Override
             public void onItemClick(E entity) {
-                navigate(v,getManagerItemLayout(),entity);
+                navigate(v,getNavigationManagerFragment(),entity);
             }
         });
     }
     public void initRecyclerView(@NonNull View v){
-        rv = v.findViewById(getItemLayout());
+        rv = v.findViewById(getRecycleView());
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
     }
@@ -118,9 +118,7 @@ public abstract class GenericEntityManagerFragment<E,
     }
     public void navigate(View v, int idFragment, E entity){
         Bundle bundle = new Bundle();
-        if(entity != null) {
-            buildBundle(bundle,entity);
-        }
+        if(entity != null) buildBundle(bundle,entity);
         Navigation.findNavController(v).navigate(idFragment,bundle);
     }
 }

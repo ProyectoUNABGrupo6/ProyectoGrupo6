@@ -20,85 +20,46 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.adapter.GenericEntityManagerAdapter;
 import grupo6.proyectogrupo6.adapter.ProductRecycleViewAdapter;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
-public class ProductMainFragment extends Fragment  implements View.OnClickListener {
+public class ProductMainFragment extends GenericEntityManagerFragment<Product,ProductRecycleViewAdapter,ProductViewModel> {
 
-    private SearchView svProduct;
-    //Product
-    private RecyclerView rvProduct;
-    private ProductRecycleViewAdapter productAdapter;
-    private ProductViewModel  productViewModel;
-    //add button
-    private FloatingActionButton addButton;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.product_main_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //Search
-        //initSearch(view);
-        //Product
-        initAdapterRvProduct(view);
-        initRvProduct(view);
-        initViewModelProduct(view);
-        //loadDataRvCategory();
-        //add button
-        initAddButton(view);
-    }
-
-    //Product
-    private void initAdapterRvProduct(View v){
-        productAdapter = new ProductRecycleViewAdapter(new ProductRecycleViewAdapter.OnItemClickListener<Product>() {
-            @Override
-            public void onItemClick(Product product) {
-                navigate(v,R.id.menuItemProductAdd,product);
-            }
-        });
-    }
-    private void initRvProduct(View v){
-        rvProduct = v.findViewById(R.id.menuItemProductRvProduct);
-        rvProduct.setAdapter(productAdapter);
-        rvProduct.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
-    }
-    private void initViewModelProduct(View v){
-        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.getEntities().observe(getViewLifecycleOwner(), list -> {
-            // Update the cached copy of the words in the adapter.
-            productAdapter.submitList(list);
-        });
-    }
-    //add button
-    private void initAddButton(View v){
-        addButton = v.findViewById(R.id.menuItemProductAddButton);
-        addButton.setOnClickListener(this);
+    public int getLayout() {
+        return R.layout.product_main_fragment;
     }
     @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.menuItemProductAddButton){
-            navigate(v,R.id.menuItemProductAdd,null);
-        }
+    public int getRecycleView() {
+        return R.id.menuItemProductRvProduct;
     }
-
-    public void navigate(View v, int idFragment, Product product){
-        Bundle bundle = new Bundle();
-        if(product != null) {
-            bundle.putString("name",product.getName());
-            bundle.putString("description",product.getDescription());
-            bundle.putString("price",product.getPrice());
-        }
-        Navigation.findNavController(v).navigate(idFragment,bundle);
+    @Override
+    public int getSearchView() {
+        return R.id.menuItemProductSvProduct;
+    }
+    @Override
+    public int getNavigationManagerFragment() {
+        return R.id.menuItemProductAdd;
+    }
+    @Override
+    public int getAddItemButton() {
+        return R.id.menuItemProductAddButton;
+    }
+    @Override
+    public void buildBundle(@NonNull Bundle bundle, @NonNull Product entity) {
+        bundle.putString("name",entity.getName());
+        bundle.putString("description",entity.getDescription());
+        bundle.putString("price",entity.getPrice());
+    }
+    @Override
+    public ProductRecycleViewAdapter getAdapter(GenericEntityManagerAdapter.OnItemClickListener<Product> onItemClickListener) {
+        return new ProductRecycleViewAdapter(onItemClickListener);
+    }
+    @Override
+    public ProductViewModel constructViewModel() {
+        return new ViewModelProvider(this).get(ProductViewModel.class);
     }
 }

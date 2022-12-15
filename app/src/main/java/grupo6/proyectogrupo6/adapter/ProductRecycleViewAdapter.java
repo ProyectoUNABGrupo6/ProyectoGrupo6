@@ -1,18 +1,15 @@
 package grupo6.proyectogrupo6.adapter;
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 
 import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.entity.Product;
-import grupo6.proyectogrupo6.viewHolder.ProductViewHolder;
 
 public class ProductRecycleViewAdapter extends GenericEntityManagerAdapter<Product> {
 

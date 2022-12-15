@@ -77,11 +77,11 @@ public class ProductoAdapters extends BaseAdapter {
         //String image = producto.getImagen();
         //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         txtID.setText(String.valueOf(producto.getId()));
-        //imgProductoTemplate.setImageBitmap(bitmap);
+        //imgProductoTemplate.setImageBitmap(producto.getImagen());
         txtProductoTituloTemplate.setText(producto.getNombre());
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
-
+/*
         try {
             String precio = txtPrecioTemplate.getText().toString();
             precio = precio.replaceAll("[$]", "");
@@ -89,13 +89,14 @@ public class ProductoAdapters extends BaseAdapter {
                     txtID.getText().toString(),
                     txtProductoTituloTemplate.getText().toString(),
                     txtDescripcionTemplate.getText().toString(),
-                    Integer.parseInt(precio)
+                    Integer.parseInt(precio),
+                    ""
             );
             dbHelper.insetarDatos(producto1);
         } catch (Exception w) {
             Log.w("BD Sync", w.toString());
         }
-
+*/
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);
         spinnerMenu.setAdapter(adapter);

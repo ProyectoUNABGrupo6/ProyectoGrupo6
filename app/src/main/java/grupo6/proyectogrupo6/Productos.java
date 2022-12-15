@@ -55,6 +55,10 @@ public class Productos extends AppCompatActivity {
             Cursor cursor = dbHelper.consultarDatos();
             arrayList = productosServices.cursorToArray(cursor);
 
+            productoAdapters = new ProductoAdapters(this, arrayList);
+            listViewProductos = findViewById(R.id.listViewProductos);
+            listViewProductos.setAdapter(productoAdapters);
+
 
         } catch (Exception e) {
             Log.e("Database", e.toString());
@@ -78,12 +82,7 @@ public class Productos extends AppCompatActivity {
         });
 
 
-        productoAdapters = new ProductoAdapters(this, arrayList);
-
-        listViewProductos = findViewById(R.id.listViewProductos);
-        listViewProductos.setAdapter(productoAdapters);
-        dbFirebase.buscarDatos(productoAdapters, arrayList);
-
+        //dbFirebase.buscarDatos(productoAdapters, arrayList);
 
 
     }

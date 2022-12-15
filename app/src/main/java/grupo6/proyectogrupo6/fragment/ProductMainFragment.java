@@ -61,7 +61,7 @@ public class ProductMainFragment extends Fragment  implements View.OnClickListen
 
     //Product
     private void initAdapterRvProduct(View v){
-        productAdapter = new ProductRecycleViewAdapter(new ProductRecycleViewAdapter.ProductDiff(), new ProductRecycleViewAdapter.OnItemClickListener() {
+        productAdapter = new ProductRecycleViewAdapter(new ProductRecycleViewAdapter.OnItemClickListener<Product>() {
             @Override
             public void onItemClick(Product product) {
                 navigate(v,R.id.menuItemProductAdd,product);

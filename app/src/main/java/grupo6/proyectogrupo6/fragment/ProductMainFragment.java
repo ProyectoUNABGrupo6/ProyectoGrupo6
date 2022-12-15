@@ -41,7 +41,7 @@ public class ProductMainFragment extends GenericEntityManagerFragment<Product,Pr
         return R.id.menuItemProductSvProduct;
     }
     @Override
-    public int getNavigationManagerFragment() {
+    public int getNavigationManagerEditFragment() {
         return R.id.menuItemProductAdd;
     }
     @Override

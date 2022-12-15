@@ -35,7 +35,7 @@ public abstract class GenericEntityManagerFragment<E,
     public abstract int getLayout();
     public abstract int getRecycleView();
     public abstract int getSearchView();
-    public abstract int getNavigationManagerFragment();
+    public abstract int getNavigationManagerEditFragment();
     public abstract int getAddItemButton();
     public abstract void buildBundle(Bundle bundle,E entity);
     public abstract A getAdapter(GenericEntityManagerAdapter.OnItemClickListener<E> onItemClickListener);
@@ -76,14 +76,14 @@ public abstract class GenericEntityManagerFragment<E,
     @Override
     public void onClick(@NonNull View v) {
         if(v.getId() == getAddItemButton()){
-            navigate(v,getNavigationManagerFragment(),null);
+            navigate(v, getNavigationManagerEditFragment(),null);
         }
     }
     public void initAdapter(View v){
         adapter = getAdapter(new GenericEntityManagerAdapter.OnItemClickListener<E>() {
             @Override
             public void onItemClick(E entity) {
-                navigate(v,getNavigationManagerFragment(),entity);
+                navigate(v, getNavigationManagerEditFragment(),entity);
             }
         });
     }

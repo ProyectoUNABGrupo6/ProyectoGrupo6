@@ -66,16 +66,32 @@
             android:inputType="textMultiLine"
             android:lines="5" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/menuItemProductSaveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_check"
-            app:backgroundTint="@color/design_default_color_primary" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/menuItemProductDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_delete"
+                app:backgroundTint="@color/design_default_color_error" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/menuItemProductSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foregroundGravity="right"
+                android:src="@drawable/ic_check"
+                app:backgroundTint="@color/design_default_color_primary" />
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -48,11 +48,11 @@ public class ProductManagerFragment extends GenericEntityManagerEditFragment<Pro
         price = v.findViewById(R.id.menuItemProductAddPrice);
     }
     @Override
-    public void initDataFields(View v,Product entity) {
-        if(entity == null) return;
-        name.setText(entity.getName());
-        description.setText(entity.getDescription());
-        price.setText(entity.getPrice());
+    public void initDataFields(View v,Product data) {
+        if(data == null) return;
+        name.setText(data.getName());
+        description.setText(data.getDescription());
+        price.setText(data.getPrice());
     }
     @Override
     public String getErrorDataFields(@NonNull Product data) {
@@ -65,12 +65,14 @@ public class ProductManagerFragment extends GenericEntityManagerEditFragment<Pro
         return new ViewModelProvider(this).get(ProductViewModel.class);
     }
     @Override
-    public Product getDataFields() {
-        Product data = new Product();
+    public Product getInstanceData() {
+        return new Product();
+    }
+    @Override
+    public void updateData(@NonNull Product data) {
         data.setUrlImage(getUriImage());
         data.setName(getStringField(name.getText()));
         data.setDescription(getStringField(description.getText()));
         data.setPrice(getStringField(price.getText()));
-        return data;
     }
 }

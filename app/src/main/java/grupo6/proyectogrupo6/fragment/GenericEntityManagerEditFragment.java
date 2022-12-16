@@ -22,9 +22,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.JsonUtil;
+import grupo6.proyectogrupo6.entity.GenericEntity;
 import grupo6.proyectogrupo6.viewModel.GenericEntityManagerViewModel;
 
-public abstract class GenericEntityManagerEditFragment<E,
+public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
                                                        V extends GenericEntityManagerViewModel>
                                                         extends Fragment implements View.OnClickListener{
 
@@ -35,16 +36,19 @@ public abstract class GenericEntityManagerEditFragment<E,
     public abstract int getSaveButton();
     public abstract int getNavigationManagerFragment();
     public abstract void bindFields(View v);
-    public abstract void initDataFields(View v,E entity);
+    public abstract void initDataFields(View v,E data);
     public abstract String getErrorDataFields(E data);
     public abstract V constructViewModel();
-    public abstract E getDataFields();
+    public abstract E getInstanceData();
+    public abstract void updateData(E data);
+
 
     //add photo
     private FloatingActionButton addImageButton;
     private ImageView image;
     private ActivityResultLauncher<String> mGetContent;
     //Fields
+    private E entity;
     private FloatingActionButton saveDataButton;
 
     @Override
@@ -61,14 +65,16 @@ public abstract class GenericEntityManagerEditFragment<E,
         //add photo button
         if(getImageView() != 0 && getAddImageButton() != 0) initSelectImage(view);
         bindFields(view);
-        E entity = getDataBundle();
-        if(entity != null) initDataFields(view,entity);
+        if(!isNewData(getDataBundle())) initDataFields(view,entity);
         initSaveData(view);
     }
     @Override
     public void onClick(@NonNull View v) {
         if(v.getId() == getAddImageButton()) chooseFile();
-        else if(v.getId() == getSaveButton()) saveData(v,getDataFields());
+        else if(v.getId() == getSaveButton()){
+            updateData(this.entity);
+            saveData(v,this.entity);
+        }
     }
     //add photo
     private void initSelectImage(@NonNull View v) {
@@ -89,7 +95,7 @@ public abstract class GenericEntityManagerEditFragment<E,
     private void chooseFile() {
         mGetContent.launch("image/*");
     }
-    private void setUriImage(Uri uri, Context c){
+    private void setUriImage(@NonNull Uri uri, Context c){
         //String path = RealPathUtil.getRealPath(c, uri);
         String path = uri.getPath();
         image.setTag(path);
@@ -103,6 +109,9 @@ public abstract class GenericEntityManagerEditFragment<E,
         saveDataButton = v.findViewById(getSaveButton());
         saveDataButton.setOnClickListener(this);
     }
+    private boolean isNewData(E data){
+        return (data == null || data.getUid() == null || data.getUid() == 0);
+    }
     public void saveData(View v,E data){
         String errorFields = getErrorDataFields(data);
         if(errorFields != null) {
@@ -111,17 +120,19 @@ public abstract class GenericEntityManagerEditFragment<E,
             return;
         }
         V viewModel = constructViewModel();
-        viewModel.save(data);
+        if(isNewData(data)) viewModel.save(data);
+        else viewModel.update(data);
         navigate(v,getNavigationManagerFragment());
     }
     //tool
     public E getDataBundle(){
-        E entity = null;
+        this.entity = null;
         if(getArguments() != null){
             String data = getArguments().getString(GenericEntityManagerFragment.keyDataBundle,null);
-            entity = (data != null) ? JsonUtil.toObject(data,getTypeClass()):null;
+           this.entity = (data != null) ? JsonUtil.toObject(data,getTypeClass()):null;
         }
-        return entity;
+        if(this.entity == null) this.entity = getInstanceData();
+        return this.entity;
     }
     @NonNull
     public String getStringField(Object field){

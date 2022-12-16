@@ -13,9 +13,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import grupo6.proyectogrupo6.entity.Category;
 import grupo6.proyectogrupo6.entity.Product;
 
-@Database(entities = {Product.class}, version = 1, exportSchema = false)
+@Database(entities = {Category.class,Product.class}, version = 1, exportSchema = false)
 @TypeConverters({ConvertersDao.class})
 public abstract class DB extends RoomDatabase {
 
@@ -23,6 +24,7 @@ public abstract class DB extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    public abstract CategoryDao categoryDao();
     public abstract ProductDao productDao();
 
     public static DB getDatabase(final Context context) {
@@ -47,11 +49,13 @@ public abstract class DB extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                ProductDao dao = INSTANCE.productDao();
-                dao.deleteAll();
+                CategoryDao categoryDao = INSTANCE.categoryDao();
+                categoryDao.deleteAll();
+                ProductDao productDao = INSTANCE.productDao();
+                productDao.deleteAll();
 
                 Product p = new Product("Product 1","Product 1", "1");
-                dao.save(p);
+                productDao.save(p);
             });
         }
     };

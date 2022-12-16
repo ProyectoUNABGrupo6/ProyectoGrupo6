@@ -53,5 +53,17 @@
     <string name="imgCategoria">imagen de la Categoria</string>
     <string name="agregarCategoria">Agregar Categoria</string>
 
+    //Login y registro
+    <string name="imglogin">imgLogin</string>
+    <string name="imgReg">imgReg</string>
+    <string name="insEmailReg">Ingrese su Email</string>
+    <string name="insEmail">Ingrese su Email</string>
+    <string name="insContrasena">Ingrese su Contraseña</string>
+    <string name="insContrasenaReg">Ingrese su Contraseña</string>
+    <string name="btnIngresar">Ingresar</string>
+    <string name="btnRegistrarReg">Registrar</string>
+    <string name="btnRegistrar">Registrar</string>
+    <string name="insConfirmarContra">Confirmar Contraseña</string>
+
 
 </resources>

@@ -9,23 +9,17 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import grupo6.proyectogrupo6.entity.Product;
+import grupo6.proyectogrupo6.repository.GenericEntityManagerRepository;
 import grupo6.proyectogrupo6.repository.ProductRepository;
 
-public class ProductViewModel extends AndroidViewModel {
-
-    private ProductRepository r;
-    private final LiveData<List<Product>> allProductOrderByNameAsc;
+public class ProductViewModel extends GenericEntityManagerViewModel<Product,ProductRepository> {
 
     public ProductViewModel(@NonNull Application application) {
         super(application);
-        r = new ProductRepository(application);
-        allProductOrderByNameAsc = r.getAllProductOrderByNameAsc();
+    }
+    @Override
+    public ProductRepository builderRepository(@NonNull Application application) {
+        return new ProductRepository(application);
     }
 
-    public LiveData<List<Product>> getAllProductOrderByNameAsc() {
-        return allProductOrderByNameAsc;
-    }
-    public void insert(Product product) {
-        r.insert(product);
-    }
 }

@@ -16,9 +16,11 @@ import grupo6.proyectogrupo6.entity.Product;
 public interface ProductDao {
 
     @Query("SELECT * FROM Product")
-    List<Product> findAll();
-    @Query("SELECT * FROM PRODUCT WHERE uid= :id")
+    LiveData<List<Product>> findAll();
+    @Query("SELECT * FROM Product WHERE uid= :id")
     Product findById(Long id);
+    @Query("SELECT * FROM Product WHERE name LIKE :name ")
+    LiveData<List<Product>> findByNameLike(String name);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(Product... entities);
     @Update
@@ -28,7 +30,7 @@ public interface ProductDao {
     //---
     @Query("SELECT * FROM Product ORDER BY name ASC")
     LiveData<List<Product>> findAllOrderByNameAsc();
-    @Query("DELETE FROM PRODUCT")
+    @Query("DELETE FROM product")
     void deleteAll();
 
 

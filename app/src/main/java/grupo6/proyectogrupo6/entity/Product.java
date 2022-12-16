@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity(tableName = "product")
-public class Product implements Serializable {
+public class Product implements Serializable, GenericEntity{
 
     @PrimaryKey
     private Long uid;

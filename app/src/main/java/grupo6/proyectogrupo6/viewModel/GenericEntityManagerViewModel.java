@@ -13,16 +13,18 @@ import grupo6.proyectogrupo6.repository.GenericEntityManagerRepository;
 
 public abstract class GenericEntityManagerViewModel<E,R extends GenericEntityManagerRepository> extends AndroidViewModel {
 
-    public abstract R builderRepository();
-    public abstract R getRepository();
+    public abstract R builderRepository(@NonNull Application application);
 
     private final R r;
     private final LiveData<List<E>> entities;
 
     public GenericEntityManagerViewModel(@NonNull Application application) {
         super(application);
-        r = getRepository();
+        r = builderRepository(application);
         entities = getRepository().findAll();
+    }
+    public R getRepository() {
+        return r;
     }
     public LiveData<List<E>> getEntities() {
         return this.entities;

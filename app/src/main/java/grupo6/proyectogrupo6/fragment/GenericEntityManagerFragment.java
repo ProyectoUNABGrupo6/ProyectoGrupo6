@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import grupo6.proyectogrupo6.JsonUtil;
 import grupo6.proyectogrupo6.adapter.GenericEntityManagerAdapter;
 import grupo6.proyectogrupo6.viewModel.GenericEntityManagerViewModel;
 
@@ -31,13 +32,14 @@ public abstract class GenericEntityManagerFragment<E,
                                                    implements SearchView.OnQueryTextListener,
                                                               View.OnClickListener {
 
+    public static final String keyDataBundle = "data";
+
 
     public abstract int getLayout();
-    public abstract int getItemLayout();
+    public abstract int getRecycleView();
     public abstract int getSearchView();
-    public abstract int getManagerItemLayout();
+    public abstract int getNavigationManagerEditFragment();
     public abstract int getAddItemButton();
-    public abstract void buildBundle(Bundle bundle,E entity);
     public abstract A getAdapter(GenericEntityManagerAdapter.OnItemClickListener<E> onItemClickListener);
     public abstract V constructViewModel();
 
@@ -76,19 +78,19 @@ public abstract class GenericEntityManagerFragment<E,
     @Override
     public void onClick(@NonNull View v) {
         if(v.getId() == getAddItemButton()){
-            navigate(v,getManagerItemLayout(),null);
+            navigate(v, getNavigationManagerEditFragment(),null);
         }
     }
     public void initAdapter(View v){
         adapter = getAdapter(new GenericEntityManagerAdapter.OnItemClickListener<E>() {
             @Override
             public void onItemClick(E entity) {
-                navigate(v,getManagerItemLayout(),entity);
+                navigate(v, getNavigationManagerEditFragment(),entity);
             }
         });
     }
     public void initRecyclerView(@NonNull View v){
-        rv = v.findViewById(getItemLayout());
+        rv = v.findViewById(getRecycleView());
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
     }
@@ -116,11 +118,14 @@ public abstract class GenericEntityManagerFragment<E,
         addButton = v.findViewById(getAddItemButton());
         addButton.setOnClickListener(this);
     }
+    public Bundle putDataBundle(@NonNull Bundle bundle, E entity){
+        String data = JsonUtil.toJson(entity);
+        bundle.putString(keyDataBundle,data);
+        return bundle;
+    }
     public void navigate(View v, int idFragment, E entity){
         Bundle bundle = new Bundle();
-        if(entity != null) {
-            buildBundle(bundle,entity);
-        }
+        if(entity != null) putDataBundle(bundle,entity);
         Navigation.findNavController(v).navigate(idFragment,bundle);
     }
 }

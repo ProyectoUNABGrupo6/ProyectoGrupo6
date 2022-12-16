@@ -1,9 +1,13 @@
 package grupo6.proyectogrupo6.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncDifferConfig;
@@ -11,22 +15,28 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import grupo6.proyectogrupo6.R;
+
 public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, GenericEntityManagerAdapter.ViewHolder> {
 
     public abstract int itemLayout();
-    public abstract void bindItemView();
+    public abstract void bindItemView(View itemView);
     public abstract void setItemView(E entity);
 
-    public  GenericEntityManagerAdapter.OnItemClickListener listener;
+    public GenericEntityManagerAdapter.OnItemClickListener listener;
 
-    protected GenericEntityManagerAdapter(@NonNull DiffUtil.ItemCallback<E> diffCallback) {
+    public GenericEntityManagerAdapter(@NonNull DiffUtil.ItemCallback<E> diffCallback) {
         super(diffCallback);
     }
-    protected GenericEntityManagerAdapter(GenericEntityManagerAdapter.OnItemClickListener listener) {
+    public GenericEntityManagerAdapter(GenericEntityManagerAdapter.OnItemClickListener listener) {
         super(new Diff<E>());
         this.listener = listener;
     }
-    protected GenericEntityManagerAdapter(@NonNull AsyncDifferConfig<E> config) {
+    public GenericEntityManagerAdapter(@NonNull AsyncDifferConfig<E> config) {
         super(config);
     }
     @Override @NonNull
@@ -36,14 +46,27 @@ public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, Gene
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         E current = getItem(position);
-        setItemView(current);
+        holder.setItemView(current,this);
+    }
+    public void setImageView(ImageView imageView,String StringUri){
+        try {
+            Bitmap imgBitmap = null;
+            if(StringUri != null && !StringUri.isEmpty()) {
+                File imgFile = new File(StringUri);
+                if (imgFile.exists()) imgBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            }
+            if(imgBitmap != null) imageView.setImageBitmap(imgBitmap);
+            else imageView.setImageResource(R.drawable.img_not_available);
+        }catch (Exception e){
+            imageView.setImageResource(R.drawable.img_not_available);
+        }
     }
     //---
     public interface OnItemClickListener<E> {
         void onItemClick(E entity);
     }
     //---
-    protected static class Diff<E> extends DiffUtil.ItemCallback<E> {
+    public static class Diff<E> extends DiffUtil.ItemCallback<E> {
 
         @Override
         public boolean areItemsTheSame(@NonNull E oldItem, @NonNull E newItem) {
@@ -55,11 +78,11 @@ public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, Gene
             return oldItem.equals(newItem);
         }
     }
-    protected static class ViewHolder<E> extends RecyclerView.ViewHolder{
+    public static class ViewHolder<E> extends RecyclerView.ViewHolder{
 
         public ViewHolder(@NonNull View itemView, @NonNull GenericEntityManagerAdapter adapter) {
             super(itemView);
-            adapter.bindItemView();
+            adapter.bindItemView(itemView);
         }
         @NonNull
         public static ViewHolder create(@NonNull ViewGroup parent, @NonNull GenericEntityManagerAdapter adapter) {

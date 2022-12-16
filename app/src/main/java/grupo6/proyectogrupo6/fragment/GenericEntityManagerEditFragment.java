@@ -34,6 +34,7 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
     public abstract int getImageView();
     public abstract int getAddImageButton();
     public abstract int getSaveButton();
+    public abstract int getDeleteButton();
     public abstract int getNavigationManagerFragment();
     public abstract void bindFields(View v);
     public abstract void initDataFields(View v,E data);
@@ -50,6 +51,7 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
     //Fields
     private E entity;
     private FloatingActionButton saveDataButton;
+    private FloatingActionButton deleteDataButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,14 +69,17 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
         bindFields(view);
         if(!isNewData(getDataBundle())) initDataFields(view,entity);
         initSaveData(view);
+        initDeleteData(view);
     }
     @Override
     public void onClick(@NonNull View v) {
-        if(v.getId() == getAddImageButton()) chooseFile();
-        else if(v.getId() == getSaveButton()){
+        int idButton = v.getId();
+        if(idButton == getAddImageButton()) chooseFile();
+        else if(idButton == getSaveButton()){
             updateData(this.entity);
             saveData(v,this.entity);
         }
+        else if(idButton == getDeleteButton()) deleteData(v,this.entity);
     }
     //add photo
     private void initSelectImage(@NonNull View v) {
@@ -122,6 +127,16 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
         V viewModel = constructViewModel();
         if(isNewData(data)) viewModel.save(data);
         else viewModel.update(data);
+        navigate(v,getNavigationManagerFragment());
+    }
+    private void initDeleteData(@NonNull View v){
+        deleteDataButton = v.findViewById(getDeleteButton());
+        if(isNewData(this.entity)) deleteDataButton.setVisibility(View.GONE);
+        else deleteDataButton.setOnClickListener(this);
+    }
+    public void deleteData(View v,E data){
+        V viewModel = constructViewModel();
+        if(!isNewData(data))viewModel.delete(data);
         navigate(v,getNavigationManagerFragment());
     }
     //tool

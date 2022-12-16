@@ -38,6 +38,10 @@ public class ProductManagerFragment extends GenericEntityManagerEditFragment<Pro
         return R.id.menuItemProductSaveButton;
     }
     @Override
+    public int getDeleteButton() {
+        return R.id.menuItemProductDeleteButton;
+    }
+    @Override
     public int getNavigationManagerFragment() {
         return R.id.action_menuItemProductAdd_to_menuItemProduct;
     }

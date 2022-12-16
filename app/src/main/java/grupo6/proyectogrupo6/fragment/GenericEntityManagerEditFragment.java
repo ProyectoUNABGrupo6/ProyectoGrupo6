@@ -21,20 +21,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
-import grupo6.proyectogrupo6.RealPathUtil;
+import grupo6.proyectogrupo6.JsonUtil;
 import grupo6.proyectogrupo6.viewModel.GenericEntityManagerViewModel;
 
 public abstract class GenericEntityManagerEditFragment<E,
                                                        V extends GenericEntityManagerViewModel>
                                                         extends Fragment implements View.OnClickListener{
 
+    public abstract Class<E> getTypeClass();
     public abstract int getLayout();
     public abstract int getImageView();
     public abstract int getAddImageButton();
     public abstract int getSaveButton();
     public abstract int getNavigationManagerFragment();
     public abstract void bindFields(View v);
-    public abstract void initDataFields(View v);
+    public abstract void initDataFields(View v,E entity);
     public abstract String getErrorDataFields(E data);
     public abstract V constructViewModel();
     public abstract E getDataFields();
@@ -60,7 +61,8 @@ public abstract class GenericEntityManagerEditFragment<E,
         //add photo button
         if(getImageView() != 0 && getAddImageButton() != 0) initSelectImage(view);
         bindFields(view);
-        if(getArguments() != null) initDataFields(view);
+        E entity = getDataBundle();
+        if(entity != null) initDataFields(view,entity);
         initSaveData(view);
     }
     @Override
@@ -113,6 +115,14 @@ public abstract class GenericEntityManagerEditFragment<E,
         navigate(v,getNavigationManagerFragment());
     }
     //tool
+    public E getDataBundle(){
+        E entity = null;
+        if(getArguments() != null){
+            String data = getArguments().getString(GenericEntityManagerFragment.keyDataBundle,null);
+            entity = (data != null) ? JsonUtil.toObject(data,getTypeClass()):null;
+        }
+        return entity;
+    }
     @NonNull
     public String getStringField(Object field){
         if(field == null) return "";

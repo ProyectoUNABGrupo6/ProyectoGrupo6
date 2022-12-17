@@ -51,6 +51,7 @@ public class CategoryManagerFragment extends GenericEntityManagerEditFragment<Ca
     @Override
     public void initDataFields(View v, Category data) {
         if(data == null) return;
+        setImage(data.getUrlImage());
         name.setText(data.getName());
         description.setText(data.getDescription());
     }

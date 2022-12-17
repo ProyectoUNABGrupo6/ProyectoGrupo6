@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.jetbrains.annotations.NotNull;
 
 import grupo6.proyectogrupo6.JsonUtil;
+import grupo6.proyectogrupo6.Util;
 import grupo6.proyectogrupo6.entity.GenericEntity;
 import grupo6.proyectogrupo6.viewModel.GenericEntityManagerViewModel;
 
@@ -45,8 +46,8 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
 
 
     //add photo
-    private FloatingActionButton addImageButton;
     private ImageView image;
+    private FloatingActionButton addImageButton;
     private ActivityResultLauncher<String> mGetContent;
     //Fields
     private E entity;
@@ -82,6 +83,9 @@ public abstract class GenericEntityManagerEditFragment<E extends GenericEntity,
         else if(idButton == getDeleteButton()) deleteData(v,this.entity);
     }
     //add photo
+    protected void setImage(String stringUri){
+        Util.setImageView(this.image,stringUri);
+    }
     private void initSelectImage(@NonNull View v) {
         //button
         addImageButton = v.findViewById(getAddImageButton());

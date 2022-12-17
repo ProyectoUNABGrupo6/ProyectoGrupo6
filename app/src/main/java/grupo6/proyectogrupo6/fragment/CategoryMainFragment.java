@@ -1,136 +1,41 @@
 package grupo6.proyectogrupo6.fragment;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SearchView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import androidx.lifecycle.ViewModelProvider;
 
 import grupo6.proyectogrupo6.R;
 import grupo6.proyectogrupo6.adapter.CategoryRecycleViewAdapter;
-import grupo6.proyectogrupo6.model.CategoryItemRecycleViewModel;
+import grupo6.proyectogrupo6.adapter.GenericEntityManagerAdapter;
+import grupo6.proyectogrupo6.entity.Category;
+import grupo6.proyectogrupo6.viewModel.CategoryViewModel;
 
-public class CategoryMainFragment extends Fragment
-                                      implements SearchView.OnQueryTextListener,
-                                                 View.OnClickListener {
-
-    private SearchView svCategory;
-    //Category
-    private RecyclerView rvCategory;
-    private CategoryRecycleViewAdapter categoryAdapter;
-    //add button
-    private FloatingActionButton addButton;
+public class CategoryMainFragment extends GenericEntityManagerFragment<Category, CategoryRecycleViewAdapter, CategoryViewModel> {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.category_main_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //Search
-        initSearch(view);
-        //Category
-        initRvCategory(view);
-        initAdapterRvCategory(view);
-        loadDataRvCategory();
-        //add button
-        initAddButton(view);
-    }
-
-    //Search
-    private void initSearch(View v){
-        svCategory = v.findViewById(R.id.menuItemCategorySvCategory);
-        svCategory.setOnQueryTextListener(this);
+    public int getLayout() {
+        return R.layout.category_main_fragment;
     }
     @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
+    public int getRecycleView() {
+        return R.id.menuItemCategoryRvCategory;
     }
     @Override
-    public boolean onQueryTextChange(String s) {
-        categoryAdapter.filter(s);
-        return false;
-    }
-    //Category
-    private void initRvCategory(View v){
-        rvCategory = v.findViewById(R.id.menuItemCategoryRvCategory);
-        rvCategory.setLayoutManager(new LinearLayoutManager(v.getContext(),LinearLayoutManager.VERTICAL,false));
-    }
-    private void initAdapterRvCategory(View v){
-        categoryAdapter = new CategoryRecycleViewAdapter(new CategoryRecycleViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(CategoryItemRecycleViewModel cardItemCategoryModel) {
-                navigate(v,R.id.menuItemCategoryAdd,cardItemCategoryModel);
-            }
-        });
-        rvCategory.setAdapter(categoryAdapter);
-
-    }
-    private void loadDataRvCategory(){
-        List<CategoryItemRecycleViewModel> list = new ArrayList<>();
-        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 1", "Description 1"));
-        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 2", "Description 2"));
-        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 3", "Description 3"));
-        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 4", "Description 4"));
-        list.add(new CategoryItemRecycleViewModel(R.drawable.img_logo, "category 5", "Description 5"));
-        categoryAdapter.updateList(list);
-    }
-    //add button
-    private void initAddButton(View v){
-        addButton = v.findViewById(R.id.menuItemCategoryAddButton);
-        addButton.setOnClickListener(this);
+    public int getSearchView() {
+        return R.id.menuItemCategorySvCategory;
     }
     @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.menuItemCategoryAddButton){
-            navigate(v,R.id.menuItemCategoryAdd,null);
-        }
+    public int getNavigationManagerEditFragment() {
+        return R.id.menuItemCategoryAdd;
     }
-
-//    public void navActivity(View v, Activity activity){
-//        Intent intent = new Intent(v.getContext(), activity.getClass());
-//        startActivity(intent);
-//    }
-//
-//    public void navFragment( int layout, Fragment fragment){
-//        FragmentManager fragmentManager =  getParentFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .add(layout, fragment)
-//                .setReorderingAllowed(true)
-//                .addToBackStack(fragment.getClass().getName())// name can be null
-//                .commit();
-//    }
-
-    public void navigate(View v, int idFragment, CategoryItemRecycleViewModel cardItemCategoryModel){
-        Bundle bundle = new Bundle();
-        if(cardItemCategoryModel != null) {
-            bundle.putString("name",cardItemCategoryModel.getName());
-            bundle.putString("description",cardItemCategoryModel.getDescription());
-        }
-        Navigation.findNavController(v).navigate(idFragment,bundle);
+    @Override
+    public int getAddItemButton() {
+        return R.id.menuItemCategoryAddButton;
     }
-
+    @Override
+    public CategoryRecycleViewAdapter getAdapter(GenericEntityManagerAdapter.OnItemClickListener<Category> onItemClickListener) {
+        return new CategoryRecycleViewAdapter(onItemClickListener);
+    }
+    @Override
+    public CategoryViewModel constructViewModel() {
+        return new ViewModelProvider(this).get(CategoryViewModel.class);
+    }
 }

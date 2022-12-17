@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.Util;
 import grupo6.proyectogrupo6.entity.Product;
 import grupo6.proyectogrupo6.viewModel.ProductViewModel;
 
@@ -54,6 +55,7 @@ public class ProductManagerFragment extends GenericEntityManagerEditFragment<Pro
     @Override
     public void initDataFields(View v,Product data) {
         if(data == null) return;
+        setImage(data.getUrlImage());
         name.setText(data.getName());
         description.setText(data.getDescription());
         price.setText(data.getPrice());

@@ -22,7 +22,7 @@
                 android:id="@+id/menuItemProductAddImg"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:src="@drawable/img_logo"/>
+                android:src="@drawable/img_not_available"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/menuItemProductAddImgButton"

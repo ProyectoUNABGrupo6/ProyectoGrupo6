@@ -1,154 +1,79 @@
 package grupo6.proyectogrupo6.fragment;
 
-import android.net.Uri;
-import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 
 import grupo6.proyectogrupo6.R;
-import grupo6.proyectogrupo6.model.MenuItemCategoryAddModel;
+import grupo6.proyectogrupo6.entity.Category;
+import grupo6.proyectogrupo6.viewModel.CategoryViewModel;
 
-public class CategoryManagerFragment extends Fragment
-                                         implements View.OnClickListener{
+public class CategoryManagerFragment extends GenericEntityManagerEditFragment<Category, CategoryViewModel>{
 
-    //add photo
-    private FloatingActionButton addPhotoButton;
-    private ImageView imgCategory;
-    private ActivityResultLauncher<String> mGetContent;
-    //other other fields
-    private TextView nameCategory;
-    private TextView shortDescriptionCategory;
-    //save info
-    private FloatingActionButton addInfoButton;
-
+    private TextView name;
+    private TextView description;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.category_manager_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //add photo button
-        initSelectPhoto(view);
-        initOtherFields(view);
-        initOtherFieldsData(view);
-        initSaveInfo(view);
-    }
-
-
-    //add photo button
-    private void initSelectPhoto(View v) {
-
-        //button
-        addPhotoButton = v.findViewById(R.id.menuItemCategoryAddImgButton);
-        addPhotoButton.setOnClickListener(this);
-        // photo
-        imgCategory = v.findViewById(R.id.menuItemCategoryAddImg);
-        mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        if(uri != null) setUriPhoto(uri);
-                    }
-                });
+    public Class<Category> getTypeClass() {
+        return Category.class;
     }
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.menuItemCategoryAddImgButton:
-                chooseFile();
-                break;
-            case R.id.menuItemCategorySaveButton:
-                saveInfo(v);
-                break;
-            default:
-                break;
-        }
-
+    public int getLayout() {
+        return R.layout.category_manager_fragment;
     }
-    //add photo
-    private void chooseFile() {
-        mGetContent.launch("image/*");
+    @Override
+    public int getImageView() {
+        return R.id.menuItemCategoryAddImg;
     }
-    private void setUriPhoto(Uri uri){
-        imgCategory.setTag(uri.getPath());
-        imgCategory.setImageURI(uri);
+    @Override
+    public int getAddImageButton() {
+        return R.id.menuItemCategoryAddImgButton;
     }
-    //other other fields
-    private void initOtherFields(View v){
-        nameCategory = v.findViewById(R.id.menuItemCategoryAddName);
-        shortDescriptionCategory = v.findViewById(R.id.menuItemCategoryAddDescription);
+    @Override
+    public int getSaveButton() {
+        return R.id.menuItemCategorySaveButton;
     }
-    private void initOtherFieldsData(View v) {
-        if(getArguments() == null){
-            Toast toast = Toast.makeText(v.getContext(), "bundle == null", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if(getArguments().getString("name") != null) nameCategory.setText(getArguments().getString("name",""));
-        if(getArguments().getString("description") != null) shortDescriptionCategory.setText(getArguments().getString("description",""));
+    @Override
+    public int getDeleteButton() {
+        return R.id.menuItemCategoryDeleteButton;
     }
-    //save info
-    private void initSaveInfo(View v){
-        addInfoButton = v.findViewById(R.id.menuItemCategorySaveButton);
-        addInfoButton.setOnClickListener(this);
+    @Override
+    public int getNavigationManagerFragment() {
+        return R.id.action_menuItemCategoryAdd_to_menuItemCategory;
     }
-    private void saveInfo(View v){
-        MenuItemCategoryAddModel infoCategory;
-        try {
-            errorFields();
-            infoCategory = getInfo();
-            Log.i("Save",infoCategory.toString());
-            navigate(v,R.id.action_menuItemCategoryAdd_to_menuItemCategory);
-        } catch (Exception e) {
-            Toast toast = Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT);
-            toast.show();
-        }
+    @Override
+    public void bindFields(@NonNull View v) {
+        name = v.findViewById(R.id.menuItemCategoryAddName);
+        description = v.findViewById(R.id.menuItemCategoryAddDescription);
     }
-    private MenuItemCategoryAddModel getInfo() {
-        MenuItemCategoryAddModel infoCategory = new MenuItemCategoryAddModel();
-        infoCategory.setUrlPhoto(getString(imgCategory.getTag()));
-        infoCategory.setName(getString(nameCategory.getText()));
-        infoCategory.setShortDescription(getString(shortDescriptionCategory.getText()));
-        return infoCategory;
+    @Override
+    public void initDataFields(View v, Category data) {
+        if(data == null) return;
+        setImage(data.getUrlImage());
+        name.setText(data.getName());
+        description.setText(data.getDescription());
     }
-    public void navigate(View v, int idFragment){
-        Navigation.findNavController(v).navigate(idFragment);
+    @Override
+    public String getErrorDataFields(@NonNull Category data) {
+        if(data.getUrlImage().isEmpty()) return "Empty photo";
+        if(data.getName() == null) return "Empty name";
+        return null;
     }
-    private void errorFields() throws Exception{
-        if(imgCategory.getTag() == null) throw new Exception("Empty photo");
-        if(nameCategory.getText() == null) throw new Exception("Empty name");
+    @Override
+    public CategoryViewModel constructViewModel() {
+        return new ViewModelProvider(this).get(CategoryViewModel.class);
     }
-    private String getString(Object field){
-        if(field == null) return "";
-        return field.toString();
+    @Override
+    public Category getInstanceData() {
+        return new Category();
+    }
+    @Override
+    public void updateData(@NonNull Category data) {
+        data.setUrlImage(getUriImage());
+        data.setName(getStringField(name.getText()));
+        data.setDescription(getStringField(description.getText()));
     }
 }
 

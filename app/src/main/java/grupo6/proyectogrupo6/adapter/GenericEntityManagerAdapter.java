@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import grupo6.proyectogrupo6.R;
+import grupo6.proyectogrupo6.Util;
 
 public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, GenericEntityManagerAdapter.ViewHolder> {
 
@@ -48,18 +49,8 @@ public abstract class GenericEntityManagerAdapter<E> extends ListAdapter<E, Gene
         E current = getItem(position);
         holder.setItemView(current,this);
     }
-    public void setImageView(ImageView imageView,String StringUri){
-        try {
-            Bitmap imgBitmap = null;
-            if(StringUri != null && !StringUri.isEmpty()) {
-                File imgFile = new File(StringUri);
-                if (imgFile.exists()) imgBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            }
-            if(imgBitmap != null) imageView.setImageBitmap(imgBitmap);
-            else imageView.setImageResource(R.drawable.img_not_available);
-        }catch (Exception e){
-            imageView.setImageResource(R.drawable.img_not_available);
-        }
+    public void setImageView(ImageView imageView,String stringUri){
+        Util.setImageView(imageView,stringUri);
     }
     //---
     public interface OnItemClickListener<E> {

@@ -3,7 +3,7 @@ package grupo6.proyectogrupo6.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import grupo6.proyectogrupo6.AgregarProducto;
 import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Entities.Usuario;
 import grupo6.proyectogrupo6.Informacion;
 import grupo6.proyectogrupo6.Productos;
 import grupo6.proyectogrupo6.R;
@@ -27,16 +28,34 @@ import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class ProductoAdapters extends BaseAdapter {
 
-    private final Context context;
-    private final ArrayList<Producto> arrayList;
+    private Context context;
+    private ArrayList<Producto> arrayList;
+    private ArrayList<Usuario> arrayUsuario;
+
+
     private ProductosServices productosServices;
     private DBHelper dbHelper;
     private DBFirebase dbFirebase;
+    private Productos productos;
+    public String usuario;
 
 
     public ProductoAdapters(Context context, ArrayList<Producto> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+
+    }
+
+    public ProductoAdapters(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -60,9 +79,11 @@ public class ProductoAdapters extends BaseAdapter {
 
         dbHelper = new DBHelper(context);
         dbFirebase = new DBFirebase();
+        productos = new Productos();
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         view = layoutInflater.inflate(R.layout.produtos_template, null);
+
 
         Producto producto = arrayList.get(position);
 
@@ -71,6 +92,7 @@ public class ProductoAdapters extends BaseAdapter {
         TextView txtProductoTituloTemplate = view.findViewById(R.id.txtProductoTituloTemplate);
         TextView txtDescripcionTemplate = view.findViewById(R.id.txtDescripcionTemplate);
         TextView txtPrecioTemplate = view.findViewById(R.id.txtPrecioTemplate);
+        TextView txtUsuP = view.findViewById(R.id.txtUsuP);
         Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
 
 
@@ -81,22 +103,25 @@ public class ProductoAdapters extends BaseAdapter {
         txtProductoTituloTemplate.setText(producto.getNombre());
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
+
 /*
-        try {
-            String precio = txtPrecioTemplate.getText().toString();
-            precio = precio.replaceAll("[$]", "");
-            Producto producto1 = new Producto(
-                    txtID.getText().toString(),
-                    txtProductoTituloTemplate.getText().toString(),
-                    txtDescripcionTemplate.getText().toString(),
-                    Integer.parseInt(precio),
-                    ""
-            );
-            dbHelper.insetarDatos(producto1);
-        } catch (Exception w) {
-            Log.w("BD Sync", w.toString());
+        Cursor cursor = dbHelper.consultarUsuarios();
+        arrayUsuario = productosServices.cursorUsuario(cursor);
+        if (arrayUsuario.size() != 0) {
+
+            int posicion = 0;
+
+            Usuario usuario = arrayUsuario.get(posicion);
+            String user = usuario.getEmail();
+
+            txtUsuP.setText(user);
+        }
+
+        if (!txtUsuP.getText().toString().isEmpty()){
+            spinnerMenu.setVisibility(View.VISIBLE);
         }
 */
+
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);
         spinnerMenu.setAdapter(adapter);
@@ -108,13 +133,14 @@ public class ProductoAdapters extends BaseAdapter {
 
                 if (parent.getItemAtPosition(position).equals("Eliminar")) {
                     String idP = txtID.getText().toString().trim();
-                    //dbHelper.eliminarDatos(idP);
+                    dbHelper.eliminarDatos(idP);
                     dbFirebase.eliminarDatos(idP);
                     Intent intent = new Intent(context.getApplicationContext(), Productos.class);
                     context.startActivity(intent);
 
                 } else if (parent.getItemAtPosition(position).equals("Actualizar")) {
                     Intent intent = new Intent(context.getApplicationContext(), AgregarProducto.class);
+                    intent.putExtra("usuario", productos.usuarioP.getText().toString());
                     intent.putExtra("imageAtras", R.mipmap.atras);
                     intent.putExtra("imageTitulo", R.drawable.ferresix);
                     intent.putExtra("imageCarrito", R.drawable.carrito);
@@ -140,6 +166,7 @@ public class ProductoAdapters extends BaseAdapter {
         imgProductoTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context.getApplicationContext(), Informacion.class);
 
+
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
@@ -157,6 +184,8 @@ public class ProductoAdapters extends BaseAdapter {
 
         txtProductoTituloTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context.getApplicationContext(), Informacion.class);
+
+
 
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
@@ -176,6 +205,7 @@ public class ProductoAdapters extends BaseAdapter {
         txtDescripcionTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context.getApplicationContext(), Informacion.class);
 
+
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
@@ -193,6 +223,7 @@ public class ProductoAdapters extends BaseAdapter {
 
         txtPrecioTemplate.setOnClickListener(View -> {
             Intent intent = new Intent(context.getApplicationContext(), Informacion.class);
+
 
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);

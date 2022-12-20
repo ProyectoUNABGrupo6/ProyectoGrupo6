@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Entities.Usuario;
 
 
 public class ProductosServices {
@@ -27,6 +29,7 @@ public class ProductosServices {
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
+                        cursor.getString(8),
                         cursor.getInt(3),
                         cursor.getString(4),
                         Boolean.valueOf(cursor.getString(5)),
@@ -34,6 +37,43 @@ public class ProductosServices {
                         formatoFecha(cursor.getString(7))
                 );
                 list.add(producto);
+
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Categoria> cursorCategoria(Cursor cursor) {
+        ArrayList<Categoria> list = new ArrayList<>();
+        if (cursor.getCount() == 0) {
+            return list;
+        } else{
+            while ((cursor.moveToNext())){
+                Categoria categoria = new Categoria(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2)
+                );
+
+                list.add(categoria);
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Usuario> cursorUsuario(Cursor cursor) {
+        ArrayList<Usuario> list = new ArrayList<>();
+        if (cursor.getCount() == 0) {
+            return list;
+        } else {
+            while (cursor.moveToNext()) {
+                Usuario usuario = new Usuario(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2)
+
+                );
+                list.add(usuario);
             }
         }
         return list;

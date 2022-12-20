@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Entities.Usuario;
 import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -24,6 +26,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase FerreteriaDB) {
 
+        FerreteriaDB.execSQL("CREATE TABLE CATEGORIAS(" +
+                "idCat VARCHAR PRIMARY KEY," +
+                "CATEGORIA VARCHAR," +
+                "IMAGEN VARCHAR" +
+                ")");
+
+
         FerreteriaDB.execSQL("CREATE TABLE PRODUCTOS(" +
                 "id VARCHAR PRIMARY KEY," +
                 "NOMBRE VARCHAR," +
@@ -32,7 +41,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "IMAGEN VARCHAR," +
                 "F_ELIMINAR BOOLEAN," +
                 "F_CREACION TEXT," +
-                "F_ACTUALIZADO TEXT" +
+                "F_ACTUALIZADO TEXT," +
+                "CATEGORIA VARCHAR" +
+                ")");
+
+        FerreteriaDB.execSQL("CREATE TABLE USUARIOS(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "EMAIL VARCHAR," +
+                "CONTRASEÑA VARCHAR" +
                 ")");
 
     }
@@ -41,13 +57,35 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS PRODUCTOS");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS CATEGORIAS");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS USUARIOS");
     }
 
     //CRUD
 
-    public void insetarDatos(Producto producto) {
+    public void insertarCategorias(Categoria categoria) {
+        String sql = "INSERT INTO CATEGORIAS VALUES(?, ?, ?)";
+        SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
 
-        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        statement.bindString(1, categoria.getIdCat());
+        statement.bindString(2, categoria.getCategoria());
+        statement.bindString(3, categoria.getImagen());
+        statement.executeInsert();
+    }
+
+    public void insertarUsuarios(Usuario usuario) {
+        String sql = "INSERT INTO USUARIOS VALUES(null, ?, ?)";
+        SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
+
+
+        statement.bindString(1, usuario.getEmail());
+        statement.bindString(2, usuario.getContra());
+        statement.executeInsert();
+    }
+
+    public void insertarDatos(Producto producto) {
+
+        String sql = "INSERT INTO PRODUCTOS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         SQLiteStatement statement = FerreteriaDB.compileStatement(sql);
 
         statement.bindString(1, producto.getId());
@@ -58,6 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
         statement.bindString(6, String.valueOf(producto.isEliminado()));
         statement.bindString(7, String.valueOf(producto.getCreado()));
         statement.bindString(8, String.valueOf(producto.getActualizacion()));
+        statement.bindString(9, producto.getCategoria());
 
         statement.executeInsert();
         //statement.close();
@@ -65,18 +104,30 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor consultarUsuarios() {
+        return FerreteriaDB.rawQuery("SELECT * FROM USUARIOS", null);
+    }
+
     public Cursor consultarDatos() {
         return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS", null);
     }
 
-    public Cursor consultarDatosporID(int id) {
-        return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS WHERE id = " + id, null);
+    public Cursor consultarCategorias() {
+        return FerreteriaDB.rawQuery("SELECT * FROM CATEGORIAS", null);
+    }
+
+    public Cursor consultarDatosCategoria(String categoria) {
+        return FerreteriaDB.rawQuery("SELECT * FROM PRODUCTOS WHERE CATEGORIA = '" + categoria + "'" , null);
     }
 
     public void eliminarDatos(String id) {
         FerreteriaDB.execSQL("DELETE  FROM PRODUCTOS WHERE id =" + id);
-        FerreteriaDB.execSQL("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'PRODUCTOS'");
+        //FerreteriaDB.execSQL("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'PRODUCTOS'");
         //FerreteriaDB.close();
+    }
+
+    public void eliminarUsuario(int id) {
+        FerreteriaDB.execSQL("DELETE FROM USUARIOS WHERE id =" + id);
     }
 
     public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {

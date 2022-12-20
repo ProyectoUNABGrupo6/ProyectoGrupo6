@@ -1,8 +1,6 @@
 package grupo6.proyectogrupo6;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,8 +32,8 @@ public class Informacion extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
         txtID = findViewById(R.id.txtID);
-        botonAtras = findViewById(R.id.imgAtrasForm);
-        imgTitulo = findViewById(R.id.imgTituloForm);
+        botonAtras = findViewById(R.id.imgAtrasProd);
+        imgTitulo = findViewById(R.id.imgTituloProd);
         imgCarrito = findViewById(R.id.imgCarritoInfo);
         imgProd = findViewById(R.id.imgProductoInfo);
         txtTituloInf = findViewById(R.id.txtTituloProInfo);

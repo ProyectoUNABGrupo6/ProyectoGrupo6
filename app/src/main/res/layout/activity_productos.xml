@@ -35,6 +35,12 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/imgCarrito" />
 
+            <TextView
+                android:id="@+id/txtUsuP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
             <ImageView
                 android:id="@+id/imgCarritoProductos"
                 android:layout_width="50dp"
@@ -45,19 +51,12 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <SearchView
+            android:id="@+id/buscarProductos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <SearchView
-                android:id="@+id/buscarProductos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </SearchView>
-
-        </LinearLayout>
+        </SearchView>
 
         <ListView
             android:id="@+id/listViewProductos"

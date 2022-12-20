@@ -29,9 +29,9 @@ public class AgregarProducto extends AppCompatActivity {
     private DBFirebase dbFirebase;
     private DBHelper dbHelper;
     public Button botonAgregarPro, btnActualizar;
-    private EditText productoAdd, descripcionAdd, precioAdd;
+    private EditText productoAdd, descripcionAdd, precioAdd, categoriaAdd;
     private ImageButton imgAdd;
-    private TextView idAct;
+    private TextView idAct, usuA;
 
     ActivityResultLauncher<String> content;
 
@@ -49,17 +49,21 @@ public class AgregarProducto extends AppCompatActivity {
         productoAdd = findViewById(R.id.insNombre);
         descripcionAdd = findViewById(R.id.insDescripcion);
         precioAdd = findViewById(R.id.insPrecio);
+        categoriaAdd = findViewById(R.id.insCatProd);
         imgAdd = findViewById(R.id.imgAgregar);
         btnActualizar = findViewById(R.id.btnActualizar);
         idAct = findViewById(R.id.txtIDAct);
 
-        botonAtrasForm = findViewById(R.id.imgAtrasForm);
-        imgTituloForm = findViewById(R.id.imgTituloForm);
+        botonAtrasForm = findViewById(R.id.imgAtrasProd);
+        imgTituloForm = findViewById(R.id.imgTituloProd);
+        usuA = findViewById(R.id.txtUsuProd);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            String usuario = bundle.getString("usuario");
             int imgTit = bundle.getInt("imageTitulo");
             int imgAtras = bundle.getInt("imageAtras");
+            usuA.setText(usuario);
             botonAtrasForm.setImageResource(imgAtras);
             imgTituloForm.setImageResource(imgTit);
 
@@ -108,11 +112,14 @@ public class AgregarProducto extends AppCompatActivity {
                     Producto producto = new Producto(
                             productoAdd.getText().toString(),
                             descripcionAdd.getText().toString(),
+                            categoriaAdd.getText().toString(),
                             Integer.parseInt(precioAdd.getText().toString()),
                             ""
+
                     );
-                    dbHelper.insetarDatos(producto);
-                    dbFirebase.insertarDatos(producto);
+                    dbHelper.insertarDatos(producto);
+
+                    //dbFirebase.insertarDatos(producto);
                     volverAtras(View);
                 } catch (Exception e) {
                     Log.e("DB Insert", e.toString());
@@ -152,6 +159,8 @@ public class AgregarProducto extends AppCompatActivity {
 
     public void volverAtras(View view) {
         Intent intent = new Intent(getApplicationContext(), Productos.class);
+        intent.putExtra("usuario", usuA.getText().toString());
+        intent.putExtra("categoria", categoriaAdd.getText().toString());
         intent.putExtra("imageAtras", R.mipmap.atras);
         intent.putExtra("imageTitulo", R.drawable.ferresix);
         intent.putExtra("imageCarrito", R.drawable.carrito);

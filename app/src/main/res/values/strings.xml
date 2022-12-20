@@ -6,17 +6,20 @@
     <string name="splashScreen">Screen</string>
     <string name="botonProductos">Info</string>
     <string name="imgTienda">FERRESIX</string>
-    <string name="imgCarrito">Carrito</string>
+
     <string name="txtCategoria">Categorías</string>
-    <string name="imgMaterial">Material</string>
+    <string name="imgCat">imgCategoria</string>
+    <string name="imgCarrito">Carrito</string>
     <string name="txtMaterial">Material de Construcción</string>
-    <string name="imgCables">Cables</string>
+
     <string name="txtCables">Electricidad</string>
     <string name="imgHerramienta">Herramienta</string>
     <string name="txtHerramienta">Herramientas</string>
 
     // Productos
     <string name="imgAtras">Atras</string>
+    <string name="categoria">Categoria</string>
+    <string name="imgProductos">Productos</string>
 
     //Formulario
     <string name="agregarProducto">Agregar Producto</string>
@@ -41,17 +44,6 @@
         <item>Actualizar</item>
         <item>Eliminar</item>
     </string-array>
-    <string name="title_activity_agrergar_categorias">AgrergarCategorias</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    //Categorias
-    <string name="insCategoria">Nombre de la Categoria</string>
-    <string name="imgCategoria">imagen de la Categoria</string>
-    <string name="agregarCategoria">Agregar Categoria</string>
 
     //Login y registro
     <string name="imglogin">imgLogin</string>
@@ -64,6 +56,13 @@
     <string name="btnRegistrarReg">Registrar</string>
     <string name="btnRegistrar">Registrar</string>
     <string name="insConfirmarContra">Confirmar Contraseña</string>
+    <string name="menuLogin">Ingresar</string>
+    <string name="menuSalir">Salir</string>
+
+    //Agregar categorias
+    <string name="imgAddCat">IMAGEN CATEGORIA</string>
+    <string name="txtAddCat">Categoria nueva</string>
+    <string name="imgCatBut">Boton Categoria</string>
 
 
 </resources>

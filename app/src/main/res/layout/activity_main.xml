@@ -6,121 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="601dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imgTitulo"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:contentDescription="@string/imgTienda"
+                app:srcCompat="@drawable/ferresix" />
 
-                <ImageView
-                    android:id="@+id/imgTitulo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/imgTienda"
-                    app:srcCompat="@drawable/ferresix" />
-
-                <ImageView
-                    android:id="@+id/imgCarrito"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="100dp"
-                    android:contentDescription="@string/imgCarrito"
-                    app:srcCompat="@drawable/carrito" />
-            </LinearLayout>
-
-            <SearchView
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/txtUsuario"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/txtCategoria"
-                android:textColor="#656565"
-                android:textSize="20sp" />
+                android:id="@+id/txtIdUser"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imgMaterial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/imgMaterial"
-                    app:srcCompat="@mipmap/materialesdeconstruccion" />
-
-                <TextView
-                    android:id="@+id/txtMate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/txtMaterial"
-                    android:textColor="#656565"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imgCables"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/imgCables"
-                    app:srcCompat="@mipmap/cableselectricos" />
-
-                <TextView
-                    android:id="@+id/txtElect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtCables"
-                    android:textColor="#656565"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imgHerramienta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/imgHerramienta"
-                    app:srcCompat="@mipmap/herramienta" />
-
-                <TextView
-                    android:id="@+id/txtHerram"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtHerramienta"
-                    android:textColor="#656565"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
+            <ImageView
+                android:id="@+id/imgCarrito"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/imgCarrito"
+                app:srcCompat="@drawable/carrito" />
         </LinearLayout>
-    </ScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtCategoria"
+            android:textColor="#656565"
+            android:textSize="20sp" />
+
+        <SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </SearchView>
+
+        <ListView
+            android:id="@+id/listViewCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

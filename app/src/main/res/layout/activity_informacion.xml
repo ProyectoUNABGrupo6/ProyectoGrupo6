@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imgAtrasForm"
+                android:id="@+id/imgAtrasProd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/imgAtras"
@@ -30,7 +30,7 @@
                 tools:ignore="ImageContrastCheck" />
 
             <ImageView
-                android:id="@+id/imgTituloForm"
+                android:id="@+id/imgTituloProd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

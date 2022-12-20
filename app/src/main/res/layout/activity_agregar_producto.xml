@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imgAtrasForm"
+                android:id="@+id/imgAtrasProd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/imgAtras"
@@ -30,11 +30,17 @@
                 tools:ignore="ImageContrastCheck" />
 
             <ImageView
-                android:id="@+id/imgTituloForm"
+                android:id="@+id/imgTituloProd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/imgTienda" />
+
+            <TextView
+                android:id="@+id/txtUsuProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -88,6 +94,17 @@
                     android:inputType="textPersonName"
                     android:textColorHint="#757575"
                     android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/insCatProd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/categoria"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#757575"
+                    android:textSize="20sp"
+                    android:autofillHints="" />
 
                 <EditText
                     android:id="@+id/insPrecio"

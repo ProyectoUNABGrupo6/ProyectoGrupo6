@@ -15,35 +15,52 @@ import java.util.HashMap;
 import java.util.Map;
 
 import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
+import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class DBFirebase {
 
 
-    private final FirebaseFirestore PRODUCTOS;
+    private final FirebaseFirestore FERRETERIADB;
     private ProductosServices productosServices;
 
     public DBFirebase() {
-        this.PRODUCTOS = FirebaseFirestore.getInstance();
+        this.FERRETERIADB = FirebaseFirestore.getInstance();
         this.productosServices = new ProductosServices();
     }
 
     public void insertarDatos(Producto producto) {
-        Map<String, Object> PRODUCTO = new HashMap<>();
-        PRODUCTO.put("id", producto.getId());
-        PRODUCTO.put("NOMBRE", producto.getNombre());
-        PRODUCTO.put("DESCRIPCION", producto.getDescripcion());
-        PRODUCTO.put("PRECIO", producto.getPrecio());
-        PRODUCTO.put("IMAGEN", producto.getImagen());
-        PRODUCTO.put("F_ELIMINADO", producto.isEliminado());
-        PRODUCTO.put("F_CREADO", producto.getCreado());
-        PRODUCTO.put("F_ACTUALIZADO", producto.getActualizacion());
+        Map<String, Object> PRODUCTOS = new HashMap<>();
+        PRODUCTOS.put("id", producto.getId());
+        PRODUCTOS.put("NOMBRE", producto.getNombre());
+        PRODUCTOS.put("DESCRIPCION", producto.getDescripcion());
+        PRODUCTOS.put("PRECIO", producto.getPrecio());
+        PRODUCTOS.put("IMAGEN", producto.getImagen());
+        PRODUCTOS.put("F_ELIMINADO", producto.isEliminado());
+        PRODUCTOS.put("F_CREADO", producto.getCreado());
+        PRODUCTOS.put("F_ACTUALIZADO", producto.getActualizacion());
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            PRODUCTOS.collection("PRODUCTOS")
-                    .add(PRODUCTO)
+            FERRETERIADB.collection("PRODUCTOS")
+                    .add(PRODUCTOS)
+                    .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+        }
+
+
+    }
+
+    public void insertarCategorias(Categoria categoria) {
+        Map<String, Object> CATEGORIAS = new HashMap<>();
+        CATEGORIAS.put("idCat", categoria.getIdCat());
+        CATEGORIAS.put("CATEGORIA", categoria.getCategoria());
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            FERRETERIADB.collection("CATEGORIAS")
+                    .add(CATEGORIAS)
                     .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
                     .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
         }
@@ -54,7 +71,7 @@ public class DBFirebase {
     @RequiresApi(api = Build.VERSION_CODES.R)
     public void buscarDatos(ProductoAdapters productoAdapters, ArrayList<Producto> list) {
 
-        PRODUCTOS.collection("PRODUCTOS")
+        FERRETERIADB.collection("PRODUCTOS")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -68,6 +85,7 @@ public class DBFirebase {
                                         document.getData().get("id").toString(),
                                         (document.getData().get("NOMBRE")).toString(),
                                         (document.getData().get("DESCRIPCION")).toString(),
+                                        document.getData().get("CATEGORIA").toString(),
                                         Integer.parseInt((document.getData().get("PRECIO")).toString()),
                                         document.getData().get("IMAGEN").toString(),
                                         Boolean.valueOf(document.getData().get("F_ELIMINADO").toString()),
@@ -85,9 +103,9 @@ public class DBFirebase {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    public void sincronizarDatos(DBHelper dbHelper, ArrayList<Producto> list) {
+    public void sincronizarDatos(DBHelper dbHelper, ArrayList<Producto> listProd, ArrayList<Categoria> listCat) {
 
-        PRODUCTOS.collection("PRODUCTOS")
+        FERRETERIADB.collection("PRODUCTOS")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -101,17 +119,28 @@ public class DBFirebase {
                                         document.getData().get("id").toString(),
                                         document.getData().get("NOMBRE").toString(),
                                         document.getData().get("DESCRIPCION").toString(),
+                                        document.getData().get("CATEGORIA").toString(),
                                         Integer.parseInt((document.getData().get("PRECIO")).toString()),
                                         document.getData().get("IMAGEN").toString(),
                                         Boolean.valueOf(document.getData().get("F_ELIMINADO").toString()),
                                         document.getDate("F_CREADO"),
                                         document.getDate("F_ACTUALIZADO")
                                 );
-                                list.add(producto);
+                                listProd.add(producto);
 
-                                dbHelper.insetarDatos(producto);
+                                dbHelper.insertarDatos(producto);
 
                             }
+                        }
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+
+                            Categoria categoria = new Categoria(
+                                    document.getData().get("idCat").toString(),
+                                    document.getData().get("CATEGORIA").toString()
+                            );
+                            listCat.add(categoria);
+                            dbHelper.insertarCategorias(categoria);
                         }
 
                     } else {
@@ -121,7 +150,7 @@ public class DBFirebase {
     }
 
     public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {
-        PRODUCTOS.collection("PRODUCTOS")
+        FERRETERIADB.collection("PRODUCTOS")
                 .document(id)
                 .update(
                         "NOMBRE", NOMBRE,
@@ -134,7 +163,7 @@ public class DBFirebase {
     }
 
     public void eliminarDatos(String id) {
-        PRODUCTOS.collection("PRODUCTOS")
+        FERRETERIADB.collection("PRODUCTOS")
                 .document(id)
                 .delete()
                 .addOnCompleteListener(task -> {

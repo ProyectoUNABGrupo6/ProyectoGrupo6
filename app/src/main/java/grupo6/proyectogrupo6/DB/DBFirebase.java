@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import grupo6.proyectogrupo6.Adapters.CategoriaAdapters;
 import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
 import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
@@ -69,7 +70,7 @@ public class DBFirebase {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    public void buscarDatos(ProductoAdapters productoAdapters, ArrayList<Producto> list) {
+    public void buscarDatos(ArrayList<Producto> list) {
 
         FERRETERIADB.collection("PRODUCTOS")
                 .get()
@@ -95,9 +96,30 @@ public class DBFirebase {
                                 list.add(producto);
                             }
                         }
-                        productoAdapters.notifyDataSetChanged();
+                        //productoAdapters.notifyDataSetChanged();
                     } else {
                         Log.w(TAG, "Error getting documents.", task.getException());
+                    }
+                });
+    }
+
+    public void buscarCategorias(ArrayList<Categoria> list){
+        FERRETERIADB.collection("CATEGORIAS")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+
+                            Categoria categoria = new Categoria(
+                                    document.getData().get("idCat").toString(),
+                                    document.getData().get("CATEGORIA").toString()
+                            );
+                            list.add(categoria);
+                        }
+                        //categoriaAdapters.notifyDataSetChanged();
+                    }else {
+                        Log.w(TAG, "Error getting documents", task.getException());
                     }
                 });
     }

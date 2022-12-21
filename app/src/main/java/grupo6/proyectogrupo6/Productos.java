@@ -60,7 +60,14 @@ public class Productos extends AppCompatActivity {
         imgCarrito = findViewById(R.id.imgCarritoProductos);
         usuarioP = findViewById(R.id.txtUsuP);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int imgTit = bundle.getInt("imageTitulo");
+            int imgCar = bundle.getInt("imageCarrito");
+            imgTitulo.setImageResource(imgTit);
+            imgCarrito.setImageResource(imgCar);
 
+        }
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             int imgTit = bundle.getInt("imageTitulo");
@@ -80,21 +87,36 @@ public class Productos extends AppCompatActivity {
 
         arrayList = new ArrayList<>();
 
+  /*      Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
+        if (!usuarioS.isEmpty()) {
+            spinnerMenu.setVisibility(View.VISIBLE);
+
+        }
+*/
+
+        arrayList = new ArrayList<>();
+
         try {
             dbHelper = new DBHelper(this);
             dbFirebase = new DBFirebase();
+            arrayUsuario = new ArrayList<>();
 
             productosServices = new ProductosServices();
 
             String categoria = bundle.getString("categoria");
             Cursor cursor = dbHelper.consultarDatosCategoria(categoria);
+            Cursor cursor1 = dbHelper.consultarUsuarios();
+            arrayUsuario = productosServices.cursorUsuario(cursor1);
+            arrayList = productosServices.cursorToArray(cursor);
+
+
+            productoAdapters = new ProductoAdapters(this, arrayList, arrayUsuario);
             //Cursor cursor1 = dbHelper.consultarDatos();
 
             arrayList = productosServices.cursorToArray(cursor);
 
 
             productoAdapters = new ProductoAdapters(this, arrayList);
-
             listViewProductos = findViewById(R.id.listViewProductos);
             listViewProductos.setAdapter(productoAdapters);
 

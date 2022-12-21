@@ -120,6 +120,7 @@ public class AgregarProducto extends AppCompatActivity {
                     dbHelper.insertarDatos(producto);
 
                     dbFirebase.insertarDatos(producto);
+                    //dbFirebase.insertarDatos(producto);
                     volverAtras(View);
                 } catch (Exception e) {
                     Log.e("DB Insert", e.toString());

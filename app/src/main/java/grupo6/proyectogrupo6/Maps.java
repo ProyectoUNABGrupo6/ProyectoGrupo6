@@ -10,6 +10,9 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +33,9 @@ public class Maps extends AppCompatActivity {
     private MapController mapController;
     private LocationManager locationManager;
     private Location currentLocation;
+    private ImageButton btnAtras;
+    private ImageView titulo;
+    private TextView user;
 
 
     @Override
@@ -38,9 +44,26 @@ public class Maps extends AppCompatActivity {
         setContentView(R.layout.activity_maps);
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
 
+        btnAtras = findViewById(R.id.imgAtrasMap);
+        titulo = findViewById(R.id.imgTituloMap);
+        user = findViewById(R.id.txtUsuMap);
 
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            int imgTitle = bundle.getInt("imageTitulo");
+            int imgAtras = bundle.getInt("imageAtras");
+            String users = bundle.getString("usuario");
+            btnAtras.setImageResource(imgAtras);
+            titulo.setImageResource(imgTitle);
+            user.setText(users);
+        }
 
+        btnAtras.setOnClickListener(View ->{
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            startActivity(intent);
+        });
 
         map = (MapView) findViewById(R.id.map);
 
@@ -90,6 +113,8 @@ public class Maps extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Sucursales.class);
+                intent.putExtra("imageAtras", R.mipmap.atras);
+                intent.putExtra("imageTitulo", R.drawable.ferresix);
                 startActivity(intent);
             }
         });

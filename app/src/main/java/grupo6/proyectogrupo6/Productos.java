@@ -83,17 +83,18 @@ public class Productos extends AppCompatActivity {
         try {
             dbHelper = new DBHelper(this);
             dbFirebase = new DBFirebase();
+            arrayUsuario = new ArrayList<>();
 
             productosServices = new ProductosServices();
 
             String categoria = bundle.getString("categoria");
             Cursor cursor = dbHelper.consultarDatosCategoria(categoria);
-            //Cursor cursor1 = dbHelper.consultarDatos();
-
+            Cursor cursor1 = dbHelper.consultarUsuarios();
+            arrayUsuario = productosServices.cursorUsuario(cursor1);
             arrayList = productosServices.cursorToArray(cursor);
 
 
-            productoAdapters = new ProductoAdapters(this, arrayList);
+            productoAdapters = new ProductoAdapters(this, arrayList, arrayUsuario);
 
             listViewProductos = findViewById(R.id.listViewProductos);
             listViewProductos.setAdapter(productoAdapters);

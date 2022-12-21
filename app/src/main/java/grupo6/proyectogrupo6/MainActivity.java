@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             Cursor cursor = dbHelper.consultarCategorias();
             Cursor cursor1 = dbHelper.consultarDatos();
             arrayCategoria = productosServices.cursorCategoria(cursor);
-            //arrayList = productosServices.cursorToArray(cursor1);
+            arrayList = productosServices.cursorToArray(cursor1);
             if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
                 dbFirebase.sincronizarDatos(dbHelper, arrayList, arrayCategoria);
             }
@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void pasarProducto(View view) {
 

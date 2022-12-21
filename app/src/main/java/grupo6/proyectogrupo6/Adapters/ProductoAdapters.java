@@ -3,7 +3,6 @@ package grupo6.proyectogrupo6.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,27 +35,15 @@ public class ProductoAdapters extends BaseAdapter {
     private ProductosServices productosServices;
     private DBHelper dbHelper;
     private DBFirebase dbFirebase;
-    private Productos productos;
-    public String usuario;
 
 
-    public ProductoAdapters(Context context, ArrayList<Producto> arrayList) {
+    public ProductoAdapters(Context context, ArrayList<Producto> arrayList, ArrayList<Usuario> arrayUsuario) {
         this.context = context;
         this.arrayList = arrayList;
+        this.arrayUsuario = arrayUsuario;
 
     }
 
-    public ProductoAdapters(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
 
     @Override
     public int getCount() {
@@ -79,7 +66,7 @@ public class ProductoAdapters extends BaseAdapter {
 
         dbHelper = new DBHelper(context);
         dbFirebase = new DBFirebase();
-        productos = new Productos();
+
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         view = layoutInflater.inflate(R.layout.produtos_template, null);
@@ -93,6 +80,7 @@ public class ProductoAdapters extends BaseAdapter {
         TextView txtDescripcionTemplate = view.findViewById(R.id.txtDescripcionTemplate);
         TextView txtPrecioTemplate = view.findViewById(R.id.txtPrecioTemplate);
         TextView txtUsuP = view.findViewById(R.id.txtUsuP);
+        TextView txtCategoriaT = view.findViewById(R.id.txtCategoriaTemplate);
         Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
 
 
@@ -102,11 +90,11 @@ public class ProductoAdapters extends BaseAdapter {
         //imgProductoTemplate.setImageBitmap(producto.getImagen());
         txtProductoTituloTemplate.setText(producto.getNombre());
         txtDescripcionTemplate.setText(producto.getDescripcion());
+        txtCategoriaT.setText(producto.getCategoria());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
 
-/*
-        Cursor cursor = dbHelper.consultarUsuarios();
-        arrayUsuario = productosServices.cursorUsuario(cursor);
+
+
         if (arrayUsuario.size() != 0) {
 
             int posicion = 0;
@@ -117,10 +105,10 @@ public class ProductoAdapters extends BaseAdapter {
             txtUsuP.setText(user);
         }
 
-        if (!txtUsuP.getText().toString().isEmpty()){
+        if (!txtUsuP.getText().toString().isEmpty()) {
             spinnerMenu.setVisibility(View.VISIBLE);
         }
-*/
+
 
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);
@@ -140,7 +128,7 @@ public class ProductoAdapters extends BaseAdapter {
 
                 } else if (parent.getItemAtPosition(position).equals("Actualizar")) {
                     Intent intent = new Intent(context.getApplicationContext(), AgregarProducto.class);
-                    intent.putExtra("usuario", productos.usuarioP.getText().toString());
+                    //intent.putExtra("usuario", productos.usuarioP.getText().toString());
                     intent.putExtra("imageAtras", R.mipmap.atras);
                     intent.putExtra("imageTitulo", R.drawable.ferresix);
                     intent.putExtra("imageCarrito", R.drawable.carrito);
@@ -152,6 +140,7 @@ public class ProductoAdapters extends BaseAdapter {
                     //intent.putExtra("imageCode", byteArray);
                     intent.putExtra("titulo", txtProductoTituloTemplate.getText());
                     intent.putExtra("descripcion", txtDescripcionTemplate.getText());
+                    intent.putExtra("categoria", txtCategoriaT.getText());
                     intent.putExtra("precio", txtPrecioTemplate.getText());
                     context.startActivity(intent);
                 }
@@ -172,12 +161,15 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
             productosServices = new ProductosServices();
-            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+
+            intent.putExtra("usuario", txtUsuP.getText().toString());
+            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
             intent.putExtra("ida", txtID.getText());
-            intent.putExtra("imageCode", byteArray);
+            //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtProductoTituloTemplate.getText());
             intent.putExtra("descripcion", txtDescripcionTemplate.getText());
+            intent.putExtra("categoria", txtCategoriaT.getText());
             intent.putExtra("precio", txtPrecioTemplate.getText());
             context.startActivity(intent);
         });
@@ -186,11 +178,11 @@ public class ProductoAdapters extends BaseAdapter {
             Intent intent = new Intent(context.getApplicationContext(), Informacion.class);
 
 
-
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
+            intent.putExtra("usuario", txtUsuP.getText().toString());
             productosServices = new ProductosServices();
             //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
@@ -198,6 +190,7 @@ public class ProductoAdapters extends BaseAdapter {
             //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtProductoTituloTemplate.getText());
             intent.putExtra("descripcion", txtDescripcionTemplate.getText());
+            intent.putExtra("categoria", txtCategoriaT.getText());
             intent.putExtra("precio", txtPrecioTemplate.getText());
             context.startActivity(intent);
         });
@@ -210,13 +203,15 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
+            intent.putExtra("usuario", txtUsuP.getText().toString());
             productosServices = new ProductosServices();
-            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
             intent.putExtra("ida", txtID.getText());
-            intent.putExtra("imageCode", byteArray);
+            //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtProductoTituloTemplate.getText());
             intent.putExtra("descripcion", txtDescripcionTemplate.getText());
+            intent.putExtra("categoria", txtCategoriaT.getText());
             intent.putExtra("precio", txtPrecioTemplate.getText());
             context.startActivity(intent);
         });
@@ -229,13 +224,15 @@ public class ProductoAdapters extends BaseAdapter {
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
+            intent.putExtra("usuario", txtUsuP.getText().toString());
             productosServices = new ProductosServices();
-            byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
             intent.putExtra("ida", txtID.getText());
-            intent.putExtra("imageCode", byteArray);
+            //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtProductoTituloTemplate.getText());
             intent.putExtra("descripcion", txtDescripcionTemplate.getText());
+            intent.putExtra("categoria", txtCategoriaT.getText());
             intent.putExtra("precio", txtPrecioTemplate.getText());
             context.startActivity(intent);
         });

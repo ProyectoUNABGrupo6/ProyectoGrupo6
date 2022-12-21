@@ -6,9 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import grupo6.proyectogrupo6.Adapters.CategoriaAdapters;
 import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
+import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Entities.Usuario;
 import grupo6.proyectogrupo6.Services.ProductosServices;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,14 +32,16 @@ public class MainActivity extends AppCompatActivity {
     public DBFirebase dbFirebase;
     public ProductosServices productosServices;
     public ArrayList<Producto> arrayList;
+    public ArrayList<Categoria> arrayCategoria;
+    public ArrayList<Usuario> arrayUsuario;
 
 
-    public ImageButton imgMaterial;
-    public ImageButton imgHerramientas;
-    public ImageButton imgElectricos;
-    public TextView txtMaterial;
-    public TextView txtHerramienta;
-    public TextView txtElectrico;
+    public CategoriaAdapters categoriaAdapters;
+    public ListView listViewCategoria;
+
+
+    public TextView txtUsuario;
+    public TextView txtIdUser;
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -44,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         arrayList = new ArrayList<>();
+        arrayCategoria = new ArrayList<>();
+        arrayUsuario = new ArrayList<>();
 
 
         try {
@@ -52,37 +61,51 @@ public class MainActivity extends AppCompatActivity {
             dbFirebase = new DBFirebase();
 
             productosServices = new ProductosServices();
-            Cursor cursor = dbHelper.consultarDatos();
-            arrayList = productosServices.cursorToArray(cursor);
-            if (arrayList.size() == 0) {
-                dbFirebase.sincronizarDatos(dbHelper, arrayList);
+            Cursor cursor = dbHelper.consultarCategorias();
+            Cursor cursor1 = dbHelper.consultarDatos();
+            arrayCategoria = productosServices.cursorCategoria(cursor);
+            arrayList = productosServices.cursorToArray(cursor1);
+            if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
+                dbFirebase.sincronizarDatos(dbHelper, arrayList, arrayCategoria);
             }
+
+            categoriaAdapters = new CategoriaAdapters(this, arrayCategoria);
+            listViewCategoria = findViewById(R.id.listViewCategorias);
+            listViewCategoria.setAdapter(categoriaAdapters);
+
+
         } catch (Exception e) {
             Log.e("Database", e.toString());
         }
 
-        imgMaterial = findViewById(R.id.imgMaterial);
-        imgHerramientas = findViewById(R.id.imgHerramienta);
-        imgElectricos = findViewById(R.id.imgCables);
-        txtMaterial = findViewById(R.id.txtMate);
-        txtHerramienta = findViewById(R.id.txtHerram);
-        txtElectrico = findViewById(R.id.txtElect);
+        dbHelper = new DBHelper(this);
+        txtUsuario = findViewById(R.id.txtUsuario);
+        txtIdUser = findViewById(R.id.txtIdUser);
 
-        txtMaterial.setOnClickListener(this::pasarProducto);
+        Cursor cursor = dbHelper.consultarUsuarios();
+        arrayUsuario = productosServices.cursorUsuario(cursor);
+        if (arrayUsuario.size() != 0) {
 
-        txtHerramienta.setOnClickListener(this::pasarProducto);
+            int posicion = 0;
 
-        txtElectrico.setOnClickListener(this::pasarProducto);
+            Usuario usuario = arrayUsuario.get(posicion);
+            int id = usuario.getIdUser();
+            String user = usuario.getEmail();
 
-        imgMaterial.setOnClickListener(this::pasarProducto);
+            txtUsuario.setText(user);
+            txtIdUser.setText(String.valueOf(id));
+        }
 
-        imgHerramientas.setOnClickListener(this::pasarProducto);
 
-        imgElectricos.setOnClickListener(this::pasarProducto);
     }
 
+
+
     public void pasarProducto(View view) {
+
+
         Intent intent = new Intent(getApplicationContext(), Productos.class);
+
         intent.putExtra("imageTitulo", R.drawable.ferresix);
         intent.putExtra("imageCarrito", R.drawable.carrito);
         startActivity(intent);
@@ -91,13 +114,52 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu, menu);
+        String user = txtUsuario.getText().toString();
+        if (!user.isEmpty()) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu, menu);
+
+            menu.findItem(R.id.actionAdd).setVisible(true);
+            menu.findItem(R.id.exit).setVisible(true);
+            menu.findItem(R.id.menuLogin).setVisible(false);
+            invalidateOptionsMenu();
+
+        } else {
+
+            getMenuInflater().inflate(R.menu.menu, menu);
+
+        }
+
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.menuLogin) {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.exit) {
+
+            int id = Integer.parseInt(txtIdUser.getText().toString());
+            dbHelper.eliminarUsuario(id);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            return true;
+
+        }
+        if (item.getItemId() == R.id.actionAdd) {
+            Intent intent = new Intent(getApplicationContext(), AgregarCategoria.class);
+            intent.putExtra("usuario", txtUsuario.getText().toString());
+            intent.putExtra("imageAtras", R.mipmap.atras);
+            intent.putExtra("imageTitulo", R.drawable.ferresix);
+            startActivity(intent);
+            return true;
+        }
 
         if (item.getItemId() == R.id.geo) {
             Intent intent = new Intent(getApplicationContext(), Maps.class);

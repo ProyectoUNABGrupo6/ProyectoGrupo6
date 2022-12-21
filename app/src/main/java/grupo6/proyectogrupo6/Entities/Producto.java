@@ -12,13 +12,14 @@ public class Producto {
     private boolean eliminado;
     private Date actualizacion;
     private Date creado;
+    private String categoria;
 
 
-
-    public Producto(String id, String nombre, String descripcion, int precio, String imagen) {
-        this.id = id;
+    public Producto(String nombre, String descripcion, String categoria, int precio, String imagen) {
+        this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.categoria = categoria;
         this.precio = precio;
         this.imagen = imagen;
         this.creado = new Date();
@@ -35,17 +36,28 @@ public class Producto {
         this.creado = new Date();
         this.actualizacion = new Date();
         this.eliminado = false;
+        this.categoria = categoria;
     }
 
-    public Producto(String id, String nombre, String descripcion, int precio, String imagen, Boolean eliminado, Date creado, Date actualizacion) {
+    public Producto(String id, String nombre, String descripcion, String categoria, int precio, String imagen, Boolean eliminado, Date creado, Date actualizacion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.categoria = categoria;
         this.precio = precio;
         this.imagen = imagen;
         this.creado = creado;
         this.actualizacion = actualizacion;
         this.eliminado = eliminado;
+
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public boolean isEliminado() {

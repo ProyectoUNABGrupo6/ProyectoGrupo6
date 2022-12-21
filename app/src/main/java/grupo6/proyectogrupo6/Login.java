@@ -3,6 +3,7 @@ package grupo6.proyectogrupo6;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,13 +13,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import grupo6.proyectogrupo6.DB.DBHelper;
+import grupo6.proyectogrupo6.Entities.Producto;
+import grupo6.proyectogrupo6.Entities.Usuario;
+
 public class Login extends AppCompatActivity {
+
 
     public Button btnIngresar, btnRegistrar;
     public EditText insEmail, insContra;
     public ImageButton imgLogin;
 
     private FirebaseAuth mAuth;
+
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,8 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        dbHelper = new DBHelper(this);
+
 
         btnIngresar.setOnClickListener(View -> {
             String email = insEmail.getText().toString().trim();
@@ -41,6 +51,13 @@ public class Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, contra)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+
+                            Usuario usuario = new Usuario(
+                                    email,
+                                    contra
+                            );
+                            dbHelper.insertarUsuarios(usuario);
+
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
@@ -58,5 +75,13 @@ public class Login extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
     }
 }

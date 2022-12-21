@@ -30,8 +30,8 @@ public class Maps extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        botonAtrasForm = findViewById(R.id.imgAtrasForm);
-        imgTituloForm = findViewById(R.id.imgTituloForm);
+        botonAtrasForm = findViewById(R.id.imgAtrasProd);
+        imgTituloForm = findViewById(R.id.imgTituloProd);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

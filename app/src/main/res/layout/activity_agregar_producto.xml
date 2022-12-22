@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:text="@string/agregarProducto"
                 android:textColor="#656565"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,10 +67,10 @@
 
                 <ImageButton
                     android:id="@+id/imgAgregar"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="128dp"
+                    android:layout_height="127dp"
                     android:contentDescription="@string/imgAgregar"
-                    app:srcCompat="@drawable/addimagen"
+                    app:srcCompat="@drawable/carrito"
                     tools:ignore="ImageContrastCheck" />
 
                 <EditText

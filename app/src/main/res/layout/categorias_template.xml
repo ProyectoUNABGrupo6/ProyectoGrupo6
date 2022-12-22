@@ -15,14 +15,30 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txtUsuarioLV"
+        android:id="@+id/txtCategoria"
+        android:layout_width="253dp"
+        android:layout_height="30dp"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spinnerCat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:layout_height="5dp"
+        android:contentDescription="@string/eliminar"
+        android:minHeight="48dp"
+        android:spinnerMode="dialog"
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/txtCategoria"
+        android:id="@+id/txtIDCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUsuC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 </LinearLayout>

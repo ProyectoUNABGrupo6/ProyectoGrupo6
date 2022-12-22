@@ -121,23 +121,36 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void eliminarDatos(String id) {
-        FerreteriaDB.execSQL("DELETE  FROM PRODUCTOS WHERE id =" + id);
-        //FerreteriaDB.execSQL("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'PRODUCTOS'");
-        //FerreteriaDB.close();
+        FerreteriaDB.execSQL("DELETE  FROM PRODUCTOS WHERE id = '" + id + "'");
+
+    }
+
+    public void eliminarCategoria(String id) {
+        FerreteriaDB.execSQL("DELETE  FROM CATEGORIAS WHERE id = '" + id + "'");
+
     }
 
     public void eliminarUsuario(int id) {
         FerreteriaDB.execSQL("DELETE FROM USUARIOS WHERE id =" + id);
     }
 
-    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {
+    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN, String CATEGORIA) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("NOMBRE", NOMBRE);
         contentValues.put("DESCRIPCION", DESCRIPCION);
         contentValues.put("PRECIO", PRECIO);
         contentValues.put("IMAGEN", IMAGEN);
+        contentValues.put("CATEGORIA", CATEGORIA);
 
         FerreteriaDB.update("PRODUCTOS", contentValues, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public void actualizarCategorias(String id, String CATEGORIA, String IMAGEN) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("CATEGORIA", CATEGORIA);
+        contentValues.put("IMAGEN", IMAGEN);
+
+        FerreteriaDB.update("CATEGORIAS", contentValues, "id = ?", new String[]{String.valueOf(id)});
     }
 
 }

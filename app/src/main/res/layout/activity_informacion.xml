@@ -15,41 +15,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imgAtrasProd"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAtrasInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:contentDescription="@string/imgAtras"
-                android:minWidth="32dp"
-                android:minHeight="48dp"
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_arrow_back"
                 tools:ignore="ImageContrastCheck" />
-
-            <ImageView
-                android:id="@+id/imgTituloProd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/imgTienda" />
 
             <TextView
                 android:id="@+id/txtUsuI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="298dp"
+                android:layout_toStartOf="@+id/btnCarritoInfo"
+                android:layout_toEndOf="@+id/btnAtrasInfo"
                 android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/imgCarritoInfo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="100dp"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCarritoInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="1dp"
+                android:clickable="true"
                 android:contentDescription="@string/imgCarrito"
-                tools:ignore="ImageContrastCheck" />
-        </LinearLayout>
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_shopping_cart_checkout" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#656565"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtPrecioInfo"
@@ -124,6 +128,7 @@
                     android:clickable="true"
                     android:contentDescription="@string/Actualizar"
                     android:focusable="true"
+                    app:backgroundTint="#00FFFFFF"
                     app:srcCompat="@drawable/ic_create"
                     tools:ignore="ImageContrastCheck" />
 
@@ -131,10 +136,11 @@
                     android:id="@+id/botonEliminar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="20dp"
                     android:clickable="true"
                     android:contentDescription="@string/eliminar"
                     android:focusable="true"
+                    app:backgroundTint="#00FFFFFF"
                     app:srcCompat="@drawable/ic_delete"
                     tools:ignore="ImageContrastCheck" />
 

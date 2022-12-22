@@ -1,9 +1,12 @@
 package grupo6.proyectogrupo6.Services;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageButton;
+
+import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
@@ -47,8 +50,8 @@ public class ProductosServices {
         ArrayList<Categoria> list = new ArrayList<>();
         if (cursor.getCount() == 0) {
             return list;
-        } else{
-            while ((cursor.moveToNext())){
+        } else {
+            while ((cursor.moveToNext())) {
                 Categoria categoria = new Categoria(
                         cursor.getString(0),
                         cursor.getString(1),
@@ -103,6 +106,13 @@ public class ProductosServices {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         return dateFormat.format(date);
 
+    }
+
+    public void insertarImagen(String url, ImageButton imageButton, Context context) {
+        Glide.with(context)
+                .load(url)
+                .override(500,500)
+                .into(imageButton);
     }
 
 

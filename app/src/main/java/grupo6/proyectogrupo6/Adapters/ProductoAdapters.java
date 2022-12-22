@@ -32,29 +32,17 @@ public class ProductoAdapters extends BaseAdapter {
     private ArrayList<Usuario> arrayUsuario;
 
 
-    private ProductosServices productosServices;
+    ProductosServices productosServices;
     private DBHelper dbHelper;
     private DBFirebase dbFirebase;
     private Productos productos;
-    public String usuario;
 
 
     public ProductoAdapters(Context context, ArrayList<Producto> arrayList, ArrayList<Usuario> arrayUsuario) {
         this.context = context;
         this.arrayList = arrayList;
         this.arrayUsuario = arrayUsuario;
-    }
-
-    public ProductoAdapters(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+        this.productosServices = new ProductosServices();
     }
 
 
@@ -84,8 +72,8 @@ public class ProductoAdapters extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         view = layoutInflater.inflate(R.layout.produtos_template, null);
 
-
         Producto producto = arrayList.get(position);
+
 
         TextView txtID = view.findViewById(R.id.txtID);
         ImageButton imgProductoTemplate = view.findViewById(R.id.imgProductoTemplate);
@@ -97,10 +85,8 @@ public class ProductoAdapters extends BaseAdapter {
         Spinner spinnerMenu = view.findViewById(R.id.spinnerMenu);
 
 
-        //String image = producto.getImagen();
-        //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         txtID.setText(String.valueOf(producto.getId()));
-        //imgProductoTemplate.setImageBitmap(producto.getImagen());
+        productosServices.insertarImagen(producto.getImagen(), imgProductoTemplate, context);
         txtProductoTituloTemplate.setText(producto.getNombre());
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtCategoriaT.setText(producto.getCategoria());
@@ -110,7 +96,6 @@ public class ProductoAdapters extends BaseAdapter {
         if (arrayUsuario.size() != 0) {
 
             int posicion = 0;
-
             Usuario usuario = arrayUsuario.get(posicion);
             String user = usuario.getEmail();
 
@@ -120,7 +105,6 @@ public class ProductoAdapters extends BaseAdapter {
         if (!txtUsuP.getText().toString().isEmpty()) {
             spinnerMenu.setVisibility(View.VISIBLE);
         }
-
 
 
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
@@ -137,25 +121,21 @@ public class ProductoAdapters extends BaseAdapter {
                     dbHelper.eliminarDatos(idP);
                     dbFirebase.eliminarDatos(idP);
                     Intent intent = new Intent(context.getApplicationContext(), Productos.class);
+                    intent.putExtra("categoria", producto.getCategoria());
                     context.startActivity(intent);
 
                 } else if (parent.getItemAtPosition(position).equals("Actualizar")) {
                     Intent intent = new Intent(context.getApplicationContext(), AgregarProducto.class);
-                    //intent.putExtra("usuario", productos.usuarioP.getText().toString());
-                    intent.putExtra("usuario", productos.usuarioP.getText().toString());
-                    intent.putExtra("imageAtras", R.mipmap.atras);
-                    intent.putExtra("imageTitulo", R.drawable.ferresix);
-                    intent.putExtra("imageCarrito", R.drawable.carrito);
 
-                    productosServices = new ProductosServices();
-                    //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
+                    intent.putExtra("usuario", txtUsuP.getText());
 
                     intent.putExtra("id", txtID.getText());
-                    //intent.putExtra("imageCode", byteArray);
+
                     intent.putExtra("titulo", txtProductoTituloTemplate.getText());
                     intent.putExtra("descripcion", txtDescripcionTemplate.getText());
                     intent.putExtra("categoria", txtCategoriaT.getText());
                     intent.putExtra("precio", txtPrecioTemplate.getText());
+                    intent.putExtra("imagen", producto.getImagen());
                     context.startActivity(intent);
                 }
             }
@@ -171,20 +151,15 @@ public class ProductoAdapters extends BaseAdapter {
 
 
             intent.putExtra("imageAtras", R.mipmap.atras);
-            intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
-            productosServices = new ProductosServices();
 
-            intent.putExtra("usuario", txtUsuP.getText().toString());
-            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
-
-            intent.putExtra("ida", txtID.getText());
-            //intent.putExtra("imageCode", byteArray);
-            intent.putExtra("titulo", txtProductoTituloTemplate.getText());
-            intent.putExtra("descripcion", txtDescripcionTemplate.getText());
-            intent.putExtra("categoria", txtCategoriaT.getText());
-            intent.putExtra("precio", txtPrecioTemplate.getText());
+            intent.putExtra("ida", producto.getId());
+            intent.putExtra("titulo", producto.getNombre());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("categoria", producto.getCategoria());
+            intent.putExtra("imagen", String.valueOf(producto.getImagen()));
+            intent.putExtra("precio", String.valueOf(producto.getPrecio()));
             context.startActivity(intent);
         });
 
@@ -193,19 +168,15 @@ public class ProductoAdapters extends BaseAdapter {
 
 
             intent.putExtra("imageAtras", R.mipmap.atras);
-            intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
-            intent.putExtra("usuario", txtUsuP.getText().toString());
-            productosServices = new ProductosServices();
-            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
-            intent.putExtra("ida", txtID.getText());
-            //intent.putExtra("imageCode", byteArray);
-            intent.putExtra("titulo", txtProductoTituloTemplate.getText());
-            intent.putExtra("descripcion", txtDescripcionTemplate.getText());
-            intent.putExtra("categoria", txtCategoriaT.getText());
-            intent.putExtra("precio", txtPrecioTemplate.getText());
+            intent.putExtra("ida", producto.getId());
+            intent.putExtra("titulo", producto.getNombre());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("categoria", producto.getCategoria());
+            intent.putExtra("imagen", String.valueOf(producto.getImagen()));
+            intent.putExtra("precio", String.valueOf(producto.getPrecio()));
             context.startActivity(intent);
         });
 
@@ -214,19 +185,15 @@ public class ProductoAdapters extends BaseAdapter {
 
 
             intent.putExtra("imageAtras", R.mipmap.atras);
-            intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
-            intent.putExtra("usuario", txtUsuP.getText().toString());
-            productosServices = new ProductosServices();
-            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
-            intent.putExtra("ida", txtID.getText());
-            //intent.putExtra("imageCode", byteArray);
-            intent.putExtra("titulo", txtProductoTituloTemplate.getText());
-            intent.putExtra("descripcion", txtDescripcionTemplate.getText());
-            intent.putExtra("categoria", txtCategoriaT.getText());
-            intent.putExtra("precio", txtPrecioTemplate.getText());
+            intent.putExtra("ida", producto.getId());
+            intent.putExtra("titulo", producto.getNombre());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("categoria", producto.getCategoria());
+            intent.putExtra("imagen", String.valueOf(producto.getImagen()));
+            intent.putExtra("precio", String.valueOf(producto.getPrecio()));
             context.startActivity(intent);
         });
 
@@ -235,19 +202,15 @@ public class ProductoAdapters extends BaseAdapter {
 
 
             intent.putExtra("imageAtras", R.mipmap.atras);
-            intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
 
-            intent.putExtra("usuario", txtUsuP.getText().toString());
-            productosServices = new ProductosServices();
-            //byte[] byteArray = productosServices.imageButtonToByte(imgProductoTemplate);
 
-            intent.putExtra("ida", txtID.getText());
-            //intent.putExtra("imageCode", byteArray);
-            intent.putExtra("titulo", txtProductoTituloTemplate.getText());
-            intent.putExtra("descripcion", txtDescripcionTemplate.getText());
-            intent.putExtra("categoria", txtCategoriaT.getText());
-            intent.putExtra("precio", txtPrecioTemplate.getText());
+            intent.putExtra("ida", producto.getId());
+            intent.putExtra("titulo", producto.getNombre());
+            intent.putExtra("descripcion", producto.getDescripcion());
+            intent.putExtra("categoria", producto.getCategoria());
+            intent.putExtra("imagen", String.valueOf(producto.getImagen()));
+            intent.putExtra("precio", String.valueOf(producto.getPrecio()));
             context.startActivity(intent);
         });
         return view;

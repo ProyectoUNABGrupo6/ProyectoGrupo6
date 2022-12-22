@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import grupo6.proyectogrupo6.DB.DBHelper;
@@ -21,7 +22,7 @@ public class Registro extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DBHelper dbHelper;
 
-    public Button btnRegistro;
+    public FloatingActionButton btnRegistro;
     public EditText insEmailReg, insContraReg, insConfContra;
     public ImageButton imgReg;
 
@@ -31,13 +32,11 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         mAuth = FirebaseAuth.getInstance();
-
         btnRegistro = findViewById(R.id.btnRegistroReg);
         insEmailReg = findViewById(R.id.insEmailReg);
         insContraReg = findViewById(R.id.insContrasenaReg);
         insConfContra = findViewById(R.id.insConfirmarContra);
         imgReg = findViewById(R.id.imgReg);
-
         dbHelper = new DBHelper(this);
 
         btnRegistro.setOnClickListener(View -> {
@@ -46,7 +45,6 @@ public class Registro extends AppCompatActivity {
             String configContra = insConfContra.getText().toString().trim();
 
             if (contra.compareTo(configContra) == 0) {
-
                 mAuth.createUserWithEmailAndPassword(email, contra)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -55,9 +53,7 @@ public class Registro extends AppCompatActivity {
                                         contra
                                 );
                                 dbHelper.insertarUsuarios(usuario);
-
                                 mAuth.signInWithEmailAndPassword(email, contra);
-
                                 Toast.makeText(this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
@@ -71,6 +67,5 @@ public class Registro extends AppCompatActivity {
                 Toast.makeText(this, "La contraseña no Coincide", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 }

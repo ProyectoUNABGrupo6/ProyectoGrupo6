@@ -63,6 +63,8 @@
     <string name="imgAddCat">IMAGEN CATEGORIA</string>
     <string name="txtAddCat">Categoria nueva</string>
     <string name="imgCatBut">Boton Categoria</string>
+    <string name="agregarCategoria">Agregar Categoria</string>
+    <string name="btnActuaCat">Actualizar categoria</string>
 
     //Mapas
     <string name="textbognor">Punto de venta ubicado en la zona norte de la ciudad de Bogota</string>
@@ -72,6 +74,14 @@
     <string name="textmonte">Punto de venta ubicado en la ciudad de Monteria</string>
     <string name="textcali">Punto de venta ubicado en la ciudad de Cali</string>
     <string name="textdescrip">Tenemos a su dispocicion estos puntos de venta para su mayor comodidad y cercanias a su ciudad</string>
+    <string name="btnBuscarMap">Buscar Mapa</string>
+    <string name="imgMap1">map1</string>
+    <string name="imgMap2">map2</string>
+    <string name="imgMap3">map3</string>
+    <string name="imgMap4">map4</string>
+    <string name="imgMap5">map5</string>
+    <string name="imgMap6">map6</string>
+    <string name="imgMap7">map7</string>
 
 
 

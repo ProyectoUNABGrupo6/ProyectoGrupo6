@@ -13,21 +13,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imgAtrasCat"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAtrasCat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:contentDescription="@string/imgAtras"
-            android:minWidth="32dp"
-            android:minHeight="48dp"
+            android:focusable="true"
+            app:backgroundTint="#00FFFFFF"
+            app:srcCompat="@drawable/baseline_arrow_back"
             tools:ignore="ImageContrastCheck" />
-
-        <ImageView
-            android:id="@+id/imgTituloCat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/imgTienda" />
 
         <TextView
             android:id="@+id/txtUsuCat"
@@ -44,35 +39,80 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imgAddCat"
+        <TextView
+            android:id="@+id/txtAgregarCategoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/imgAddCat"
-            tools:ignore="ImageContrastCheck"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:text="@string/agregarCategoria"
+            android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/insCategoria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/txtAddCat"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-            android:textSize="20sp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAddCat"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@string/imgCatBut"
-            android:focusable="true"
-            app:srcCompat="@drawable/baseline_check"
-            tools:ignore="ImageContrastCheck" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|top"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imgAddCat"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/imgAddCat"
+                tools:ignore="ImageContrastCheck"
+                tools:src="@drawable/ic_baseline_add_photo_alternate_24"
+                tools:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
+
+            <EditText
+                android:id="@+id/insCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/txtAddCat"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="#757575"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtIDAddCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnAddCat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/imgCatBut"
+                    android:focusable="true"
+                    app:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/ic_baseline_check_2"
+                    tools:ignore="ImageContrastCheck" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnActualizarCat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/btnActuaCat"
+                    android:focusable="true"
+                    app:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/baseline_upload" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

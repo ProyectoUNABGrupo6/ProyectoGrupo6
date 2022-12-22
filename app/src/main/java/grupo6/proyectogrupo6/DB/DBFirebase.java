@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import grupo6.proyectogrupo6.Adapters.CategoriaAdapters;
-import grupo6.proyectogrupo6.Adapters.ProductoAdapters;
 import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Services.ProductosServices;
@@ -41,6 +39,7 @@ public class DBFirebase {
         PRODUCTOS.put("F_ELIMINADO", producto.isEliminado());
         PRODUCTOS.put("F_CREADO", producto.getCreado());
         PRODUCTOS.put("F_ACTUALIZADO", producto.getActualizacion());
+        PRODUCTOS.put("CATEGORIA", producto.getCategoria());
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -57,6 +56,7 @@ public class DBFirebase {
         Map<String, Object> CATEGORIAS = new HashMap<>();
         CATEGORIAS.put("idCat", categoria.getIdCat());
         CATEGORIAS.put("CATEGORIA", categoria.getCategoria());
+        CATEGORIAS.put("IMAGEN", categoria.getImagen());
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -103,12 +103,13 @@ public class DBFirebase {
                 });
     }
 
-    public void buscarCategorias(ArrayList<Categoria> list){
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    public void buscarCategorias(ArrayList<Categoria> list) {
         FERRETERIADB.collection("CATEGORIAS")
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : task.getResult()){
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Categoria categoria = new Categoria(
@@ -118,7 +119,7 @@ public class DBFirebase {
                             list.add(categoria);
                         }
                         //categoriaAdapters.notifyDataSetChanged();
-                    }else {
+                    } else {
                         Log.w(TAG, "Error getting documents", task.getException());
                     }
                 });
@@ -149,12 +150,11 @@ public class DBFirebase {
                                         document.getDate("F_ACTUALIZADO")
                                 );
                                 listProd.add(producto);
-
                                 dbHelper.insertarDatos(producto);
 
                             }
                         }
-                        for (QueryDocumentSnapshot document : task.getResult()){
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Categoria categoria = new Categoria(
@@ -171,13 +171,25 @@ public class DBFirebase {
                 });
     }
 
-    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN) {
+    public void actualizarDatos(String id, String NOMBRE, String DESCRIPCION, int PRECIO, String IMAGEN, String CATEGORIA) {
         FERRETERIADB.collection("PRODUCTOS")
                 .document(id)
                 .update(
                         "NOMBRE", NOMBRE,
                         "DESCRIPCION", DESCRIPCION,
                         "PRECIO", PRECIO,
+                        "IMAGEN", IMAGEN,
+                        "CATEGORIA", CATEGORIA)
+                .addOnCompleteListener(task -> {
+
+                });
+    }
+
+    public void actualizarCategoria(String id, String CATEGORIA, String IMAGEN) {
+        FERRETERIADB.collection("CATEGORIAS")
+                .document(id)
+                .update(
+                        "CATEGORIA", CATEGORIA,
                         "IMAGEN", IMAGEN)
                 .addOnCompleteListener(task -> {
 
@@ -185,11 +197,26 @@ public class DBFirebase {
     }
 
     public void eliminarDatos(String id) {
-        FERRETERIADB.collection("PRODUCTOS")
-                .document(id)
-                .delete()
-                .addOnCompleteListener(task -> {
-
+        FERRETERIADB.collection("PRODUCTOS").whereEqualTo("id", id)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            documentSnapshot.getReference().delete();
+                        }
+                    }
                 });
+
+    }
+
+    public void eliminarCategoria(String id) {
+        FERRETERIADB.collection("CATEGORIAS").whereEqualTo("idCat", id)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            documentSnapshot.getReference().delete();
+                        }
+                    }
+                });
+
     }
 }

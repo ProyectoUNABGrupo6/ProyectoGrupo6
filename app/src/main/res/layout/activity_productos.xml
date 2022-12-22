@@ -21,34 +21,33 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/imgAtras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:contentDescription="@string/imgAtras"
-                android:minHeight="48dp"
-                app:srcCompat="@mipmap/atras" />
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_arrow_back"
+                tools:ignore="ImageContrastCheck" />
 
-            <ImageView
-                android:id="@+id/imgTituloProductoTemplate"
-                android:layout_width="0dp"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCarritoP"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/imgCarrito" />
+                android:clickable="true"
+                android:contentDescription="@string/imgCarrito"
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_shopping_cart_checkout" />
 
             <TextView
                 android:id="@+id/txtUsuP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
-
-            <ImageView
-                android:id="@+id/imgCarritoProductos"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="100dp"
-                android:contentDescription="@string/imgCarrito"
-                tools:ignore="ImageContrastCheck" />
+                android:layout_marginEnd="20dp"
+                android:textSize="20sp" />
 
         </LinearLayout>
 

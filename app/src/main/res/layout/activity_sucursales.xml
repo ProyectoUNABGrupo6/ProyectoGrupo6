@@ -13,33 +13,32 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/imgAtrasSuc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="355dp"
+                android:layout_toStartOf="@+id/txtUsuSuc"
+                android:clickable="true"
                 android:contentDescription="@string/imgAtras"
-                android:minHeight="48dp"
-                app:srcCompat="@mipmap/atras" />
-
-            <ImageView
-                android:id="@+id/imgTituloSuc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/imgCarrito" />
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_arrow_back"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/txtUsuSuc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="false" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +54,8 @@
                     android:id="@+id/btnBogNor"
                     android:layout_width="102dp"
                     android:layout_height="87dp"
+                    android:contentDescription="@string/imgMap1"
+                    tools:ignore="ImageContrastCheck"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -76,8 +77,8 @@
                     android:id="@+id/btnBogOccident"
                     android:layout_width="99dp"
                     android:layout_height="85dp"
-                    tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/imgMap2"
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/textBogOccident"
@@ -97,9 +98,11 @@
                     android:id="@+id/btnBogSur"
                     android:layout_width="99dp"
                     android:layout_height="83dp"
+                    android:contentDescription="@string/imgMap3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.37"
+                    tools:ignore="ImageContrastCheck"
                     tools:layout_editor_absoluteX="47dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -122,6 +125,8 @@
                     android:id="@+id/btnCali"
                     android:layout_width="99dp"
                     android:layout_height="78dp"
+                    android:contentDescription="@string/imgMap4"
+                    tools:ignore="ImageContrastCheck"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -142,6 +147,8 @@
                     android:id="@+id/btnMonter"
                     android:layout_width="100dp"
                     android:layout_height="89dp"
+                    android:contentDescription="@string/imgMap5"
+                    tools:ignore="ImageContrastCheck"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -163,6 +170,8 @@
                     android:layout_width="93dp"
                     android:layout_height="93dp"
                     android:layout_marginBottom="116dp"
+                    android:contentDescription="@string/imgMap7"
+                    tools:ignore="ImageContrastCheck"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
@@ -180,9 +189,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:textSize="18dp"
-                android:textColor="@color/teal_700"
-                android:text="@string/textdescrip" />
+                android:text="@string/textdescrip"
+                android:textColor="#00838F"
+                android:textSize="18sp" />
 
 
         </LinearLayout>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="601dp"
@@ -47,7 +48,7 @@
                 android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="245dp"
                 android:layout_height="wrap_content"
                 android:text="@string/txtCategoria"
                 android:textColor="#656565"
@@ -61,10 +62,10 @@
 
                 <ImageButton
                     android:id="@+id/imgMaterial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:contentDescription="@string/imgMaterial"
-                    app:srcCompat="@mipmap/materialesdeconstruccion" />
+                    app:srcCompat="@drawable/materialconstruccprueba" />
 
                 <TextView
                     android:id="@+id/txtMate"
@@ -84,10 +85,10 @@
 
                 <ImageButton
                     android:id="@+id/imgCables"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:contentDescription="@string/imgCables"
-                    app:srcCompat="@mipmap/cableselectricos" />
+                    app:srcCompat="@drawable/electricidadprueba" />
 
                 <TextView
                     android:id="@+id/txtElect"
@@ -106,10 +107,10 @@
 
                 <ImageButton
                     android:id="@+id/imgHerramienta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:contentDescription="@string/imgHerramienta"
-                    app:srcCompat="@mipmap/herramienta" />
+                    app:srcCompat="@drawable/herramientaspruebaa" />
 
                 <TextView
                     android:id="@+id/txtHerram"

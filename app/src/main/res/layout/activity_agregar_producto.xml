@@ -20,21 +20,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imgAtrasProd"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAtrasAddP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:contentDescription="@string/imgAtras"
-                android:minWidth="32dp"
-                android:minHeight="48dp"
-                tools:ignore="ImageContrastCheck" />
-
-            <ImageView
-                android:id="@+id/imgTituloProd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/imgTienda" />
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/baseline_arrow_back"
+                tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
             <TextView
                 android:id="@+id/txtUsuProd"
@@ -70,7 +65,7 @@
                     android:layout_width="128dp"
                     android:layout_height="127dp"
                     android:contentDescription="@string/imgAgregar"
-                    app:srcCompat="@drawable/carrito"
+                    app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24"
                     tools:ignore="ImageContrastCheck" />
 
                 <EditText
@@ -131,17 +126,28 @@
                         android:textSize="20sp"
                         android:visibility="gone" />
 
-                    <Button
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/botonAgregar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/botonAgregar" />
+                        android:clickable="true"
+                        android:contentDescription="@string/agregar"
+                        android:focusable="true"
+                        app:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/ic_baseline_check_2"
+                        tools:ignore="ImageContrastCheck" />
 
-                    <Button
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/btnActualizar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Actualizar" />
+                        android:layout_marginStart="10dp"
+                        android:clickable="true"
+                        android:contentDescription="@string/Actualizar"
+                        android:focusable="true"
+                        app:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/baseline_upload"
+                        tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
             </LinearLayout>

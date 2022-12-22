@@ -14,7 +14,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:contentDescription="@string/imgReg"
-        app:srcCompat="@drawable/baseline_person_add" />
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/insEmailReg"
@@ -50,9 +50,14 @@
         android:textColorHint="#757575" />
 
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnRegistroReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnRegistrarReg" />
+        android:clickable="true"
+        android:contentDescription="@string/btnRegistrarReg"
+        android:focusable="true"
+        app:backgroundTint="#00FFFFFF"
+        app:srcCompat="@drawable/baseline_check" />
+
 </LinearLayout>

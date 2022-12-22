@@ -21,6 +21,6 @@
             android:layout_width="213dp"
             android:layout_height="95dp"
             android:contentDescription="@string/splashScreen"
-            app:srcCompat="@drawable/cargandoo" />
+            app:srcCompat="@drawable/ferresix" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,14 +20,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imgTitulo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/imgTienda"
-                app:srcCompat="@drawable/ferresix" />
-
             <TextView
                 android:id="@+id/txtUsuario"
                 android:layout_width="wrap_content"
@@ -41,7 +33,7 @@
 
             <ImageView
                 android:id="@+id/imgCarrito"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:contentDescription="@string/imgCarrito"
                 app:srcCompat="@drawable/carrito" />

@@ -63,9 +63,11 @@ public class AgregarProducto extends AppCompatActivity {
             String usuario = bundle.getString("usuario");
             int imgTit = bundle.getInt("imageTitulo");
             int imgAtras = bundle.getInt("imageAtras");
+            String catAdd = bundle.getString("categoria");
             usuA.setText(usuario);
             botonAtrasForm.setImageResource(imgAtras);
             imgTituloForm.setImageResource(imgTit);
+            categoriaAdd.setText(catAdd);
 
             String ida = bundle.getString("id");
             if (ida != null) {
@@ -120,7 +122,7 @@ public class AgregarProducto extends AppCompatActivity {
                     dbHelper.insertarDatos(producto);
 
                     dbFirebase.insertarDatos(producto);
-                    //dbFirebase.insertarDatos(producto);
+
                     volverAtras(View);
                 } catch (Exception e) {
                     Log.e("DB Insert", e.toString());
@@ -159,7 +161,7 @@ public class AgregarProducto extends AppCompatActivity {
 
 
     public void volverAtras(View view) {
-        Intent intent = new Intent(getApplicationContext(), Productos.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("usuario", usuA.getText().toString());
         intent.putExtra("categoria", categoriaAdd.getText().toString());
         intent.putExtra("imageAtras", R.mipmap.atras);

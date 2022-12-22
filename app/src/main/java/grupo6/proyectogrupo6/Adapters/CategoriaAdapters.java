@@ -83,7 +83,6 @@ public class CategoriaAdapters extends BaseAdapter {
             int posicion = 0;
             Usuario usuario = arrayUsuario.get(posicion);
             String user = usuario.getEmail();
-
             txtUsuCat.setText(user);
         }
 
@@ -126,7 +125,6 @@ public class CategoriaAdapters extends BaseAdapter {
 
         txtCategoria.setOnClickListener(View -> {
             Intent intent = new Intent(context.getApplicationContext(), Productos.class);
-
             intent.putExtra("categoria", txtCategoria.getText());
             context.startActivity(intent);
         });

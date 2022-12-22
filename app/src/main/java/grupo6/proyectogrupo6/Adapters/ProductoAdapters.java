@@ -3,7 +3,6 @@ package grupo6.proyectogrupo6.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +44,15 @@ public class ProductoAdapters extends BaseAdapter {
         this.arrayList = arrayList;
         this.arrayUsuario = arrayUsuario;
     }
+
     public ProductoAdapters(String usuario) {
         this.usuario = usuario;
     }
+
     public String getUsuario() {
         return usuario;
     }
+
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
@@ -77,7 +79,7 @@ public class ProductoAdapters extends BaseAdapter {
 
         dbHelper = new DBHelper(context);
         dbFirebase = new DBFirebase();
-productos = new Productos();
+        productos = new Productos();
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         view = layoutInflater.inflate(R.layout.produtos_template, null);
@@ -103,9 +105,7 @@ productos = new Productos();
         txtDescripcionTemplate.setText(producto.getDescripcion());
         txtCategoriaT.setText(producto.getCategoria());
         txtPrecioTemplate.setText("$" + producto.getPrecio());
-/*
-        Cursor cursor = dbHelper.consultarUsuarios();
-        arrayUsuario = productosServices.cursorUsuario(cursor);
+
 
         if (arrayUsuario.size() != 0) {
 
@@ -120,10 +120,8 @@ productos = new Productos();
         if (!txtUsuP.getText().toString().isEmpty()) {
             spinnerMenu.setVisibility(View.VISIBLE);
         }
-        if (!txtUsuP.getText().toString().isEmpty()){
-            spinnerMenu.setVisibility(View.VISIBLE);
-        }
-*/
+
+
 
         String[] opciones = {"Elija una opcion", "Actualizar", "Eliminar"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, opciones);

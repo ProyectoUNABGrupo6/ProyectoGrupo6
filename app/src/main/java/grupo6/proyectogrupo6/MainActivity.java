@@ -11,13 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
-
 import grupo6.proyectogrupo6.Adapters.CategoriaAdapters;
 import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
@@ -34,12 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Producto> arrayList;
     public ArrayList<Categoria> arrayCategoria;
     public ArrayList<Usuario> arrayUsuario;
-
-
     public CategoriaAdapters categoriaAdapters;
     public ListView listViewCategoria;
-
-
     public TextView txtUsuario;
     public TextView txtIdUser;
 
@@ -65,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Cursor cursor1 = dbHelper.consultarDatos();
             arrayCategoria = productosServices.cursorCategoria(cursor);
             arrayList = productosServices.cursorToArray(cursor1);
-            //arrayList = productosServices.cursorToArray(cursor1);
+
             if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
                 dbFirebase.sincronizarDatos(dbHelper, arrayList, arrayCategoria);
             }
@@ -100,10 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void pasarProducto(View view) {
-
 
         Intent intent = new Intent(getApplicationContext(), Productos.class);
 

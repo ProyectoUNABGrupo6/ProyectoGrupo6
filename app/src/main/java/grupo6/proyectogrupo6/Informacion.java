@@ -105,6 +105,7 @@ public class Informacion extends AppCompatActivity {
 
         botonActualizar.setOnClickListener(View -> {
             Intent intent = new Intent(getApplicationContext(), AgregarProducto.class);
+
             intent.putExtra("imageAtras", R.mipmap.atras);
             intent.putExtra("imageTitulo", R.drawable.ferresix);
             intent.putExtra("imageCarrito", R.drawable.carrito);
@@ -116,6 +117,7 @@ public class Informacion extends AppCompatActivity {
             //intent.putExtra("imageCode", byteArray);
             intent.putExtra("titulo", txtTituloInf.getText());
             intent.putExtra("descripcion", txtDescripInf.getText());
+            intent.putExtra("categoria", txtCatInf.getText());
             intent.putExtra("precio", txtPrecioInf.getText());
             startActivity(intent);
 

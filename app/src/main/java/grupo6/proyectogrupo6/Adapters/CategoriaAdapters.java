@@ -35,6 +35,11 @@ public class CategoriaAdapters extends BaseAdapter {
     public MainActivity mainActivity;
     ProductosServices productosServices;
 
+    public CategoriaAdapters(Context context, ArrayList<Categoria> arrayCategoria) {
+        this.context = context;
+        this.arrayCategoria = arrayCategoria;
+    }
+
     public CategoriaAdapters(Context context, ArrayList<Categoria> arrayCategoria, ArrayList<Usuario> arrayUsuario) {
         this.context = context;
         this.arrayCategoria = arrayCategoria;

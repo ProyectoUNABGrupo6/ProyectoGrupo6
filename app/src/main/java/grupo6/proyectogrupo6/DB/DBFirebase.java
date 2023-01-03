@@ -13,6 +13,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
@@ -22,7 +23,8 @@ public class DBFirebase {
 
 
     private final FirebaseFirestore FERRETERIADB;
-    private ProductosServices productosServices;
+    private final ProductosServices productosServices;
+    public DBHelper dbHelper;
 
     public DBFirebase() {
         this.FERRETERIADB = FirebaseFirestore.getInstance();
@@ -70,7 +72,7 @@ public class DBFirebase {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    public void buscarDatos(ArrayList<Producto> list) {
+    public void buscarDatos(DBHelper dbHelper, ArrayList<Producto> list) {
 
         FERRETERIADB.collection("PRODUCTOS")
                 .get()
@@ -81,22 +83,22 @@ public class DBFirebase {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Producto producto;
-                            if (!Boolean.valueOf(document.getData().get("F_ELIMINADO").toString())) {
+                            if (!Boolean.parseBoolean(Objects.requireNonNull(document.getData().get("F_ELIMINADO")).toString())) {
                                 producto = new Producto(
-                                        document.getData().get("id").toString(),
-                                        (document.getData().get("NOMBRE")).toString(),
-                                        (document.getData().get("DESCRIPCION")).toString(),
-                                        document.getData().get("CATEGORIA").toString(),
-                                        Integer.parseInt((document.getData().get("PRECIO")).toString()),
-                                        document.getData().get("IMAGEN").toString(),
-                                        Boolean.valueOf(document.getData().get("F_ELIMINADO").toString()),
-                                        productosServices.formatoFecha(document.getData().get("F_CREADO").toString()),
-                                        productosServices.formatoFecha(document.getData().get("F_ACTUALIZADO").toString())
+                                        Objects.requireNonNull(document.getData().get("id")).toString(),
+                                        (Objects.requireNonNull(document.getData().get("NOMBRE"))).toString(),
+                                        (Objects.requireNonNull(document.getData().get("DESCRIPCION"))).toString(),
+                                        Objects.requireNonNull(document.getData().get("CATEGORIA")).toString(),
+                                        Integer.parseInt((Objects.requireNonNull(document.getData().get("PRECIO"))).toString()),
+                                        Objects.requireNonNull(document.getData().get("IMAGEN")).toString(),
+                                        Boolean.valueOf(Objects.requireNonNull(document.getData().get("F_ELIMINADO")).toString()),
+                                        productosServices.formatoFecha(Objects.requireNonNull(document.getData().get("F_CREADO")).toString()),
+                                        productosServices.formatoFecha(Objects.requireNonNull(document.getData().get("F_ACTUALIZADO")).toString())
                                 );
                                 list.add(producto);
+                                dbHelper.insertarDatos(producto);
                             }
                         }
-                        //productoAdapters.notifyDataSetChanged();
                     } else {
                         Log.w(TAG, "Error getting documents.", task.getException());
                     }
@@ -104,7 +106,7 @@ public class DBFirebase {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    public void buscarCategorias(ArrayList<Categoria> list) {
+    public void buscarCategorias(DBHelper dbHelper, ArrayList<Categoria> list) {
         FERRETERIADB.collection("CATEGORIAS")
                 .get()
                 .addOnCompleteListener(task -> {
@@ -113,60 +115,15 @@ public class DBFirebase {
                             Log.d(TAG, document.getId() + " => " + document.getData());
 
                             Categoria categoria = new Categoria(
-                                    document.getData().get("idCat").toString(),
-                                    document.getData().get("CATEGORIA").toString()
+                                    Objects.requireNonNull(document.getData().get("idCat")).toString(),
+                                    Objects.requireNonNull(document.getData().get("CATEGORIA")).toString(),
+                                    Objects.requireNonNull(document.getData().get("IMAGEN")).toString()
                             );
                             list.add(categoria);
-                        }
-                        //categoriaAdapters.notifyDataSetChanged();
-                    } else {
-                        Log.w(TAG, "Error getting documents", task.getException());
-                    }
-                });
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    public void sincronizarDatos(DBHelper dbHelper, ArrayList<Producto> listProd, ArrayList<Categoria> listCat) {
-
-        FERRETERIADB.collection("PRODUCTOS")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d(TAG, document.getId() + " => " + document.getData());
-
-                            Producto producto;
-                            if (!Boolean.valueOf(document.getData().get("F_ELIMINADO").toString())) {
-                                producto = new Producto(
-                                        document.getData().get("id").toString(),
-                                        document.getData().get("NOMBRE").toString(),
-                                        document.getData().get("DESCRIPCION").toString(),
-                                        document.getData().get("CATEGORIA").toString(),
-                                        Integer.parseInt((document.getData().get("PRECIO")).toString()),
-                                        document.getData().get("IMAGEN").toString(),
-                                        Boolean.valueOf(document.getData().get("F_ELIMINADO").toString()),
-                                        document.getDate("F_CREADO"),
-                                        document.getDate("F_ACTUALIZADO")
-                                );
-                                listProd.add(producto);
-                                dbHelper.insertarDatos(producto);
-
-                            }
-                        }
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d(TAG, document.getId() + " => " + document.getData());
-
-                            Categoria categoria = new Categoria(
-                                    document.getData().get("idCat").toString(),
-                                    document.getData().get("CATEGORIA").toString()
-                            );
-                            listCat.add(categoria);
                             dbHelper.insertarCategorias(categoria);
                         }
-
                     } else {
-                        Log.w(TAG, "Error getting documents.", task.getException());
+                        Log.w(TAG, "Error getting documents", task.getException());
                     }
                 });
     }

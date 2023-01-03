@@ -65,6 +65,7 @@
     <string name="imgCatBut">Boton Categoria</string>
     <string name="agregarCategoria">Agregar Categoria</string>
     <string name="btnActuaCat">Actualizar categoria</string>
+    <string name="spinnerCategorias">spinnerCategorias</string>
 
     //Mapas
     <string name="textbognor">Punto de venta ubicado en la zona norte de la ciudad de Bogota</string>

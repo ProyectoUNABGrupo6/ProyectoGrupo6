@@ -10,10 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
+
 import grupo6.proyectogrupo6.Adapters.CategoriaAdapters;
 import grupo6.proyectogrupo6.DB.DBFirebase;
 import grupo6.proyectogrupo6.DB.DBHelper;
@@ -55,15 +58,13 @@ public class MainActivity extends AppCompatActivity {
             arrayUsuario = productosServices.cursorUsuario(cursor3);
             arrayCategoria = productosServices.cursorCategoria(cursor);
             arrayList = productosServices.cursorToArray(cursor1);
-            if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
-                dbFirebase.sincronizarDatos(dbHelper, arrayList, arrayCategoria);
-            }
             categoriaAdapters = new CategoriaAdapters(this, arrayCategoria, arrayUsuario);
             listViewCategoria = findViewById(R.id.listViewCategorias);
             listViewCategoria.setAdapter(categoriaAdapters);
         } catch (Exception e) {
             Log.e("Database", e.toString());
         }
+
         dbHelper = new DBHelper(this);
         txtUsuario = findViewById(R.id.txtUsuario);
         txtIdUser = findViewById(R.id.txtIdUser);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             txtIdUser.setText(String.valueOf(id));
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menuLogin) {

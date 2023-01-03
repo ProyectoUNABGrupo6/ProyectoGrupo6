@@ -2,25 +2,34 @@ package grupo6.proyectogrupo6.Services;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.util.Log;
 import android.widget.ImageButton;
+
+import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
 
-import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import grupo6.proyectogrupo6.DB.DBFirebase;
+import grupo6.proyectogrupo6.DB.DBHelper;
 import grupo6.proyectogrupo6.Entities.Categoria;
 import grupo6.proyectogrupo6.Entities.Producto;
 import grupo6.proyectogrupo6.Entities.Usuario;
 
 
 public class ProductosServices {
+
+    public DBHelper dbHelper;
+    public DBFirebase dbFirebase;
+    public ProductosServices productosServices;
+    public ArrayList<Producto> arrayList;
+    public ArrayList<Categoria> arrayCategoria;
 
     public ArrayList<Producto> cursorToArray(Cursor cursor) {
         ArrayList<Producto> list = new ArrayList<>();
@@ -83,15 +92,6 @@ public class ProductosServices {
     }
 
 
-    public byte[] imageButtonToByte(ImageButton imageButton) {
-
-        Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
-        return stream.toByteArray();
-    }
-
     public Date formatoFecha(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
@@ -102,18 +102,32 @@ public class ProductosServices {
         return null;
     }
 
-    public String stringaFecha(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-        return dateFormat.format(date);
-
-    }
-
     public void insertarImagen(String url, ImageButton imageButton, Context context) {
         Glide.with(context)
                 .load(url)
-                .override(500,500)
+                .override(500, 500)
                 .into(imageButton);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    public void sincronizarDB(Context context) {
+        arrayList = new ArrayList<>();
+        arrayCategoria = new ArrayList<>();
 
+        try {
+            dbHelper = new DBHelper(context);
+            dbFirebase = new DBFirebase();
+            productosServices = new ProductosServices();
+            Cursor cursor = dbHelper.consultarCategorias();
+            Cursor cursor1 = dbHelper.consultarDatos();
+            arrayCategoria = productosServices.cursorCategoria(cursor);
+            arrayList = productosServices.cursorToArray(cursor1);
+            if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
+                dbFirebase.buscarCategorias(dbHelper, arrayCategoria);
+                dbFirebase.buscarDatos(dbHelper, arrayList);
+            }
+        } catch (Exception e) {
+            Log.e("Database", e.toString());
+        }
+    }
 }

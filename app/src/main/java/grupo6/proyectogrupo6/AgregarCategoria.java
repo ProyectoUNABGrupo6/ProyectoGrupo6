@@ -29,7 +29,7 @@ public class AgregarCategoria extends AppCompatActivity {
     private ImageButton imgAddCat;
     private TextView usuCat, idCat;
     private EditText insAddCat;
-    private FloatingActionButton botonAgregar, botonAtras, botonActualizarCat;
+    public FloatingActionButton botonAgregar, botonAtras, botonActualizarCat;
     private ProductosServices productosServices;
     public String urlImagenCategoria;
     private StorageReference storageReference;

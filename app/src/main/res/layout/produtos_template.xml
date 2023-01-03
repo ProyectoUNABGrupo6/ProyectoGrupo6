@@ -7,8 +7,8 @@
 
     <ImageButton
         android:id="@+id/imgProductoTemplate"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="128dp"
+        android:layout_height="127dp"
         android:contentDescription="@string/imgProductos"
         tools:ignore="ImageContrastCheck" />
 

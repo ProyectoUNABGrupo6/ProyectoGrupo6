@@ -33,7 +33,7 @@ public class Productos extends AppCompatActivity {
     public DBFirebase dbFirebase;
     public ProductosServices productosServices;
     public FloatingActionButton botonAtras, botonCarritoPr;
-    public TextView usuarioP;
+    public TextView usuarioP, txtIDUserP;
     public View view;
     public ListView listViewProductos;
     public ArrayList<Producto> arrayList;
@@ -50,6 +50,7 @@ public class Productos extends AppCompatActivity {
         botonAtras = findViewById(R.id.imgAtras);
         botonCarritoPr = findViewById(R.id.btnCarritoP);
         usuarioP = findViewById(R.id.txtUsuP);
+        txtIDUserP = findViewById(R.id.txtIdUserP);
         Bundle bundle = getIntent().getExtras();
         arrayList = new ArrayList<>();
 
@@ -79,7 +80,9 @@ public class Productos extends AppCompatActivity {
             int posicion = 0;
             Usuario usuario = arrayUsuario.get(posicion);
             String user = usuario.getEmail();
+            int id = usuario.getIdUser();
             usuarioP.setText(user);
+            txtIDUserP.setText(String.valueOf(id));
         }
 
         botonAtras.setOnClickListener(View -> {
@@ -95,8 +98,8 @@ public class Productos extends AppCompatActivity {
         if (!user.isEmpty()) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu, menu);
-
             menu.findItem(R.id.actionAdd).setVisible(true);
+            menu.findItem(R.id.exit).setVisible(true);
             menu.findItem(R.id.menuLogin).setVisible(false);
             invalidateOptionsMenu();
         } else {
@@ -108,8 +111,23 @@ public class Productos extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        if (item.getItemId() == R.id.menuLogin) {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            return true;
+        }
+        if (item.getItemId() == R.id.exit) {
+            int id = Integer.parseInt(txtIDUserP.getText().toString());
+            dbHelper.eliminarUsuario(id);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
         if (item.getItemId() == R.id.actionAdd) {
             Intent intent = new Intent(getApplicationContext(), AgregarProducto.class);
+            Bundle bundle = getIntent().getExtras();
+            String cat = bundle.getString("categoria");
+            intent.putExtra("categoria", cat);
             intent.putExtra("usuario", usuarioP.getText().toString());
             startActivity(intent);
             return true;

@@ -20,6 +20,10 @@ public class Categoria {
         this.imagen = imagen;
     }
 
+    public Categoria() {
+
+    }
+
     public String getImagen() {
         return imagen;
     }

@@ -1,5 +1,6 @@
 package grupo6.proyectogrupo6.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -28,17 +29,12 @@ public class CategoriaAdapters extends BaseAdapter {
 
     private final Context context;
     private final ArrayList<Categoria> arrayCategoria;
-    private ArrayList<Usuario> arrayUsuario;
+    private final ArrayList<Usuario> arrayUsuario;
 
     public DBHelper dbHelper;
     public DBFirebase dbFirebase;
     public MainActivity mainActivity;
     ProductosServices productosServices;
-
-    public CategoriaAdapters(Context context, ArrayList<Categoria> arrayCategoria) {
-        this.context = context;
-        this.arrayCategoria = arrayCategoria;
-    }
 
     public CategoriaAdapters(Context context, ArrayList<Categoria> arrayCategoria, ArrayList<Usuario> arrayUsuario) {
         this.context = context;
@@ -62,6 +58,7 @@ public class CategoriaAdapters extends BaseAdapter {
         return p;
     }
 
+    @SuppressLint({"InflateParams", "ViewHolder"})
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
@@ -71,7 +68,6 @@ public class CategoriaAdapters extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(this.context);
         view = layoutInflater.inflate(R.layout.categorias_template, null);
         Categoria categoria = arrayCategoria.get(position);
-
 
         ImageButton imgCat = view.findViewById(R.id.imgCategoria);
         TextView txtCategoria = view.findViewById(R.id.txtCategoria);

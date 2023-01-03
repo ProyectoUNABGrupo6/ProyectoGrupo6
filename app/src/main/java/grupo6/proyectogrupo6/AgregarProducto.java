@@ -2,7 +2,6 @@ package grupo6.proyectogrupo6;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +37,8 @@ public class AgregarProducto extends AppCompatActivity {
     private StorageReference storageReference;
     public String urlImagen;
 
+
+
     ActivityResultLauncher<String> content;
 
 
@@ -62,9 +63,9 @@ public class AgregarProducto extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String usuario = bundle.getString("usuario");
-            String catAdd = bundle.getString("categoria");
             usuA.setText(usuario);
-            categoriaAdd.setText(catAdd);
+            String cat = bundle.getString("categoria");
+            categoriaAdd.setText(cat);
 
             String ida = bundle.getString("id");
             if (ida != null) {
@@ -98,14 +99,12 @@ public class AgregarProducto extends AppCompatActivity {
         content = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 result -> {
-                    Uri uri = result;
-                    StorageReference filePath = storageReference.child("imagenes").child(uri.getLastPathSegment());
-                    filePath.putFile(uri)
+                    StorageReference filePath = storageReference.child("imagenes").child(result.getLastPathSegment());
+                    filePath.putFile(result)
                             .addOnSuccessListener(taskSnapshot -> {
                                 Toast.makeText(getApplicationContext(), "Imagen Cargada", Toast.LENGTH_SHORT).show();
                                 filePath.getDownloadUrl().addOnSuccessListener(uri1 -> {
-                                    Uri urlDescargada = uri1;
-                                    urlImagen = urlDescargada.toString();
+                                    urlImagen = uri1.toString();
                                     productosServices.insertarImagen(urlImagen, imgAdd, AgregarProducto.this);
                                 });
                             });

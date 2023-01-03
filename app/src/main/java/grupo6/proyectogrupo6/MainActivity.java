@@ -58,22 +58,12 @@ public class MainActivity extends AppCompatActivity {
             arrayUsuario = productosServices.cursorUsuario(cursor3);
             arrayCategoria = productosServices.cursorCategoria(cursor);
             arrayList = productosServices.cursorToArray(cursor1);
- /*           if (arrayList.size() == 0 && arrayCategoria.size() == 0) {
-                categoriaAdapters = new CategoriaAdapters(this, arrayCategoria, arrayUsuario);
-                dbFirebase.buscarCategorias(dbHelper, arrayCategoria);
-                cursor = dbHelper.consultarCategorias();
-                arrayCategoria = productosServices.cursorCategoria(cursor);
-
-
-            }*/
             categoriaAdapters = new CategoriaAdapters(this, arrayCategoria, arrayUsuario);
             listViewCategoria = findViewById(R.id.listViewCategorias);
             listViewCategoria.setAdapter(categoriaAdapters);
-            //dbFirebase.buscarCategorias(categoriaAdapters, arrayCategoria);
         } catch (Exception e) {
             Log.e("Database", e.toString());
         }
-
 
         dbHelper = new DBHelper(this);
         txtUsuario = findViewById(R.id.txtUsuario);

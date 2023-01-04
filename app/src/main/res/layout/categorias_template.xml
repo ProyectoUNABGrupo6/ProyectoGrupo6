@@ -9,11 +9,10 @@
 
     <ImageButton
         android:id="@+id/imgCategoria"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
         android:layout_width="128dp"
         android:layout_height="127dp"
         android:contentDescription="@string/imgCat"
+        android:scaleType="fitCenter"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 

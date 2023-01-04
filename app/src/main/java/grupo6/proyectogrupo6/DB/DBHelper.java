@@ -126,7 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void eliminarCategoria(String id) {
-        FerreteriaDB.execSQL("DELETE  FROM CATEGORIAS WHERE id = '" + id + "'");
+        FerreteriaDB.execSQL("DELETE  FROM CATEGORIAS WHERE idCat = '" + id + "'");
 
     }
 
